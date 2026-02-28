@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Qwicktry</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --purple: #5B4FCF; --dark: #0F172A; --muted: #64748B;
+      --border: #E2E8F0; --bg: #F8FAFC; --white: #FFFFFF;
+      --accent-bg: #EEF2FF;
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-size: 16px; line-height: 1.75; color: var(--dark); background: var(--bg); }
+    header { background: linear-gradient(135deg, #5B4FCF 0%, #764ba2 100%); color: white; padding: 48px 24px 40px; text-align: center; }
+    .logo { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+    .logo span { opacity: 0.75; font-weight: 400; }
+    header h1 { font-size: 36px; font-weight: 700; margin-bottom: 12px; }
+    header p { font-size: 16px; opacity: 0.85; max-width: 560px; margin: 0 auto; }
+    .last-updated { display: inline-block; margin-top: 16px; background: rgba(255,255,255,0.15); border-radius: 20px; padding: 4px 16px; font-size: 14px; opacity: 0.9; }
+    nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 12px 24px; text-align: center; }
+    nav a { color: var(--purple); text-decoration: none; font-size: 14px; margin: 0 12px; font-weight: 500; }
+    .container { max-width: 820px; margin: 0 auto; padding: 48px 24px 80px; }
+    .summary { background: var(--accent-bg); border: 1px solid #C7D2FE; border-left: 5px solid var(--purple); border-radius: 8px; padding: 24px 28px; margin-bottom: 48px; }
+    .summary h2 { font-size: 18px; color: var(--purple); margin-bottom: 14px; }
+    .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+    .summary-item { display: flex; align-items: flex-start; gap: 8px; font-size: 15px; }
+    .summary-item.good::before { content: "✅"; flex-shrink: 0; }
+    .summary-item.bad::before  { content: "🚫"; flex-shrink: 0; }
+    section { margin-bottom: 48px; background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 32px 36px; }
+    section h2 { font-size: 22px; font-weight: 700; color: var(--dark); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+    .num { background: var(--purple); color: white; font-size: 13px; font-weight: 700; width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    section h3 { font-size: 17px; font-weight: 600; color: var(--purple); margin: 24px 0 10px; }
+    section p { color: #334155; margin-bottom: 14px; }
+    section ul { padding-left: 24px; margin-bottom: 14px; }
+    section li { color: #334155; margin-bottom: 8px; }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; }
+    th { background: var(--purple); color: white; padding: 10px 14px; text-align: left; font-weight: 600; }
+    td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; color: #334155; }
+    tr:nth-child(even) td { background: var(--bg); }
+    .tag { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 13px; font-weight: 600; }
+    .no  { background: #FEF2F2; color: #DC2626; }
+    .yes { background: #F0FDF4; color: #16A34A; }
+    .min { background: #FFFBEB; color: #D97706; }
+    .box { border-radius: 8px; padding: 16px 20px; margin: 16px 0; font-size: 15px; }
+    .box.green  { background: #F0FDF4; border-left: 4px solid #16A34A; }
+    .box.orange { background: #FFFBEB; border-left: 4px solid #D97706; }
+    .box.blue   { background: #EFF6FF; border-left: 4px solid #3B82F6; }
+    .box strong { display: block; margin-bottom: 6px; color: var(--dark); }
+    .contact-box { background: linear-gradient(135deg, #5B4FCF 0%, #764ba2 100%); border-radius: 10px; padding: 28px 32px; text-align: center; margin-bottom: 20px; }
+    .contact-box h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #ffffff; }
+    .contact-box p  { margin-bottom: 16px; color: #ffffff; opacity: 0.92; font-size: 16px; }
+    .contact-box a  { display: inline-block; background: white; color: var(--purple); padding: 10px 24px; border-radius: 6px; font-weight: 700; text-decoration: none; font-size: 15px; }
+    footer { text-align: center; padding: 32px 24px; font-size: 14px; color: var(--muted); border-top: 1px solid var(--border); }
+    footer a { color: var(--purple); text-decoration: none; margin: 0 8px; }
+    @media (max-width: 600px) {
+      header h1 { font-size: 26px; }
+      section { padding: 24px 18px; }
+      .summary-grid { grid-template-columns: 1fr; }
+      table { font-size: 13px; }
+      th, td { padding: 8px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">&#9889; Qwicktry <span>by qwicktry.com</span></div>
+  <h1>Privacy Policy</h1>
+  <p>We believe privacy should be simple and honest. This policy explains exactly what we collect, what we don't, and how we protect you.</p>
+  <span class="last-updated">Last updated: February 28, 2026</span>
+</header>
+
+<nav>
+  <a href="/">Home</a>
+  <a href="/privacy">Privacy Policy</a>
+  <a href="mailto:support@qwicktry.com">Contact</a>
+</nav>
+
+<div class="container">
+
+  <div class="summary">
+    <h2>&#128269; Privacy at a Glance</h2>
+    <div class="summary-grid">
+      <div class="summary-item good">Your shift data stays on your device — we never see it</div>
+      <div class="summary-item good">Your Employee ID is never shared with third parties</div>
+      <div class="summary-item good">We do not sell or share your data</div>
+      <div class="summary-item good">We do not use tracking cookies or analytics</div>
+      <div class="summary-item bad">We do not collect browsing history</div>
+      <div class="summary-item bad">We do not read your Amazon credentials</div>
+      <div class="summary-item bad">We do not access data outside the AtoZ shifts page</div>
+      <div class="summary-item good">You can request deletion of your data at any time</div>
+    </div>
+  </div>
+
+  <section id="who-we-are">
+    <h2><span class="num">1</span> Who We Are</h2>
+    <p>Qwicktry ("we", "us", "our") is the developer and operator of the <strong>AtoZ Shift Helper — Premium</strong> Chrome browser extension and the qwicktry.com website. We are a software tools business registered in Canada.</p>
+    <p>
+      <strong>Contact:</strong> support@qwicktry.com<br>
+      <strong>Website:</strong> https://qwicktry.com<br>
+      <strong>Country:</strong> Canada
+    </p>
+    <p>This Privacy Policy applies to the AtoZ Shift Helper — Premium Chrome extension, the qwicktry.com website, our license verification backend at qwicktry-backend.vercel.app, and any communications between you and us.</p>
+  </section>
+
+  <section id="what-we-collect">
+    <h2><span class="num">2</span> What Information We Collect</h2>
+    <p>We collect the absolute minimum information required to operate our service. Here is a complete breakdown of everything we touch.</p>
+
+    <h3>2.1 Stored Locally on Your Device Only</h3>
+    <p>The following data is saved to Chrome's local extension storage on your device. It <strong>never leaves your device</strong> and is never transmitted to us or any third party.</p>
+    <table>
+      <thead><tr><th>Data</th><th>Purpose</th><th>Sent to us?</th></tr></thead>
+      <tbody>
+        <tr><td>Your filter preferences (dates, days, time windows)</td><td>Remember your settings between sessions</td><td><span class="tag no">Never</span></td></tr>
+        <tr><td>Cached license expiry date</td><td>Allow brief offline fallback if server is temporarily unreachable</td><td><span class="tag no">Never</span></td></tr>
+        <tr><td>Your license key</td><td>Saved locally so you don't re-enter it each session</td><td><span class="tag min">Only for verification</span></td></tr>
+      </tbody>
+    </table>
+
+    <h3>2.2 Sent to Our License Verification Server</h3>
+    <p>When you click Start, two pieces of information are sent to our secure license server at qwicktry-backend.vercel.app:</p>
+    <table>
+      <thead><tr><th>Data</th><th>Purpose</th><th>Stored on our server?</th></tr></thead>
+      <tbody>
+        <tr><td>Your license key</td><td>Verify your subscription is active and has not expired</td><td><span class="tag yes">Yes — see 2.3</span></td></tr>
+        <tr><td>Your Amazon Employee ID</td><td>Bind your license on first use; verify ownership on subsequent uses</td><td><span class="tag yes">Yes — see 2.3</span></td></tr>
+      </tbody>
+    </table>
+    <div class="box orange">
+      <strong>Note about your Employee ID</strong>
+      Your Employee ID is a workplace identifier — not personal information like your name, address, or payment details. We store it solely to prevent one license being shared across multiple accounts. We do not use it for any other purpose and do not share it with any third party.
+    </div>
+
+    <h3>2.3 What We Store in Our Database</h3>
+    <p>Our database is hosted on Supabase in Canada. It stores only the following — nothing else:</p>
+    <table>
+      <thead><tr><th>Data stored</th><th>Purpose</th><th>Retention period</th></tr></thead>
+      <tbody>
+        <tr><td>License key</td><td>Verify subscription status</td><td>Until cancelled or deleted on request</td></tr>
+        <tr><td>Employee ID (bound on first use)</td><td>Verify license ownership</td><td>Until cancelled or deleted on request</td></tr>
+        <tr><td>Subscription status (active / cancelled)</td><td>Determine if a license is currently valid</td><td>Until deleted on request</td></tr>
+        <tr><td>Subscription expiry date</td><td>Enforce subscription end date</td><td>Until deleted on request</td></tr>
+        <tr><td>Record creation date</td><td>Internal record keeping</td><td>Until deleted on request</td></tr>
+      </tbody>
+    </table>
+    <div class="box green">
+      <strong>We do NOT store any of the following</strong>
+      Your name, email address, home address, payment card details, browsing history, shift history, Amazon account credentials, or any information about activity on the AtoZ page. Payment information is handled entirely by Lemon Squeezy — we never see or receive it.
+    </div>
+
+    <h3>2.4 Payment Information</h3>
+    <p>We use <strong>Lemon Squeezy</strong> as our payment processor. When you purchase a subscription, you provide payment details directly to Lemon Squeezy — not to us. We never see, receive, or store your payment card number, billing address, or any financial information.</p>
+    <p>Lemon Squeezy is the Merchant of Record for all transactions. Their privacy policy applies to all payment processing: <a href="https://www.lemonsqueezy.com/privacy" target="_blank">lemonsqueezy.com/privacy</a></p>
+
+    <h3>2.5 This Website</h3>
+    <p>The qwicktry.com website does not use tracking cookies, analytics services (such as Google Analytics), or any third-party tracking scripts. We do not collect information about visitors to our website.</p>
+
+    <h3>2.6 Support Communications</h3>
+    <p>If you contact us at support@qwicktry.com, we receive and store your email address and message content solely to respond to you. We do not share this with third parties and retain support emails only as long as necessary to resolve your issue.</p>
+  </section>
+
+  <section id="how-we-use">
+    <h2><span class="num">3</span> How We Use Your Information</h2>
+    <p>We use the limited information we collect for these purposes only:</p>
+    <ul>
+      <li><strong>License verification:</strong> To confirm your subscription is active each time you click Start in the extension</li>
+      <li><strong>License binding:</strong> To associate your license key with your Employee ID on first use, preventing a single license from being shared across multiple accounts</li>
+      <li><strong>Subscription management:</strong> To update your license status when your subscription renews, expires, or is cancelled</li>
+      <li><strong>Customer support:</strong> To respond to support requests you send to support@qwicktry.com</li>
+    </ul>
+    <p>We do not use your information for marketing, advertising, profiling, analytics, or any purpose beyond the above.</p>
+  </section>
+
+  <section id="how-we-protect">
+    <h2><span class="num">4</span> How We Protect Your Information</h2>
+    <ul>
+      <li><strong>HTTPS everywhere:</strong> All communication between the extension and our license server uses HTTPS encryption (TLS)</li>
+      <li><strong>Database security:</strong> Our database is hosted on Supabase with enterprise-grade security, encryption at rest, and strict access controls</li>
+      <li><strong>Minimal transmission:</strong> Only the minimum data required to verify a license is transmitted — no other information is requested or received</li>
+      <li><strong>Local storage:</strong> Your personal preferences never leave your device — stored in Chrome's local extension storage only</li>
+      <li><strong>No passwords stored:</strong> License keys are not passwords. We do not store any account passwords.</li>
+    </ul>
+    <p>No method of electronic transmission or storage is 100% secure. While we take reasonable precautions, we cannot guarantee absolute security of data transmitted over the internet.</p>
+  </section>
+
+  <section id="sharing">
+    <h2><span class="num">5</span> Do We Share Your Information?</h2>
+    <p><strong>We do not sell your personal information. We do not share your personal information with advertisers, data brokers, or marketing companies.</strong></p>
+    <p>We share limited data with the following service providers solely to operate our service:</p>
+    <table>
+      <thead><tr><th>Service provider</th><th>What they receive</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Supabase</strong> (supabase.com)</td><td>License keys, Employee IDs, subscription status</td><td>Database hosting — stores our license records</td></tr>
+        <tr><td><strong>Vercel</strong> (vercel.com)</td><td>License key and Employee ID in transit only — not stored by Vercel</td><td>Serverless backend hosting — runs our license verification code</td></tr>
+        <tr><td><strong>Lemon Squeezy</strong> (lemonsqueezy.com)</td><td>Payment information you provide directly to them</td><td>Payment processing — we never receive your payment details</td></tr>
+      </tbody>
+    </table>
+    <div class="box blue">
+      <strong>Legal disclosure</strong>
+      We may disclose your information if required by law, court order, or governmental authority, or if we believe in good faith that such disclosure is necessary to protect our rights, investigate fraud, or respond to a government request.
+    </div>
+  </section>
+
+  <section id="cookies">
+    <h2><span class="num">6</span> Cookies and Tracking</h2>
+    <p>The AtoZ Shift Helper — Premium extension does <strong>not</strong> use cookies.</p>
+    <p>The qwicktry.com website does <strong>not</strong> use cookies, tracking pixels, or any analytics services.</p>
+    <p>The only local data storage the extension uses is Chrome's <code>chrome.storage.local</code> API — this is browser storage on your own device only, completely inaccessible to any website or third party.</p>
+  </section>
+
+  <section id="your-rights">
+    <h2><span class="num">7</span> Your Rights</h2>
+    <p>We honour these rights for all users regardless of where you live:</p>
+
+    <h3>Right to Access</h3>
+    <p>You can request a copy of all personal information we hold about you. We will provide it within 30 days.</p>
+
+    <h3>Right to Deletion</h3>
+    <p>You can request that we delete all personal information associated with your license key. We process deletion requests within 30 days. Note: deletion of your license record will disable your subscription.</p>
+
+    <h3>Right to Correction</h3>
+    <p>If any information we hold is inaccurate, you can request that we correct it.</p>
+
+    <h3>Right to Data Portability</h3>
+    <p>You can request a copy of your data in a machine-readable format (JSON or CSV).</p>
+
+    <h3>Right to Object</h3>
+    <p>You can object to our processing of your personal information at any time.</p>
+
+    <h3>How to Exercise Your Rights</h3>
+    <p>Email <strong>support@qwicktry.com</strong> with the subject line <strong>"Privacy Request"</strong> and describe your request. We will respond within 30 days.</p>
+
+    <h3>Canadian Residents (PIPEDA)</h3>
+    <p>You have rights under the Personal Information Protection and Electronic Documents Act (PIPEDA). You may also contact the Office of the Privacy Commissioner of Canada at <a href="https://www.priv.gc.ca" target="_blank">priv.gc.ca</a> if you have concerns.</p>
+
+    <h3>European Residents (GDPR)</h3>
+    <p>You have rights under the General Data Protection Regulation (GDPR). Our legal basis for processing is contract performance. You may lodge a complaint with your local data protection authority.</p>
+
+    <h3>California Residents (CCPA)</h3>
+    <p>You have rights under the California Consumer Privacy Act (CCPA). We do not sell personal information. Contact support@qwicktry.com to exercise your rights.</p>
+  </section>
+
+  <section id="data-retention">
+    <h2><span class="num">8</span> Data Retention</h2>
+    <ul>
+      <li><strong>Active subscriptions:</strong> Your license record is kept for as long as your subscription is active or as long as you may reasonably wish to reactivate</li>
+      <li><strong>Cancelled subscriptions:</strong> Retained for up to 90 days after cancellation for billing dispute purposes, then permanently deleted</li>
+      <li><strong>On written request:</strong> Deleted immediately upon request to support@qwicktry.com regardless of subscription status</li>
+      <li><strong>Support emails:</strong> Retained for up to 2 years or until you request deletion</li>
+    </ul>
+    <p>Data stored locally on your device is entirely under your control. Clear it at any time by uninstalling the extension or clearing Chrome's extension storage.</p>
+  </section>
+
+  <section id="children">
+    <h2><span class="num">9</span> Children's Privacy</h2>
+    <p>Our extension is intended for use by Amazon warehouse employees who are adults. We do not knowingly collect personal information from anyone under the age of 18. If you are under 18, please do not use our extension or provide any information to us.</p>
+    <p>If we become aware that we have inadvertently collected information from a person under 18, we will delete it immediately. To report a concern, contact support@qwicktry.com.</p>
+  </section>
+
+  <section id="third-party">
+    <h2><span class="num">10</span> Third-Party Services and Links</h2>
+    <p>Our extension operates on the Amazon AtoZ website. We are not affiliated with, endorsed by, or in any way officially connected with Amazon.com, Inc. or any of its subsidiaries. Amazon's own privacy policy applies to your use of their platform independently of our extension.</p>
+    <p>Our website or extension may contain links to third-party websites. We are not responsible for the privacy practices of those websites and encourage you to review their individual privacy policies.</p>
+  </section>
+
+  <section id="changes">
+    <h2><span class="num">11</span> Changes to This Privacy Policy</h2>
+    <p>We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. When we make material changes:</p>
+    <ul>
+      <li>We will update the "Last updated" date at the top of this page</li>
+      <li>For significant changes, we will notify active subscribers by email</li>
+      <li>Continued use of the extension after changes are posted constitutes your acceptance of the updated policy</li>
+    </ul>
+    <p>We encourage you to review this policy periodically. All previous versions are available on request.</p>
+  </section>
+
+  <section id="contact">
+    <h2><span class="num">12</span> Contact Us</h2>
+    <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please reach out:</p>
+    <div class="contact-box">
+      <h3>&#128274; Privacy Questions?</h3>
+      <p>We respond to all privacy requests within 30 days.</p>
+      <a href="mailto:support@qwicktry.com">support@qwicktry.com</a>
+    </div>
+    <p>
+      <strong>Qwicktry</strong><br>
+      Toronto, Ontario, Canada<br>
+      support@qwicktry.com
+    </p>
+  </section>
+
+</div>
+
+<footer>
+  <p>&#169; 2026 Qwicktry. All rights reserved.</p>
+  <p style="margin-top: 10px;">
+    <a href="/">Home</a>
+    <a href="/privacy">Privacy Policy</a>
+    <a href="mailto:support@qwicktry.com">Contact</a>
+  </p>
+</footer>
+
+</body>
+</html>
