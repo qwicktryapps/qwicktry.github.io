@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Qwicktry — AtoZ Shift Helper Premium</title>
+  <title>Qwicktry — AtoZ Shift Helper</title>
   <meta name="description" content="The smarter way to manage your Amazon AtoZ shift schedule. Filter by dates, days, and times to find shifts that fit your life." />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -125,47 +125,6 @@
       max-width: 580px;
       margin: 0 auto 40px;
     }
-
-    .hero-buttons {
-      display: flex;
-      gap: 14px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      background: white;
-      color: var(--purple);
-      padding: 14px 28px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 16px;
-      text-decoration: none;
-      transition: transform 0.15s, box-shadow 0.15s;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,0.12);
-      color: white;
-      border: 1px solid rgba(255,255,255,0.35);
-      padding: 14px 28px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 16px;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-
-    .btn-secondary:hover { background: rgba(255,255,255,0.2); }
-    .hero-buttons button { cursor: pointer; border: none; text-decoration: none; }
-    .hero-buttons .btn-primary { background: white; color: var(--purple); padding: 14px 28px; border-radius: 8px; font-weight: 700; font-size: 16px; transition: transform 0.15s, box-shadow 0.15s; box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
-    .hero-buttons .btn-secondary { background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,255,255,0.35) !important; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 16px; }
 
     .hero-note {
       margin-top: 20px;
@@ -457,6 +416,24 @@
       margin-right: auto;
     }
 
+    .btn-primary {
+      display: inline-block;
+      background: white;
+      color: var(--purple);
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+
     /* ── FOOTER ── */
     footer {
       background: var(--dark);
@@ -487,15 +464,6 @@
 
     footer a:hover { color: white; }
 
-    .footer-disclaimer {
-      margin-top: 16px;
-      font-size: 12px;
-      color: rgba(255,255,255,0.25);
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
     @media (max-width: 600px) {
       .nav-links { display: none; }
       .hero { padding: 70px 20px 60px; }
@@ -513,7 +481,7 @@
     <a href="#pricing">Pricing</a>
     <a href="#faq">FAQ</a>
     <a href="/privacy">Privacy</a>
-    <a href="#pricing" class="nav-cta">Get Premium →</a>
+    <a href="#pricing" class="nav-cta">Get Started →</a>
   </div>
 </nav>
 
@@ -522,6 +490,7 @@
   <div class="hero-badge">⚡ Chrome Extension for Amazon AtoZ</div>
   <h1>Find the shifts that<br><em>actually fit your life</em></h1>
   <p>Stop scrolling through dozens of irrelevant shifts. Set your preferred schedule once — AtoZ Shift Helper surfaces only the shifts that match your dates, days, and times.</p>
+  <p class="hero-note">Works on Chrome · Licensed per Employee ID · $19/month</p>
 </section>
 
 <!-- ── PROOF STRIP ── -->
@@ -573,21 +542,21 @@
 <section class="how" id="how">
   <p class="section-label">How it works</p>
   <h2 class="section-title">Up and running in minutes</h2>
-  <p class="section-sub" style="margin-bottom: 48px;">Four simple steps from purchase to finding your first matching shift.</p>
+  <p class="section-sub" style="margin-bottom: 48px;">Four simple steps from sign-up to finding your first matching shift.</p>
 
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-content">
-        <h3>Purchase a Premium license</h3>
-        <p>Subscribe for $19/month. You'll receive your unique license key by email immediately after checkout.</p>
+        <h3>Get your license</h3>
+        <p>Contact us to get started at $19/month. You'll receive your unique license key by email.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-content">
         <h3>Install the Chrome extension</h3>
-        <p>Add AtoZ Shift Helper — Premium to Chrome from the Chrome Web Store. Takes 30 seconds.</p>
+        <p>Add AtoZ Shift Helper to Chrome from the Chrome Web Store. Takes 30 seconds.</p>
       </div>
     </div>
     <div class="step">
@@ -601,7 +570,7 @@
       <div class="step-num">4</div>
       <div class="step-content">
         <h3>Click Start</h3>
-        <p>The extension goes to work — filtering the AtoZ shift list and surfacing only the shifts that match your criteria. The HUD panel keeps you informed throughout.</p>
+        <p>The extension filters the AtoZ shift list and surfaces only the shifts that match your criteria. The HUD panel keeps you informed throughout.</p>
       </div>
     </div>
   </div>
@@ -615,7 +584,7 @@
 
   <div class="pricing-card">
     <span class="pricing-badge">MOST POPULAR</span>
-    <h3 style="font-size: 22px; font-weight: 700; color: var(--dark);">Premium Monthly</h3>
+    <h3 style="font-size: 22px; font-weight: 700; color: var(--dark);">Monthly</h3>
     <div class="price"><sup>$</sup>19</div>
     <p class="price-period">per month · billed monthly · cancel any time</p>
 
@@ -630,8 +599,8 @@
       <li>All future updates included</li>
     </ul>
 
-    <a href="https://qwicktry.lemonsqueezy.com" class="btn-buy">Get Started →</a>
-    <p class="pricing-note">Secure checkout powered by Lemon Squeezy · 1 license per Employee ID</p>
+    <a href="mailto:support@qwicktry.com" class="btn-buy">Get Started →</a>
+    <p class="pricing-note">Email us to get set up · 1 license per Employee ID · cancel any time</p>
   </div>
 </section>
 
@@ -644,7 +613,7 @@
   <div class="faq-list">
     <div class="faq-item">
       <h3>What is this extension?</h3>
-      <p>AtoZ Shift Helper — Premium is a Chrome browser extension that helps Amazon AtoZ users filter the available shift list by their preferred dates, days of the week, and time windows. Instead of manually scrolling through every available shift, you set your criteria and the extension surfaces only the ones that match.</p>
+      <p>AtoZ Shift Helper is a Chrome browser extension that helps Amazon AtoZ users filter the available shift list by their preferred dates, days of the week, and time windows. Instead of manually scrolling through every available shift, you set your criteria and the extension surfaces only the ones that match.</p>
     </div>
     <div class="faq-item">
       <h3>Do I need an Amazon AtoZ account?</h3>
@@ -656,7 +625,7 @@
     </div>
     <div class="faq-item">
       <h3>What is a license key?</h3>
-      <p>Your license key is a unique code you receive by email after purchase. You enter it in the extension popup along with your Employee ID to activate your subscription. Each license is tied to one Employee ID.</p>
+      <p>Your license key is a unique code you receive by email when you sign up. You enter it in the extension popup along with your Employee ID to activate your access. Each license is tied to one Employee ID.</p>
     </div>
     <div class="faq-item">
       <h3>Can I share my license with someone else?</h3>
@@ -664,7 +633,7 @@
     </div>
     <div class="faq-item">
       <h3>How do I cancel?</h3>
-      <p>You can cancel your subscription at any time from your Lemon Squeezy customer portal. There are no cancellation fees. Your access continues until the end of your current billing period.</p>
+      <p>Email us at <span>support</span>&#64;<span>qwicktry.com</span> at any time and we'll cancel your subscription immediately. There are no cancellation fees. Your access continues until the end of your current billing period.</p>
     </div>
     <div class="faq-item">
       <h3>Is my Amazon account information safe?</h3>
@@ -680,9 +649,9 @@
 <!-- ── CTA BOTTOM ── -->
 <section class="cta-bottom">
   <h2>Ready to stop searching<br>and start working?</h2>
-  <p>Join workers who spend less time on scheduling and more time on what matters.</p>
-  <a href="https://qwicktry.lemonsqueezy.com" class="btn-primary" style="display: inline-block;">Get Premium — $19/month →</a>
-  <p style="margin-top: 16px; font-size: 13px; color: rgba(255,255,255,0.55);">Cancel any time · Secure checkout · License delivered instantly</p>
+  <p>Spend less time on scheduling and more time on what matters.</p>
+  <a href="mailto:support@qwicktry.com" class="btn-primary">Get Started — $19/month →</a>
+  <p style="margin-top: 16px; font-size: 13px; color: rgba(255,255,255,0.55);">Cancel any time · License delivered by email · 1 license per Employee ID</p>
 </section>
 
 <!-- ── FOOTER ── -->
@@ -699,5 +668,6 @@
   <p>Contact us: <span>support</span>&#64;<span>qwicktry.com</span></p>
   <p style="margin-top: 8px;">&#169; 2026 Qwicktry</p>
 </footer>
+
 </body>
 </html>
