@@ -271,30 +271,60 @@
       background: var(--bg);
     }
 
-    .pricing-card {
-      max-width: 420px;
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      max-width: 960px;
       margin: 0 auto;
-      background: var(--white);
-      border: 2px solid var(--purple);
-      border-radius: 16px;
-      padding: 40px 36px;
-      text-align: center;
-      box-shadow: 0 8px 32px rgba(91,79,207,0.15);
-      position: relative;
     }
 
-    .pricing-badge {
+    .pricing-card {
+      background: var(--white);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 28px;
+      text-align: center;
+      position: relative;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .pricing-card:hover {
+      box-shadow: 0 8px 28px rgba(91,79,207,0.12);
+      transform: translateY(-2px);
+    }
+
+    .best-card {
+      border-color: var(--purple);
+      box-shadow: 0 8px 32px rgba(91,79,207,0.18);
+    }
+
+    .trial-card {
+      border-color: #10b981;
+    }
+
+    .plan-badge {
       position: absolute;
       top: -14px;
       left: 50%;
       transform: translateX(-50%);
       background: linear-gradient(135deg, var(--purple), var(--purple2));
       color: white;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
-      padding: 4px 16px;
+      padding: 4px 14px;
       border-radius: 20px;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.8px;
+      white-space: nowrap;
+    }
+
+    .plan-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
     }
 
     .price {
@@ -302,7 +332,11 @@
       font-weight: 800;
       color: var(--dark);
       line-height: 1;
-      margin: 20px 0 4px;
+      margin: 12px 0 4px;
+    }
+
+    .trial-price {
+      font-size: 38px;
     }
 
     .price sup {
@@ -312,20 +346,20 @@
     }
 
     .price-period {
-      font-size: 16px;
+      font-size: 14px;
       color: var(--muted);
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
     .pricing-features {
       list-style: none;
       text-align: left;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
 
     .pricing-features li {
-      padding: 8px 0;
-      font-size: 15px;
+      padding: 7px 0;
+      font-size: 14px;
       color: var(--dark);
       border-bottom: 1px solid var(--border);
       display: flex;
@@ -342,24 +376,31 @@
       flex-shrink: 0;
     }
 
+    .trial-card .pricing-features li::before { color: #10b981; }
+
     .btn-buy {
       display: block;
       background: linear-gradient(135deg, var(--purple), var(--purple2));
       color: white;
-      padding: 15px 28px;
+      padding: 13px 24px;
       border-radius: 8px;
       font-weight: 700;
-      font-size: 17px;
+      font-size: 16px;
       text-decoration: none;
       transition: opacity 0.2s, transform 0.15s;
-      box-shadow: 0 4px 14px rgba(91,79,207,0.35);
+      box-shadow: 0 4px 14px rgba(91,79,207,0.3);
+    }
+
+    .btn-trial {
+      background: linear-gradient(135deg, #10b981, #059669);
+      box-shadow: 0 4px 14px rgba(16,185,129,0.3);
     }
 
     .btn-buy:hover { opacity: 0.9; transform: translateY(-1px); }
 
     .pricing-note {
-      margin-top: 14px;
-      font-size: 13px;
+      margin-top: 12px;
+      font-size: 12px;
       color: var(--muted);
     }
 
@@ -481,6 +522,7 @@
     <a href="#pricing">Pricing</a>
     <a href="#faq">FAQ</a>
     <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
     <a href="#pricing" class="nav-cta">Get Started →</a>
   </div>
 </nav>
@@ -490,12 +532,11 @@
   <div class="hero-badge">⚡ Chrome Extension for Amazon AtoZ</div>
   <h1>Find the shifts that<br><em>actually fit your life</em></h1>
   <p>Stop scrolling through dozens of irrelevant shifts. Set your preferred schedule once — AtoZ Shift Helper surfaces only the shifts that match your dates, days, and times.</p>
-  <p class="hero-note">Works on Chrome · Licensed per Employee ID · $19/month</p>
 </section>
 
 <!-- ── PROOF STRIP ── -->
 <div class="proof-strip">
-  <p>Built for <strong>Amazon warehouse associates</strong> · Works on Chrome · Licensed per Employee ID</p>
+  <p>Built for <strong>Amazon warehouse associates</strong> · Chrome extension · Try it free for 7 days</p>
 </div>
 
 <!-- ── FEATURES ── -->
@@ -522,18 +563,18 @@
     </div>
     <div class="feature-card">
       <span class="feature-icon">⭐</span>
-      <h3>Priority Window</h3>
-      <p>Mark your ideal time slots as priority. Those shifts float to the top so you see your best options first.</p>
+      <h3>Priority Preferences</h3>
+      <p>Set your preferred time windows as priority. Your top choices are always shown before anything else.</p>
     </div>
     <div class="feature-card">
       <span class="feature-icon">💾</span>
-      <h3>Saves Your Settings</h3>
-      <p>Set your preferences once. They're remembered every time you open the extension — no re-entering filters every session.</p>
+      <h3>Set Once, Remembered Always</h3>
+      <p>Your filters are saved. Close the extension, come back tomorrow — everything is exactly as you left it.</p>
     </div>
     <div class="feature-card">
       <span class="feature-icon">📊</span>
-      <h3>Live HUD Panel</h3>
-      <p>A clean status panel sits on your AtoZ page showing shifts found, last activity, and your license status at a glance.</p>
+      <h3>Live Status Panel</h3>
+      <p>A clean status panel sits on your AtoZ page showing your current status and license validity at a glance.</p>
     </div>
   </div>
 </section>
@@ -542,14 +583,14 @@
 <section class="how" id="how">
   <p class="section-label">How it works</p>
   <h2 class="section-title">Up and running in minutes</h2>
-  <p class="section-sub" style="margin-bottom: 48px;">Four simple steps from sign-up to finding your first matching shift.</p>
+  <p class="section-sub" style="margin-bottom: 48px;">Up and running in minutes. No complicated setup.</p>
 
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-content">
         <h3>Get your license</h3>
-        <p>Contact us to get started at $19/month. You'll receive your unique license key by email.</p>
+        <p>Email us at support&#64;qwicktry.com to get started. We'll send your unique license key within a few hours.</p>
       </div>
     </div>
     <div class="step">
@@ -569,8 +610,8 @@
     <div class="step">
       <div class="step-num">4</div>
       <div class="step-content">
-        <h3>Click Start</h3>
-        <p>The extension filters the AtoZ shift list and surfaces only the shifts that match your criteria. The HUD panel keeps you informed throughout.</p>
+        <h3>Use Your Filters</h3>
+        <p>The extension displays only the shifts that match your preferences. Your status panel shows you everything is running smoothly.</p>
       </div>
     </div>
   </div>
@@ -580,28 +621,66 @@
 <section class="pricing" id="pricing">
   <p class="section-label">Pricing</p>
   <h2 class="section-title">Simple, honest pricing</h2>
-  <p class="section-sub">One plan. Everything included. Cancel any time.</p>
+  <p class="section-sub">No credit card. No auto-renewal. No surprises.<br>You pay when you're ready — we activate your license. That's it.</p>
 
-  <div class="pricing-card">
-    <span class="pricing-badge">MOST POPULAR</span>
-    <h3 style="font-size: 22px; font-weight: 700; color: var(--dark);">Monthly</h3>
-    <div class="price"><sup>$</sup>19</div>
-    <p class="price-period">per month · billed monthly · cancel any time</p>
+  <div class="pricing-grid">
 
-    <ul class="pricing-features">
-      <li>Date range shift filtering</li>
-      <li>Day of week filtering</li>
-      <li>Custom time window filtering</li>
-      <li>Priority window — your best shifts first</li>
-      <li>Persistent settings — saved between sessions</li>
-      <li>Live HUD panel on AtoZ page</li>
-      <li>Email support within 24 hours</li>
-      <li>All future updates included</li>
-    </ul>
+    <!-- FREE TRIAL -->
+    <div class="pricing-card trial-card">
+      <div class="plan-name">Free Trial</div>
+      <div class="price trial-price">7 Days</div>
+      <p class="price-period">completely free · no payment needed</p>
+      <ul class="pricing-features">
+        <li>Full access to all features</li>
+        <li>Date, day &amp; time filtering</li>
+        <li>Priority time preferences</li>
+        <li>Live status panel</li>
+        <li>Email support included</li>
+      </ul>
+      <a href="/cdn-cgi/l/email-protection#087b7d7878677a7c48797f616b637c7a71266b6765" class="btn-buy btn-trial">Start Free Trial →</a>
+      <p class="pricing-note">Email us · we'll set you up same day</p>
+    </div>
 
-    <a href="mailto:support@qwicktry.com" class="btn-buy">Get Started →</a>
-    <p class="pricing-note">Email us to get set up · 1 license per Employee ID · cancel any time</p>
+    <!-- MONTHLY -->
+    <div class="pricing-card">
+      <div class="plan-name">Monthly</div>
+      <div class="price"><sup>$</sup>19</div>
+      <p class="price-period">per month · no auto-renewal</p>
+      <ul class="pricing-features">
+        <li>Full access to all features</li>
+        <li>Date, day &amp; time filtering</li>
+        <li>Priority time preferences</li>
+        <li>Live status panel</li>
+        <li>Email support within 24 hours</li>
+        <li>All future updates included</li>
+      </ul>
+      <a href="/cdn-cgi/l/email-protection#087b7d7878677a7c48797f616b637c7a71266b6765" class="btn-buy">Get Started →</a>
+      <p class="pricing-note">1 license per Employee ID · license by email</p>
+    </div>
+
+    <!-- 3-MONTH -->
+    <div class="pricing-card best-card">
+      <div class="plan-badge">BEST VALUE</div>
+      <div class="plan-name">3 Months</div>
+      <div class="price"><sup>$</sup>45</div>
+      <p class="price-period">save $12 · no auto-renewal</p>
+      <ul class="pricing-features">
+        <li>Full access to all features</li>
+        <li>Date, day &amp; time filtering</li>
+        <li>Priority time preferences</li>
+        <li>Live status panel</li>
+        <li>Email support within 24 hours</li>
+        <li>All future updates included</li>
+      </ul>
+      <a href="/cdn-cgi/l/email-protection#087b7d7878677a7c48797f616b637c7a71266b6765" class="btn-buy">Get Started →</a>
+      <p class="pricing-note">1 license per Employee ID · license by email</p>
+    </div>
+
   </div>
+
+  <p style="text-align:center; margin-top: 32px; font-size: 14px; color: var(--muted);">
+    Pay your way — e-transfer, PayPal, or bank transfer. No credit card required.
+  </p>
 </section>
 
 <!-- ── FAQ ── -->
@@ -632,10 +711,6 @@
       <p>No. Each license is bound to one Amazon Employee ID on first use. If you try to use it with a different Employee ID, activation will be declined. You can purchase additional licenses for other accounts.</p>
     </div>
     <div class="faq-item">
-      <h3>How do I cancel?</h3>
-      <p>Email us at <span>support</span>&#64;<span>qwicktry.com</span> at any time and we'll cancel your subscription immediately. There are no cancellation fees. Your access continues until the end of your current billing period.</p>
-    </div>
-    <div class="faq-item">
       <h3>Is my Amazon account information safe?</h3>
       <p>Yes. The extension does not access, store, or transmit your Amazon account credentials, password, or personal information. It only reads the shift listings displayed on the AtoZ page. See our Privacy Policy for full details.</p>
     </div>
@@ -650,8 +725,8 @@
 <section class="cta-bottom">
   <h2>Ready to stop searching<br>and start working?</h2>
   <p>Spend less time on scheduling and more time on what matters.</p>
-  <a href="mailto:support@qwicktry.com" class="btn-primary">Get Started — $19/month →</a>
-  <p style="margin-top: 16px; font-size: 13px; color: rgba(255,255,255,0.55);">Cancel any time · License delivered by email · 1 license per Employee ID</p>
+  <a href="/cdn-cgi/l/email-protection#f88b8d8888978a8cb8898f919b938c8a81d69b9795" class="btn-primary">Get Started →</a>
+  <p style="margin-top: 16px; font-size: 13px; color: rgba(255,255,255,0.55);">No auto-renewal · License delivered by email · 1 license per Employee ID</p>
 </section>
 
 <!-- ── FOOTER ── -->
@@ -664,10 +739,13 @@
     <a href="#pricing">Pricing</a>
     <a href="#faq">FAQ</a>
     <a href="/privacy">Privacy Policy</a>
+    <a href="/terms">Terms of Service</a>
   </div>
   <p>Contact us: <span>support</span>&#64;<span>qwicktry.com</span></p>
-  <p style="margin-top: 8px;">&#169; 2026 Qwicktry</p>
+  <p style="margin-top: 18px; font-size: 12px; color: rgba(255,255,255,0.28); max-width: 640px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+    Qwicktry is not affiliated with, endorsed by, or in any way officially connected with Amazon.com, Inc. or any of its subsidiaries. AtoZ Shift Helper is an independent tool. Use of this extension is at your own risk. Users are solely responsible for ensuring their use complies with their employer's policies. Qwicktry accepts no liability for any consequences arising from the use of this software.
+  </p>
+  <p style="margin-top: 14px; font-size: 12px; color: rgba(255,255,255,0.25);">&#169; 2026 Qwicktry. All rights reserved.</p>
 </footer>
-
 </body>
 </html>
