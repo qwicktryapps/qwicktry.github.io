@@ -3,752 +3,738 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Qwicktry — AtoZ Shift Helper</title>
-  <meta name="description" content="The smarter way to manage your Amazon AtoZ shift schedule. Filter by dates, days, and times to find shifts that fit your life." />
+  <title>AtoZ Shift Helper — Auto-grab VET shifts & VTO on Amazon AtoZ</title>
+  <meta name="description" content="Chrome extension for Amazon AtoZ. Automatically claims the VET / READY shifts and VTO you want — the instant they drop — filtered to your exact dates, days, and hours." />
+  <meta name="theme-color" content="#5B4FCF" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="AtoZ Shift Helper — Auto-grab VET shifts & VTO" />
+  <meta property="og:description" content="Good VET and VTO vanish in seconds. AtoZ Shift Helper claims the ones that match your schedule automatically, the moment they post." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --purple:     #5B4FCF;
-      --purple2:    #764ba2;
-      --dark:       #0F172A;
-      --muted:      #64748B;
-      --border:     #E2E8F0;
-      --bg:         #F8FAFC;
-      --white:      #FFFFFF;
-      --yellow:     #FCD34D;
+      --purple:      #5B4FCF;
+      --purple-2:    #764ba2;
+      --indigo:      #6366F1;
+      --violet:      #8B5CF6;
+      --dark:        #0B1020;
+      --ink:         #0F172A;
+      --muted:       #5B6577;
+      --muted-2:     #8893A6;
+      --border:      #E7EAF0;
+      --bg:          #F7F8FC;
+      --white:       #FFFFFF;
+      --yellow:      #FACC15;
+      --green:       #10B981;
+      --green-2:     #059669;
+      --red:         #EF4444;
+      --shadow-lg:   0 30px 60px -15px rgba(20, 18, 66, 0.28);
+      --shadow-md:   0 12px 32px -8px rgba(20, 18, 66, 0.16);
+      --shadow-sm:   0 2px 10px rgba(15, 23, 42, 0.06);
+      --radius:      18px;
+      --maxw:        1140px;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      font-size: 16px;
-      line-height: 1.7;
-      color: var(--dark);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--ink);
       background: var(--white);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    /* ── NAV ── */
+    a { color: inherit; }
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+    .grad-text {
+      background: linear-gradient(110deg, #C4B5FD 0%, #FFFFFF 40%, #FDE68A 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .ink-grad {
+      background: linear-gradient(110deg, var(--purple) 0%, var(--violet) 60%, var(--indigo) 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* ─────────────── NAV ─────────────── */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 60px;
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: saturate(180%) blur(14px);
+      -webkit-backdrop-filter: saturate(180%) blur(14px);
+      border-bottom: 1px solid rgba(231,234,240,0.9);
     }
-
+    .nav-inner {
+      max-width: var(--maxw); margin: 0 auto; padding: 0 24px;
+      height: 66px; display: flex; align-items: center; justify-content: space-between;
+    }
     .nav-logo {
-      font-weight: 800;
-      font-size: 20px;
-      color: var(--purple);
-      text-decoration: none;
-      letter-spacing: -0.3px;
+      display: flex; align-items: center; gap: 9px;
+      font-weight: 800; font-size: 19px; color: var(--ink);
+      text-decoration: none; letter-spacing: -0.4px;
     }
-
-    .nav-logo span { color: var(--dark); }
-
+    .nav-logo .mark {
+      width: 30px; height: 30px; border-radius: 9px;
+      background: linear-gradient(135deg, var(--purple), var(--purple-2));
+      display: grid; place-items: center; color: #fff; font-size: 16px;
+      box-shadow: 0 6px 16px rgba(91,79,207,0.35);
+    }
+    .nav-logo .q { color: var(--purple); }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
     .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 15px;
-      margin-left: 24px;
-      font-weight: 500;
-      transition: color 0.2s;
+      color: var(--muted); text-decoration: none; font-size: 15px; font-weight: 500;
+      transition: color .2s;
     }
-
-    .nav-links a:hover { color: var(--purple); }
-
+    .nav-links a:hover { color: var(--ink); }
     .nav-cta {
-      background: var(--purple) !important;
-      color: white !important;
-      padding: 8px 18px;
-      border-radius: 6px;
-      font-weight: 600 !important;
-      transition: opacity 0.2s !important;
+      background: linear-gradient(135deg, var(--purple), var(--purple-2));
+      color: #fff !important; padding: 10px 18px; border-radius: 10px;
+      font-weight: 600 !important; font-size: 14.5px !important;
+      box-shadow: 0 8px 20px rgba(91,79,207,0.3);
+      transition: transform .15s, box-shadow .15s;
     }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 12px 26px rgba(91,79,207,0.42); }
 
-    .nav-cta:hover { opacity: 0.88; }
-
-    /* ── HERO ── */
+    /* ─────────────── HERO ─────────────── */
     .hero {
-      background: linear-gradient(135deg, #5B4FCF 0%, #764ba2 100%);
-      padding: 100px 24px 80px;
-      text-align: center;
-      position: relative;
+      position: relative; isolation: isolate;
+      padding: 96px 0 90px;
+      background:
+        radial-gradient(900px 500px at 12% -10%, rgba(139,92,246,0.16), transparent 60%),
+        radial-gradient(800px 520px at 95% 0%, rgba(99,102,241,0.14), transparent 55%),
+        linear-gradient(180deg, #FBFBFE 0%, #F4F3FD 100%);
       overflow: hidden;
     }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    .hero::after {
+      content: ""; position: absolute; inset: 0; z-index: -1;
+      background-image:
+        linear-gradient(rgba(91,79,207,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(91,79,207,0.045) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: radial-gradient(700px 500px at 50% 20%, #000 30%, transparent 75%);
+      -webkit-mask-image: radial-gradient(700px 500px at 50% 20%, #000 30%, transparent 75%);
+    }
+    .hero-grid {
+      max-width: var(--maxw); margin: 0 auto; padding: 0 24px;
+      display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center;
     }
 
-    .hero-badge {
-      display: inline-block;
-      background: rgba(255,255,255,0.15);
-      color: white;
-      border: 1px solid rgba(255,255,255,0.3);
-      border-radius: 20px;
-      padding: 6px 16px;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      margin-bottom: 24px;
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.9); border: 1px solid var(--border);
+      color: var(--purple); border-radius: 999px; padding: 7px 14px;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.2px;
+      box-shadow: var(--shadow-sm); margin-bottom: 22px;
     }
+    .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(16,185,129,0.18); }
 
     .hero h1 {
-      font-size: clamp(32px, 6vw, 56px);
-      font-weight: 800;
-      color: white;
-      line-height: 1.15;
+      font-size: clamp(36px, 5.4vw, 60px);
+      font-weight: 900; line-height: 1.04; letter-spacing: -1.6px; color: var(--ink);
       margin-bottom: 20px;
-      letter-spacing: -1px;
     }
-
-    .hero h1 em {
-      font-style: normal;
-      color: var(--yellow);
+    .hero h1 .ink-grad { letter-spacing: -1.6px; }
+    .hero-sub {
+      font-size: clamp(17px, 2vw, 20px); color: var(--muted); max-width: 540px;
+      margin-bottom: 30px;
     }
+    .hero-sub strong { color: var(--ink); font-weight: 700; }
 
-    .hero p {
-      font-size: clamp(16px, 2.5vw, 20px);
-      color: rgba(255,255,255,0.88);
-      max-width: 580px;
-      margin: 0 auto 40px;
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-weight: 700; text-decoration: none; border-radius: 12px;
+      transition: transform .15s, box-shadow .15s, background .2s;
+      cursor: pointer; border: none;
     }
-
-    .hero-note {
-      margin-top: 20px;
-      font-size: 13px;
-      color: rgba(255,255,255,0.6);
-    }
-
-    /* ── SOCIAL PROOF STRIP ── */
-    .proof-strip {
-      background: var(--dark);
-      padding: 16px 24px;
-      text-align: center;
-    }
-
-    .proof-strip p {
-      color: rgba(255,255,255,0.6);
-      font-size: 14px;
-    }
-
-    .proof-strip strong { color: var(--yellow); }
-
-    /* ── FEATURES ── */
-    .features {
-      padding: 80px 24px;
-      background: var(--bg);
-    }
-
-    .section-label {
-      text-align: center;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      color: var(--purple);
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: clamp(26px, 4vw, 38px);
-      font-weight: 800;
-      color: var(--dark);
-      margin-bottom: 12px;
-      letter-spacing: -0.5px;
-    }
-
-    .section-sub {
-      text-align: center;
-      font-size: 17px;
-      color: var(--muted);
-      max-width: 520px;
-      margin: 0 auto 56px;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .feature-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 28px;
-      transition: box-shadow 0.2s, transform 0.2s;
-    }
-
-    .feature-card:hover {
-      box-shadow: 0 8px 24px rgba(91,79,207,0.1);
-      transform: translateY(-2px);
-    }
-
-    .feature-icon {
-      font-size: 32px;
-      margin-bottom: 14px;
-      display: block;
-    }
-
-    .feature-card h3 {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 8px;
-    }
-
-    .feature-card p {
-      font-size: 15px;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    /* ── HOW IT WORKS ── */
-    .how {
-      padding: 80px 24px;
-      background: var(--white);
-    }
-
-    .steps {
-      max-width: 680px;
-      margin: 0 auto;
-    }
-
-    .step {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 36px;
-      align-items: flex-start;
-    }
-
-    .step-num {
-      background: linear-gradient(135deg, var(--purple), var(--purple2));
-      color: white;
-      font-weight: 800;
-      font-size: 16px;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 2px;
-      box-shadow: 0 4px 12px rgba(91,79,207,0.3);
-    }
-
-    .step-content h3 {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 6px;
-    }
-
-    .step-content p {
-      font-size: 15px;
-      color: var(--muted);
-    }
-
-    /* ── PRICING ── */
-    .pricing {
-      padding: 80px 24px;
-      background: var(--bg);
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
-    .pricing-card {
-      background: var(--white);
-      border: 2px solid var(--border);
-      border-radius: 16px;
-      padding: 36px 28px;
-      text-align: center;
-      position: relative;
-      transition: box-shadow 0.2s, transform 0.2s;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .pricing-card:hover {
-      box-shadow: 0 8px 28px rgba(91,79,207,0.12);
-      transform: translateY(-2px);
-    }
-
-    .best-card {
-      border-color: var(--purple);
-      box-shadow: 0 8px 32px rgba(91,79,207,0.18);
-    }
-
-    .trial-card {
-      border-color: #10b981;
-    }
-
-    .plan-badge {
-      position: absolute;
-      top: -14px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, var(--purple), var(--purple2));
-      color: white;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 4px 14px;
-      border-radius: 20px;
-      letter-spacing: 0.8px;
-      white-space: nowrap;
-    }
-
-    .plan-name {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-    }
-
-    .price {
-      font-size: 52px;
-      font-weight: 800;
-      color: var(--dark);
-      line-height: 1;
-      margin: 12px 0 4px;
-    }
-
-    .trial-price {
-      font-size: 38px;
-    }
-
-    .price sup {
-      font-size: 24px;
-      vertical-align: super;
-      font-weight: 600;
-    }
-
-    .price-period {
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 24px;
-    }
-
-    .pricing-features {
-      list-style: none;
-      text-align: left;
-      margin-bottom: 28px;
-    }
-
-    .pricing-features li {
-      padding: 7px 0;
-      font-size: 14px;
-      color: var(--dark);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .pricing-features li:last-child { border-bottom: none; }
-
-    .pricing-features li::before {
-      content: "✓";
-      color: var(--purple);
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    .trial-card .pricing-features li::before { color: #10b981; }
-
-    .btn-buy {
-      display: block;
-      background: linear-gradient(135deg, var(--purple), var(--purple2));
-      color: white;
-      padding: 13px 24px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 16px;
-      text-decoration: none;
-      transition: opacity 0.2s, transform 0.15s;
-      box-shadow: 0 4px 14px rgba(91,79,207,0.3);
-      margin-top: auto;
-    }
-
-    .btn-trial {
-      background: linear-gradient(135deg, #10b981, #059669);
-      box-shadow: 0 4px 14px rgba(16,185,129,0.3);
-    }
-
-    .btn-buy:hover { opacity: 0.9; transform: translateY(-1px); }
-
-    .pricing-note {
-      margin-top: 12px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    /* ── FAQ ── */
-    .faq {
-      padding: 80px 24px;
-      background: var(--white);
-    }
-
-    .faq-list {
-      max-width: 680px;
-      margin: 0 auto;
-    }
-
-    .faq-item {
-      border-bottom: 1px solid var(--border);
-      padding: 20px 0;
-    }
-
-    .faq-item h3 {
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--dark);
-      margin-bottom: 8px;
-    }
-
-    .faq-item p {
-      font-size: 15px;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    /* ── CTA BOTTOM ── */
-    .cta-bottom {
-      background: linear-gradient(135deg, var(--purple) 0%, var(--purple2) 100%);
-      padding: 80px 24px;
-      text-align: center;
-    }
-
-    .cta-bottom h2 {
-      font-size: clamp(26px, 4vw, 40px);
-      font-weight: 800;
-      color: white;
-      margin-bottom: 14px;
-      letter-spacing: -0.5px;
-    }
-
-    .cta-bottom p {
-      font-size: 17px;
-      color: rgba(255,255,255,0.85);
-      margin-bottom: 32px;
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
     .btn-primary {
-      display: inline-block;
-      background: white;
-      color: var(--purple);
-      padding: 14px 28px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 16px;
-      text-decoration: none;
-      transition: transform 0.15s, box-shadow 0.15s;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+      background: linear-gradient(135deg, var(--purple), var(--purple-2));
+      color: #fff; padding: 16px 28px; font-size: 16.5px;
+      box-shadow: 0 14px 30px rgba(91,79,207,0.38);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 20px 40px rgba(91,79,207,0.48); }
+    .btn-ghost {
+      background: var(--white); color: var(--ink); padding: 16px 24px; font-size: 16px;
+      border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    }
+    .btn-ghost:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+    .hero-trust { display: flex; align-items: center; gap: 18px; margin-top: 26px; flex-wrap: wrap; }
+    .hero-trust span { display: inline-flex; align-items: center; gap: 7px; font-size: 13.5px; color: var(--muted); font-weight: 600; }
+    .hero-trust .ic { color: var(--green); font-weight: 800; }
+
+    /* ── Hero product mock ── */
+    .hero-visual { position: relative; height: 500px; }
+    @keyframes float { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-12px); } }
+    @keyframes floatB { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(10px); } }
+
+    .mock-popup {
+      position: absolute; left: 0; top: 18px; width: 320px;
+      background: var(--white); border-radius: 20px; overflow: hidden;
+      box-shadow: var(--shadow-lg); border: 1px solid rgba(231,234,240,0.8);
+      animation: float 6s ease-in-out infinite; z-index: 2;
+    }
+    .mp-head { background: linear-gradient(135deg, var(--purple), var(--purple-2)); padding: 16px 18px; color: #fff; }
+    .mp-head .title { font-weight: 800; font-size: 15px; display:flex; align-items:center; gap:7px; }
+    .mp-head .desc { font-size: 11.5px; opacity: 0.82; margin-top: 3px; }
+    .mp-tabs { display: flex; gap: 6px; margin-top: 12px; }
+    .mp-tab { font-size: 11px; font-weight: 700; padding: 7px 11px; border-radius: 8px 8px 0 0; background: rgba(255,255,255,0.16); color: rgba(255,255,255,0.8); }
+    .mp-tab.active { background: var(--white); color: var(--purple); }
+    .mp-body { padding: 15px 16px 17px; }
+    .mp-card { border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 10px; }
+    .mp-card .lbl { font-size: 10.5px; font-weight: 700; color: var(--muted-2); text-transform: uppercase; letter-spacing: .6px; margin-bottom: 8px; }
+    .mode-pill { border: 2px solid var(--border); background: var(--bg); border-radius: 9px; padding: 9px 11px; }
+    .mode-pill + .mode-pill { margin-top: 7px; }
+    .mode-pill .n { font-size: 12px; font-weight: 800; color: var(--muted); }
+    .mode-pill .d { font-size: 10.5px; color: var(--muted-2); margin-top: 1px; }
+    .mode-pill.active { border-color: var(--purple); background: #F2F0FE; }
+    .mode-pill.active .n { color: var(--purple); }
+    .mode-pill.active .d { color: var(--muted); }
+    .mp-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .mp-chip { font-size: 11px; font-weight: 600; padding: 4px 9px; border-radius: 999px; background: #EEF0FB; color: var(--purple); border: 1px solid #D9DCF6; }
+    .mp-chip.p1 { background: linear-gradient(135deg, var(--purple), var(--purple-2)); color: #fff; border: none; }
+    .mp-start {
+      margin-top: 4px; width: 100%; text-align: center;
+      background: linear-gradient(135deg, var(--purple), var(--purple-2)); color: #fff;
+      font-weight: 800; font-size: 13px; padding: 11px; border-radius: 10px;
     }
 
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    .mock-hud {
+      position: absolute; right: -6px; top: 0; width: 268px;
+      background: var(--white); border-radius: 16px; overflow: hidden;
+      box-shadow: var(--shadow-lg); border: 1px solid rgba(231,234,240,0.8);
+      animation: floatB 5.2s ease-in-out infinite; z-index: 3;
+    }
+    .hud-head { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; background: linear-gradient(135deg, var(--purple), var(--purple-2)); }
+    .hud-head .name { color: #fff; font-weight: 800; font-size: 12.5px; }
+    .hud-head .right { display: flex; gap: 6px; }
+    .hud-pill { font-size: 9px; font-weight: 800; padding: 3px 7px; border-radius: 999px; text-transform: uppercase; letter-spacing: .6px; }
+    .hud-pill.mode { background: rgba(255,255,255,0.28); color: #fff; }
+    .hud-pill.state { background: #10B981; color: #fff; }
+    .hud-body { padding: 12px 14px; background: #F8FAFC; display: flex; align-items: center; gap: 10px; }
+    .hud-body .t { font-size: 12px; color: #475569; font-weight: 600; }
+    .hud-dots { display: inline-flex; gap: 4px; margin-left: auto; }
+    .hud-dots span { width: 6px; height: 6px; border-radius: 50%; background: linear-gradient(135deg, var(--purple), var(--purple-2)); opacity: .35; animation: hp 1.6s infinite; }
+    .hud-dots span:nth-child(2){ animation-delay:.16s; } .hud-dots span:nth-child(3){ animation-delay:.32s; }
+    .hud-dots span:nth-child(4){ animation-delay:.48s; } .hud-dots span:nth-child(5){ animation-delay:.64s; }
+    @keyframes hp { 0%,100%{ transform: scale(.75); opacity:.3; } 50%{ transform: scale(1.2); opacity:1; } }
+
+    .toast {
+      position: absolute; right: 8px; width: 248px;
+      background: var(--white); border-radius: 13px; padding: 12px 13px;
+      box-shadow: var(--shadow-md); border: 1px solid var(--border);
+      display: flex; align-items: center; gap: 11px; z-index: 4;
+      opacity: 0; transform: translateY(8px);
+    }
+    .toast .tick { width: 30px; height: 30px; border-radius: 9px; background: rgba(16,185,129,0.12); color: var(--green); display: grid; place-items: center; font-weight: 900; font-size: 15px; flex-shrink: 0; }
+    .toast .tt { font-size: 12.5px; font-weight: 800; color: var(--ink); }
+    .toast .ts { font-size: 11px; color: var(--muted); }
+    .toast.t1 { bottom: 96px; animation: pop 5.4s ease-in-out infinite; }
+    .toast.t2 { bottom: 22px; animation: pop 5.4s ease-in-out 2.7s infinite; }
+    @keyframes pop {
+      0% { opacity: 0; transform: translateY(10px) scale(.98); }
+      8%, 40% { opacity: 1; transform: translateY(0) scale(1); }
+      52%, 100% { opacity: 0; transform: translateY(-6px) scale(.99); }
     }
 
-    /* ── FOOTER ── */
-    footer {
-      background: var(--dark);
-      padding: 40px 24px;
-      text-align: center;
+    /* ─────────────── STAT STRIP ─────────────── */
+    .stat-strip { background: var(--dark); color: #fff; }
+    .stat-grid {
+      max-width: var(--maxw); margin: 0 auto; padding: 30px 24px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; text-align: center;
     }
+    .stat .num { font-size: 30px; font-weight: 900; letter-spacing: -0.5px;
+      background: linear-gradient(110deg, #fff, #C4B5FD); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .stat .lab { font-size: 13px; color: rgba(255,255,255,0.6); font-weight: 500; margin-top: 2px; }
 
-    .footer-logo {
-      font-size: 20px;
-      font-weight: 800;
-      color: white;
-      margin-bottom: 12px;
+    /* ─────────────── SECTION SHELL ─────────────── */
+    section.block { padding: 96px 0; }
+    .eyebrow { text-align: center; font-size: 13px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--purple); margin-bottom: 14px; }
+    .h2 { text-align: center; font-size: clamp(28px, 4vw, 44px); font-weight: 900; letter-spacing: -1px; line-height: 1.1; color: var(--ink); }
+    .sub { text-align: center; font-size: 18px; color: var(--muted); max-width: 600px; margin: 16px auto 0; }
+
+    /* ─────────────── PROBLEM ─────────────── */
+    .problem { background: var(--bg); }
+    .problem-wrap { max-width: 860px; margin: 48px auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .prob-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow-sm); }
+    .prob-card .tag { display:inline-flex; align-items:center; gap:7px; font-size: 12.5px; font-weight: 800; padding: 5px 12px; border-radius: 999px; margin-bottom: 16px; }
+    .prob-card.bad .tag { background: rgba(239,68,68,0.1); color: var(--red); }
+    .prob-card.good .tag { background: rgba(16,185,129,0.1); color: var(--green-2); }
+    .prob-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.3px; }
+    .prob-list { list-style: none; }
+    .prob-list li { display: flex; gap: 11px; padding: 8px 0; font-size: 15.5px; color: var(--muted); align-items: flex-start; }
+    .prob-list li .ic { flex-shrink: 0; font-weight: 900; margin-top: 1px; }
+    .prob-card.bad .ic { color: var(--red); }
+    .prob-card.good .ic { color: var(--green); }
+    .prob-card.good li { color: var(--ink); font-weight: 500; }
+
+    /* ─────────────── MODES ─────────────── */
+    .modes-grid { max-width: 980px; margin: 52px auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .mode-card {
+      position: relative; border-radius: 22px; padding: 36px 32px; overflow: hidden;
+      color: #fff; box-shadow: var(--shadow-md); isolation: isolate;
     }
+    .mode-card.vet { background: linear-gradient(150deg, #5B4FCF 0%, #7C3AED 100%); }
+    .mode-card.vto { background: linear-gradient(150deg, #0EA5E9 0%, #2563EB 100%); }
+    .mode-card::before { content:""; position:absolute; inset:0; z-index:-1; background: radial-gradient(420px 220px at 90% 0%, rgba(255,255,255,0.18), transparent 60%); }
+    .mode-card .ribbon { display:inline-flex; align-items:center; gap:8px; background: rgba(255,255,255,0.18); border:1px solid rgba(255,255,255,0.3); padding: 6px 13px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: .5px; }
+    .mode-card h3 { font-size: 26px; font-weight: 900; margin: 18px 0 6px; letter-spacing: -0.6px; }
+    .mode-card .mlead { font-size: 15px; color: rgba(255,255,255,0.88); margin-bottom: 18px; }
+    .mode-card ul { list-style: none; }
+    .mode-card ul li { display:flex; gap:10px; padding: 7px 0; font-size: 14.5px; color: rgba(255,255,255,0.95); }
+    .mode-card ul li::before { content:"✓"; font-weight: 900; color: #fff; opacity: .9; }
+    .mode-card .where { margin-top: 18px; font-size: 13px; color: rgba(255,255,255,0.75); border-top: 1px solid rgba(255,255,255,0.2); padding-top: 14px; }
+    .mode-card .where code { background: rgba(255,255,255,0.16); padding: 2px 7px; border-radius: 6px; font-size: 12px; }
 
-    footer p {
-      font-size: 14px;
-      color: rgba(255,255,255,0.4);
-      margin-bottom: 8px;
+    /* ─────────────── FEATURES ─────────────── */
+    .features { background: var(--bg); }
+    .feat-grid { max-width: var(--maxw); margin: 56px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .feat {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 28px; transition: transform .2s, box-shadow .2s, border-color .2s;
     }
-
-    footer a {
-      color: rgba(255,255,255,0.55);
-      text-decoration: none;
-      margin: 0 10px;
-      font-size: 14px;
-      transition: color 0.2s;
+    .feat:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: #D9DCF6; }
+    .feat .ic {
+      width: 48px; height: 48px; border-radius: 13px; display: grid; place-items: center;
+      font-size: 22px; margin-bottom: 16px;
+      background: linear-gradient(135deg, rgba(91,79,207,0.12), rgba(118,75,162,0.12));
     }
+    .feat h3 { font-size: 18px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.3px; }
+    .feat p { font-size: 15px; color: var(--muted); line-height: 1.6; }
 
-    footer a:hover { color: white; }
+    /* ─────────────── PRIORITY DEMO ─────────────── */
+    .demo-wrap { max-width: 760px; margin: 52px auto 0; }
+    .demo-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow-md); }
+    .demo-head { font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
+    .demo-setting { display: inline-flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+    .pill-set { background: #EEF0FB; color: var(--purple); border: 1px solid #D9DCF6; border-radius: 8px; padding: 5px 11px; font-size: 13px; font-weight: 700; }
+    .shift-row { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 12px; margin-bottom: 8px; background: var(--bg); border: 1px solid var(--border); }
+    .shift-row:last-child { margin-bottom: 0; }
+    .shift-letter { width: 28px; height: 28px; border-radius: 8px; background: var(--white); border: 1px solid var(--border); display: grid; place-items: center; font-weight: 800; font-size: 13px; color: var(--muted); flex-shrink: 0; }
+    .shift-time { font-weight: 700; font-size: 14.5px; color: var(--ink); min-width: 168px; }
+    .shift-dur { font-size: 13px; color: var(--muted); margin-left: auto; }
+    .tg { font-size: 11.5px; font-weight: 800; padding: 4px 10px; border-radius: 999px; white-space: nowrap; }
+    .tg.p1 { background: linear-gradient(135deg, var(--purple), var(--purple-2)); color: #fff; }
+    .tg.p2 { background: #DBEAFE; color: #1D4ED8; }
+    .tg.yes { background: #DCFCE7; color: #16A34A; }
+    .tg.no { background: #FEE2E2; color: #DC2626; }
+    .demo-note { font-size: 13.5px; color: var(--muted); font-style: italic; margin-top: 16px; text-align: center; }
 
-    @media (max-width: 600px) {
-      .nav-links { display: none; }
-      .hero { padding: 70px 20px 60px; }
+    /* ─────────────── HOW ─────────────── */
+    .how-steps { max-width: 760px; margin: 56px auto 0; }
+    .hstep { display: flex; gap: 22px; align-items: flex-start; position: relative; padding-bottom: 38px; }
+    .hstep:not(:last-child)::before { content:""; position: absolute; left: 23px; top: 52px; bottom: 0; width: 2px; background: linear-gradient(var(--purple), transparent); }
+    .hstep .num {
+      width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%; display: grid; place-items: center;
+      background: linear-gradient(135deg, var(--purple), var(--purple-2)); color: #fff; font-weight: 900; font-size: 18px;
+      box-shadow: 0 8px 18px rgba(91,79,207,0.35); z-index: 1;
+    }
+    .hstep h3 { font-size: 19px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.3px; }
+    .hstep p { font-size: 15.5px; color: var(--muted); }
+    .hstep p a { color: var(--purple); font-weight: 700; text-decoration: none; }
+    .hstep p a:hover { text-decoration: underline; }
+
+    /* ─────────────── FAQ ─────────────── */
+    .faq-list { max-width: 760px; margin: 52px auto 0; }
+    details.faq-item { border: 1px solid var(--border); border-radius: 14px; background: var(--white); margin-bottom: 12px; overflow: hidden; transition: box-shadow .2s, border-color .2s; }
+    details.faq-item[open] { box-shadow: var(--shadow-sm); border-color: #D9DCF6; }
+    details.faq-item summary {
+      list-style: none; cursor: pointer; padding: 20px 22px; font-size: 16.5px; font-weight: 700; color: var(--ink);
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    }
+    details.faq-item summary::-webkit-details-marker { display: none; }
+    details.faq-item summary .plus { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; background: #EEF0FB; color: var(--purple); display: grid; place-items: center; font-size: 17px; font-weight: 700; transition: transform .2s, background .2s; }
+    details.faq-item[open] summary .plus { transform: rotate(45deg); background: var(--purple); color: #fff; }
+    details.faq-item .ans { padding: 0 22px 20px; font-size: 15.5px; color: var(--muted); line-height: 1.7; }
+
+    /* ─────────────── CTA ─────────────── */
+    .cta {
+      position: relative; isolation: isolate; text-align: center; padding: 96px 24px;
+      background: linear-gradient(135deg, #5B4FCF 0%, #6D28D9 50%, #764ba2 100%);
+      overflow: hidden;
+    }
+    .cta::before { content:""; position:absolute; inset:0; z-index:-1;
+      background:
+        radial-gradient(500px 300px at 15% 20%, rgba(255,255,255,0.14), transparent 60%),
+        radial-gradient(500px 300px at 85% 80%, rgba(252,211,21,0.12), transparent 60%); }
+    .cta h2 { font-size: clamp(30px, 4.4vw, 48px); font-weight: 900; color: #fff; letter-spacing: -1px; line-height: 1.08; margin-bottom: 16px; }
+    .cta p { font-size: 18px; color: rgba(255,255,255,0.86); max-width: 500px; margin: 0 auto 32px; }
+    .btn-white { background: #fff; color: var(--purple); padding: 17px 32px; font-size: 17px; box-shadow: 0 16px 34px rgba(0,0,0,0.22); }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 22px 44px rgba(0,0,0,0.3); }
+    .cta .fine { margin-top: 18px; font-size: 13.5px; color: rgba(255,255,255,0.7); }
+
+    /* ─────────────── FOOTER ─────────────── */
+    footer { background: var(--dark); color: #fff; padding: 56px 24px 36px; }
+    .foot-inner { max-width: var(--maxw); margin: 0 auto; }
+    .foot-top { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 28px; padding-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .foot-brand { max-width: 320px; }
+    .foot-brand .nav-logo { color: #fff; margin-bottom: 12px; }
+    .foot-brand .nav-logo .q { color: #C4B5FD; }
+    .foot-brand p { color: rgba(255,255,255,0.55); font-size: 14.5px; }
+    .foot-cols { display: flex; gap: 56px; flex-wrap: wrap; }
+    .foot-col h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.45); margin-bottom: 14px; font-weight: 700; }
+    .foot-col a { display: block; color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14.5px; margin-bottom: 10px; transition: color .2s; }
+    .foot-col a:hover { color: #fff; }
+    .foot-legal { padding-top: 26px; }
+    .foot-legal .disc { font-size: 12.5px; color: rgba(255,255,255,0.4); line-height: 1.7; max-width: 880px; }
+    .foot-legal .copy { margin-top: 16px; font-size: 12.5px; color: rgba(255,255,255,0.35); }
+
+    /* ─────────────── REVEAL ─────────────── */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ─────────────── RESPONSIVE ─────────────── */
+    @media (max-width: 940px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 56px; }
+      .hero-visual { height: 420px; max-width: 420px; margin: 0 auto; width: 100%; }
+      .feat-grid { grid-template-columns: 1fr 1fr; }
+      .modes-grid, .problem-wrap { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: 1fr 1fr; gap: 24px 14px; }
+    }
+    @media (max-width: 680px) {
+      .nav-links a:not(.nav-cta) { display: none; }
+      section.block { padding: 72px 0; }
+      .feat-grid { grid-template-columns: 1fr; }
+      .hero { padding: 64px 0 72px; }
+      .shift-time { min-width: 0; font-size: 13px; }
+      .shift-dur { display: none; }
+      .foot-top { flex-direction: column; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
+<!-- ─────────────── NAV ─────────────── -->
 <nav>
-  <a href="/" class="nav-logo">⚡ Qwick<span>try</span></a>
-  <div class="nav-links">
-    <a href="#features">Features</a>
-    <a href="#how">How it works</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#faq">FAQ</a>
-    <a href="/privacy">Privacy</a>
-    <a href="/terms">Terms</a>
-    <a href="#pricing" class="nav-cta">Get Started →</a>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><span class="mark">⚡</span> AtoZ <span class="q">Shift Helper</span></a>
+    <div class="nav-links">
+      <a href="#modes">Modes</a>
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://chromewebstore.google.com/detail/atoz-shift-helper/fjajhooelifadiolkgpkafboghbdelad" target="_blank" rel="noopener" class="nav-cta">Add to Chrome</a>
+    </div>
   </div>
 </nav>
 
-<!-- ── HERO ── -->
-<section class="hero">
-  <div class="hero-badge">⚡ Chrome Extension for Amazon AtoZ</div>
-  <h1>Find the shifts that<br><em>actually fit your life</em></h1>
-  <p>Stop scrolling through dozens of irrelevant shifts. Set your preferred schedule once — AtoZ Shift Helper surfaces only the shifts that match your dates, days, and times.</p>
-</section>
+<!-- ─────────────── HERO ─────────────── -->
+<header class="hero">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <span class="badge"><span class="dot"></span> Chrome extension for Amazon AtoZ</span>
+      <h1>Grab the <span class="ink-grad">VET &amp; VTO</span> you want — the second it drops.</h1>
+      <p class="hero-sub">Good VET / READY shifts and VTO get taken in seconds. AtoZ Shift Helper watches AtoZ for you and <strong>automatically claims the ones that match your exact schedule</strong> — so you stop refreshing and start winning the grab.</p>
+      <div class="hero-cta">
+        <a href="https://chromewebstore.google.com/detail/atoz-shift-helper/fjajhooelifadiolkgpkafboghbdelad" target="_blank" rel="noopener" class="btn btn-primary">Add to Chrome →</a>
+        <a href="#how" class="btn btn-ghost">See how it works</a>
+      </div>
+      <div class="hero-trust">
+        <span><span class="ic">✓</span> Reacts in under a second</span>
+        <span><span class="ic">✓</span> Filtered to your exact schedule</span>
+        <span><span class="ic">✓</span> Runs entirely in your browser</span>
+      </div>
+    </div>
 
-<!-- ── PROOF STRIP ── -->
-<div class="proof-strip">
-  <p>Built for <strong>Amazon warehouse associates</strong> · Chrome extension · Try it free for 7 days</p>
+    <!-- product mock -->
+    <div class="hero-visual">
+      <div class="mock-popup">
+        <div class="mp-head">
+          <div class="title">⚡ AtoZ Shift Helper</div>
+          <div class="desc">Set your rules once. It grabs the right ones for you.</div>
+          <div class="mp-tabs"><span class="mp-tab active">Settings</span><span class="mp-tab">How it works</span><span class="mp-tab">Support</span></div>
+        </div>
+        <div class="mp-body">
+          <div class="mp-card">
+            <div class="lbl">Mode</div>
+            <div class="mode-pill active"><div class="n">⚡ VET (Extra Time) / READY</div><div class="d">Auto-claim extra shifts on Find Shifts</div></div>
+            <div class="mode-pill"><div class="n">🌴 VTO (Voluntary Time Off)</div><div class="d">Auto-accept time off on VTO page</div></div>
+          </div>
+          <div class="mp-card">
+            <div class="lbl">Priority times</div>
+            <div class="mp-chips"><span class="mp-chip p1">P1 · 22:00–07:00</span><span class="mp-chip">P2 · 09:00–17:00</span></div>
+          </div>
+          <div class="mp-start">▶ Start</div>
+        </div>
+      </div>
+
+      <div class="mock-hud">
+        <div class="hud-head">
+          <div class="name">Your Name</div>
+          <div class="right"><span class="hud-pill mode">VET</span><span class="hud-pill state">Running</span></div>
+        </div>
+        <div class="hud-body">
+          <div class="t">Checking shifts…</div>
+          <div class="hud-dots"><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+      </div>
+
+      <div class="toast t1"><div class="tick">✓</div><div><div class="tt">Shift claimed</div><div class="ts">Sat · 6:00 AM – 4:30 PM · 10.5 hrs</div></div></div>
+      <div class="toast t2"><div class="tick">✓</div><div><div class="tt">VTO accepted</div><div class="ts">Fri · 2:00 PM – 10:00 PM · 8 hrs</div></div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ─────────────── STAT STRIP ─────────────── -->
+<div class="stat-strip">
+  <div class="stat-grid">
+    <div class="stat"><div class="num">&lt;1<span style="font-size:18px">s</span></div><div class="lab">Reacts the moment a shift posts</div></div>
+    <div class="stat"><div class="num">2 modes</div><div class="lab">VET / READY &amp; VTO</div></div>
+    <div class="stat"><div class="num">25</div><div class="lab">Matching shifts grabbed per check</div></div>
+    <div class="stat"><div class="num">100%</div><div class="lab">Runs locally in your browser</div></div>
+  </div>
 </div>
 
-<!-- ── FEATURES ── -->
-<section class="features" id="features">
-  <p class="section-label">Features</p>
-  <h2 class="section-title">Everything you need.<br>Nothing you don't.</h2>
-  <p class="section-sub">A focused set of tools that makes finding your ideal shifts fast and simple.</p>
+<!-- ─────────────── PROBLEM ─────────────── -->
+<section class="block problem">
+  <div class="container">
+    <p class="eyebrow reveal">The race nobody tells you about</p>
+    <h2 class="h2 reveal">VET and VTO don't wait around</h2>
+    <p class="sub reveal">The shifts everyone actually wants are gone before you finish scrolling. Doing it by hand, you're always a step behind.</p>
 
-  <div class="features-grid">
-    <div class="feature-card">
-      <span class="feature-icon">📅</span>
-      <h3>Date Range Filter</h3>
-      <p>Set a start and end date. Only shifts within your chosen window appear — no more sifting through dates you can't work.</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">📆</span>
-      <h3>Day of Week Filter</h3>
-      <p>Select any combination of days. Only want Mondays and Thursdays? Done. Weekends only? Easy.</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">🕐</span>
-      <h3>Time Window Filter</h3>
-      <p>Set your preferred working hours. Morning, afternoon, evening, or a custom range — only matching shifts are shown.</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">⭐</span>
-      <h3>Priority Preferences</h3>
-      <p>Set your preferred time windows as priority. Your top choices are always shown before anything else.</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">💾</span>
-      <h3>Set Once, Remembered Always</h3>
-      <p>Your filters are saved. Close the extension, come back tomorrow — everything is exactly as you left it.</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">📊</span>
-      <h3>Live Status Panel</h3>
-      <p>A clean status panel sits on your AtoZ page showing your current status and license validity at a glance.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ── HOW IT WORKS ── -->
-<section class="how" id="how">
-  <p class="section-label">How it works</p>
-  <h2 class="section-title">Up and running in minutes</h2>
-  <p class="section-sub" style="margin-bottom: 48px;">Up and running in minutes. No complicated setup.</p>
-
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-content">
-        <h3>Get your license</h3>
-        <p>Email us at support&#64;qwicktry.com to get started. We'll send your unique license key within a few hours.</p>
+    <div class="problem-wrap">
+      <div class="prob-card bad reveal">
+        <span class="tag">😮‍💨 Doing it manually</span>
+        <h3>Refresh, scan, miss, repeat</h3>
+        <ul class="prob-list">
+          <li><span class="ic">✕</span> Sitting on the AtoZ page hitting refresh for hours</li>
+          <li><span class="ic">✕</span> The good shift is gone in the 2 seconds it took you to read it</li>
+          <li><span class="ic">✕</span> Scrolling past dozens of shifts on days and times you can't work</li>
+          <li><span class="ic">✕</span> Getting logged out and missing the drop entirely</li>
+        </ul>
       </div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-content">
-        <h3>Install the Chrome extension</h3>
-        <p>Add AtoZ Shift Helper to Chrome from the Chrome Web Store. Takes 30 seconds.</p>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-content">
-        <h3>Enter your details and set your filters</h3>
-        <p>Open the extension popup. Enter your Employee ID and license key. Set your preferred dates, days, and times.</p>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">4</div>
-      <div class="step-content">
-        <h3>Use Your Filters</h3>
-        <p>The extension displays only the shifts that match your preferences. Your status panel shows you everything is running smoothly.</p>
+      <div class="prob-card good reveal">
+        <span class="tag">⚡ With AtoZ Shift Helper</span>
+        <h3>Set it once, let it grab</h3>
+        <ul class="prob-list">
+          <li><span class="ic">✓</span> Watches AtoZ for you and claims matches instantly</li>
+          <li><span class="ic">✓</span> Only the dates, days and hours you actually want</li>
+          <li><span class="ic">✓</span> Reacts in well under a second — faster than any human</li>
+          <li><span class="ic">✓</span> Keeps you logged in so you never miss a drop</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── PRICING ── -->
-<section class="pricing" id="pricing">
-  <p class="section-label">Pricing</p>
-  <h2 class="section-title">Simple, honest pricing</h2>
-  <p class="section-sub">No credit card. No auto-renewal. No surprises.<br>You pay when you're ready — we activate your license. That's it.</p>
+<!-- ─────────────── MODES ─────────────── -->
+<section class="block" id="modes">
+  <div class="container">
+    <p class="eyebrow reveal">Two modes, one tool</p>
+    <h2 class="h2 reveal">Pick up extra hours or take time off</h2>
+    <p class="sub reveal">Whether you're chasing extra pay or trying to get a day back, AtoZ Shift Helper grabs it the moment it's available.</p>
 
-  <div class="pricing-grid">
+    <div class="modes-grid">
+      <div class="mode-card vet reveal">
+        <span class="ribbon">⚡ VET / READY mode</span>
+        <h3>Claim extra shifts automatically</h3>
+        <p class="mlead">Want more hours? Turn on VET mode and it picks up Voluntary Extra Time and READY shifts the instant they post.</p>
+        <ul>
+          <li>Auto-claims VET / Voluntary Extra Time opportunities</li>
+          <li>Grabs the longest shift first — or your priority window</li>
+          <li>Only on the days, dates and hours you allow</li>
+        </ul>
+        <div class="where">Runs on your <code>Find Shifts</code> page</div>
+      </div>
 
-    <!-- FREE TRIAL -->
-    <div class="pricing-card trial-card">
-      <div class="plan-name">Free Trial</div>
-      <div class="price trial-price">7 Days</div>
-      <p class="price-period">completely free · no payment needed</p>
-      <ul class="pricing-features">
-        <li>Full access to all features</li>
-        <li>Date, day &amp; time filtering</li>
-        <li>Priority time preferences</li>
-        <li>Live status panel</li>
-        <li>Email support included</li>
-      </ul>
-      <a href="mailto:support@qwicktry.com" class="btn-buy btn-trial">Start Free Trial →</a>
-      <p class="pricing-note">Email us · we'll set you up same day</p>
-    </div>
-
-    <!-- WEEKLY -->
-    <div class="pricing-card">
-      <div class="plan-name">Weekly</div>
-      <div class="price"><sup>$</sup>29</div>
-      <p class="price-period">per week · no auto-renewal</p>
-      <ul class="pricing-features">
-        <li>Full access to all features</li>
-        <li>Date, day &amp; time filtering</li>
-        <li>Priority time preferences</li>
-        <li>Live status panel</li>
-        <li>Email support within 24 hours</li>
-        <li>All future updates included</li>
-      </ul>
-      <a href="mailto:support@qwicktry.com" class="btn-buy">Get Started →</a>
-      <p class="pricing-note">1 license per Employee ID · license by email</p>
-    </div>
-
-    <!-- 1-MONTH -->
-    <div class="pricing-card best-card">
-      <div class="plan-badge">BEST VALUE</div>
-      <div class="plan-name">1 Months</div>
-      <div class="price"><sup>$</sup>99</div>
-      <p class="price-period">save $17 · no auto-renewal</p>
-      <ul class="pricing-features">
-        <li>Full access to all features</li>
-        <li>Date, day &amp; time filtering</li>
-        <li>Priority time preferences</li>
-        <li>Live status panel</li>
-        <li>Email support within 24 hours</li>
-        <li>All future updates included</li>
-      </ul>
-      <a href="mailto:support@qwicktry.com" class="btn-buy">Get Started →</a>
-      <p class="pricing-note">1 license per Employee ID · license by email</p>
-    </div>
-
-  </div>
-
-  <p style="text-align:center; margin-top: 32px; font-size: 14px; color: var(--muted);">
-    Pay your way — e-transfer, PayPal, or bank transfer. No credit card required.
-  </p>
-</section>
-
-<!-- ── FAQ ── -->
-<section class="faq" id="faq">
-  <p class="section-label">FAQ</p>
-  <h2 class="section-title">Common questions</h2>
-  <p class="section-sub" style="margin-bottom: 48px;">Everything you need to know before getting started.</p>
-
-  <div class="faq-list">
-    <div class="faq-item">
-      <h3>What is this extension?</h3>
-      <p>AtoZ Shift Helper is a Chrome browser extension that helps Amazon AtoZ users filter the available shift list by their preferred dates, days of the week, and time windows. Instead of manually scrolling through every available shift, you set your criteria and the extension surfaces only the ones that match.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Do I need an Amazon AtoZ account?</h3>
-      <p>Yes. This extension works on the Amazon AtoZ scheduling platform. You need an active Amazon AtoZ account to use it.</p>
-    </div>
-    <div class="faq-item">
-      <h3>What browser does it work on?</h3>
-      <p>Google Chrome only. The extension is available on the Chrome Web Store and requires Chrome version 88 or later.</p>
-    </div>
-    <div class="faq-item">
-      <h3>What is a license key?</h3>
-      <p>Your license key is a unique code you receive by email when you sign up. You enter it in the extension popup along with your Employee ID to activate your access. Each license is tied to one Employee ID.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Can I share my license with someone else?</h3>
-      <p>No. Each license is bound to one Amazon Employee ID on first use. If you try to use it with a different Employee ID, activation will be declined. You can purchase additional licenses for other accounts.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Is my Amazon account information safe?</h3>
-      <p>Yes. The extension does not access, store, or transmit your Amazon account credentials, password, or personal information. It only reads the shift listings displayed on the AtoZ page. See our Privacy Policy for full details.</p>
-    </div>
-    <div class="faq-item">
-      <h3>I have a question not listed here</h3>
-      <p>Email us at <span>support</span>&#64;<span>qwicktry.com</span> — we respond within 24 hours.</p>
+      <div class="mode-card vto reveal">
+        <span class="ribbon">🌴 VTO mode</span>
+        <h3>Snag Voluntary Time Off</h3>
+        <p class="mlead">Need a day back? Turn on VTO mode and it accepts Voluntary Time Off the second it opens — before it's claimed by everyone else.</p>
+        <ul>
+          <li>Auto-accepts VTO the moment it becomes available</li>
+          <li>Filtered to the exact dates and hours you want off</li>
+          <li>Never touches anything you didn't ask it to</li>
+        </ul>
+        <div class="where">Runs on your <code>VTO</code> page</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ── CTA BOTTOM ── -->
-<section class="cta-bottom">
-  <h2>Ready to stop searching<br>and start working?</h2>
-  <p>Spend less time on scheduling and more time on what matters.</p>
-  <a href="mailto:support@qwicktry.com" class="btn-primary">Get Started →</a>
-  <p style="margin-top: 16px; font-size: 13px; color: rgba(255,255,255,0.55);">No auto-renewal · License delivered by email · 1 license per Employee ID</p>
+<!-- ─────────────── FEATURES ─────────────── -->
+<section class="block features" id="features">
+  <div class="container">
+    <p class="eyebrow reveal">Built for precision</p>
+    <h2 class="h2 reveal">It only grabs what fits <em>your</em> life</h2>
+    <p class="sub reveal">Dial in exactly which shifts count. Everything else is ignored — automatically.</p>
+
+    <div class="feat-grid">
+      <div class="feat reveal"><div class="ic">📅</div><h3>Date ranges</h3><p>Only consider shifts inside the dates you choose. Add as many ranges as you like — overlaps are merged for you.</p></div>
+      <div class="feat reveal"><div class="ic">📆</div><h3>Days of the week</h3><p>Weekends only? Just Mondays and Thursdays? Tap the days you want and it ignores the rest.</p></div>
+      <div class="feat reveal"><div class="ic">🕐</div><h3>Allowed hours</h3><p>A hard gate — a shift is only grabbed if it fits <em>completely</em> inside your hours. Night windows that cross midnight are handled correctly.</p></div>
+      <div class="feat reveal"><div class="ic">⭐</div><h3>Priority windows</h3><p>Rank your favourite time slots P1, P2, P3… It always tries to grab your P1 shifts before anything else.</p></div>
+      <div class="feat reveal"><div class="ic">⚡</div><h3>Instant reaction</h3><p>Choose how often it checks — as fast as twice a second — so matching shifts get claimed the moment they appear.</p></div>
+      <div class="feat reveal"><div class="ic">🌍</div><h3>Timezone aware</h3><p>Set your building's timezone and every filter lines up with your site's clock — no off-by-an-hour surprises.</p></div>
+      <div class="feat reveal"><div class="ic">📊</div><h3>Live status panel</h3><p>A clean floating panel sits right on AtoZ showing Running, Idle or cooling down — so you always know it's working.</p></div>
+      <div class="feat reveal"><div class="ic">🔒</div><h3>Stays logged in</h3><p>Automatically keeps your AtoZ session alive so you don't get signed out and miss the next drop.</p></div>
+      <div class="feat reveal"><div class="ic">💾</div><h3>Remembers everything</h3><p>Your filters save themselves as you go. Close it, come back tomorrow — it's exactly how you left it.</p></div>
+    </div>
+  </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<!-- ─────────────── PRIORITY DEMO ─────────────── -->
+<section class="block">
+  <div class="container">
+    <p class="eyebrow reveal">See the logic</p>
+    <h2 class="h2 reveal">Your favourite hours, grabbed first</h2>
+    <p class="sub reveal">A shift only counts as a priority match if it fits entirely inside the window. P1 always comes before P2 — and P2 before everything else.</p>
+
+    <div class="demo-wrap reveal">
+      <div class="demo-card">
+        <div class="demo-head">Five shifts are available right now:</div>
+        <div class="demo-setting">
+          <span class="pill-set">P1 = 10:00 PM – 9:00 AM</span>
+          <span class="pill-set">P2 = 9:00 AM – 6:00 PM</span>
+        </div>
+        <div class="shift-row"><div class="shift-letter">A</div><div class="shift-time">11:00 PM → 7:30 AM</div><div class="shift-dur">8.5 hrs</div><span class="tg p1">P1 · grabbed 1st</span></div>
+        <div class="shift-row"><div class="shift-letter">B</div><div class="shift-time">1:20 AM → 8:50 AM</div><div class="shift-dur">7.5 hrs</div><span class="tg p1">P1 · grabbed 2nd</span></div>
+        <div class="shift-row"><div class="shift-letter">C</div><div class="shift-time">9:00 AM → 5:00 PM</div><div class="shift-dur">8 hrs</div><span class="tg p2">P2 · grabbed 3rd</span></div>
+        <div class="shift-row"><div class="shift-letter">D</div><div class="shift-time">2:00 PM → 6:00 PM</div><div class="shift-dur">4 hrs</div><span class="tg p2">P2 · grabbed 4th</span></div>
+        <div class="shift-row"><div class="shift-letter">E</div><div class="shift-time">6:00 PM → 9:00 PM</div><div class="shift-dur">3 hrs</div><span class="tg yes">✓ grabbed 5th</span></div>
+        <div class="demo-note">P1 matches go first, then P2, then anything else left over — longest shift first within each tier.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────── HOW IT WORKS ─────────────── -->
+<section class="block features" id="how">
+  <div class="container">
+    <p class="eyebrow reveal">Up and running in a minute</p>
+    <h2 class="h2 reveal">Three steps. That's it.</h2>
+    <p class="sub reveal">Install it, set your rules, and let it grab. That's the whole setup.</p>
+
+    <div class="how-steps">
+      <div class="hstep reveal">
+        <div class="num">1</div>
+        <div>
+          <h3>Install the extension</h3>
+          <p><a href="https://chromewebstore.google.com/detail/atoz-shift-helper/fjajhooelifadiolkgpkafboghbdelad" target="_blank" rel="noopener">Add AtoZ Shift Helper to Chrome</a> from the Chrome Web Store. One click from the Chrome Web Store — about 30 seconds.</p>
+        </div>
+      </div>
+      <div class="hstep reveal">
+        <div class="num">2</div>
+        <div>
+          <h3>Enter your Employee ID and set your rules</h3>
+          <p>Open the popup, type your Amazon Employee ID (it's on your AtoZ profile), pick VET or VTO, then set your dates, days, hours and priority windows — as broad or as specific as you like.</p>
+        </div>
+      </div>
+      <div class="hstep reveal">
+        <div class="num">3</div>
+        <div>
+          <h3>Open AtoZ and hit Start</h3>
+          <p>Go to your Find Shifts page (VET) or VTO page and press Start. It watches the page and claims every matching opportunity automatically — the status panel shows you exactly what's happening.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────── FAQ ─────────────── -->
+<section class="block" id="faq">
+  <div class="container">
+    <p class="eyebrow reveal">Good to know</p>
+    <h2 class="h2 reveal">Frequently asked questions</h2>
+
+    <div class="faq-list">
+      <details class="faq-item reveal" open>
+        <summary>What does it actually do? <span class="plus">+</span></summary>
+        <div class="ans">It watches Amazon AtoZ for available opportunities and automatically claims the ones that match your filters. In <strong>VET / READY mode</strong> it picks up extra shifts the moment they post; in <strong>VTO mode</strong> it accepts Voluntary Time Off as soon as it opens. You set the rules once — it does the grabbing for you, far faster than refreshing by hand.</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>What's the difference between VET and VTO? <span class="plus">+</span></summary>
+        <div class="ans"><strong>VET (Voluntary Extra Time)</strong> and READY shifts are extra hours you can pick up on top of your schedule — VET mode claims them for you. <strong>VTO (Voluntary Time Off)</strong> is the opposite — a chance to take time off — and VTO mode accepts it for you. Switch between them anytime in the popup.</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>How does it grab shifts so fast? <span class="plus">+</span></summary>
+        <div class="ans">While it's running, it checks AtoZ on a tight loop — as often as twice a second — and claims any matching opportunity the instant it appears. That's the difference between getting the shift and watching someone else take it.</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>What do I need to get started? <span class="plus">+</span></summary>
+        <div class="ans">Just Google Chrome and an active Amazon AtoZ account. Install the extension, enter your Amazon Employee ID (found on your AtoZ profile page), set your filters, and you're ready.</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>Is my account information safe? <span class="plus">+</span></summary>
+        <div class="ans">Yes. Everything runs locally in your own browser. Your Employee ID and filters are stored on your device only — they're never sent to us. The extension talks only to AtoZ's own scheduling page to read and claim shifts on your behalf, and it never touches your activity on any other site.</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>Which browser does it work on? <span class="plus">+</span></summary>
+        <div class="ans">Google Chrome. It's available on the Chrome Web Store and works on recent versions of Chrome.</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>I have another question <span class="plus">+</span></summary>
+        <div class="ans">Email <span>support</span>&#64;<span>qwicktry.com</span> — we usually reply within 24 hours.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────── CTA ─────────────── -->
+<section class="cta">
+  <h2>Stop refreshing.<br>Start grabbing.</h2>
+  <p>Set your schedule once and let AtoZ Shift Helper win the VET and VTO race for you.</p>
+  <a href="https://chromewebstore.google.com/detail/atoz-shift-helper/fjajhooelifadiolkgpkafboghbdelad" target="_blank" rel="noopener" class="btn btn-white">Add to Chrome →</a>
+  <p class="fine">Runs right on your AtoZ Find Shifts and VTO pages</p>
+</section>
+
+<!-- ─────────────── FOOTER ─────────────── -->
 <footer>
-  <div class="footer-logo">&#9889; Qwicktry</div>
-  <p>The smarter way to manage your AtoZ shift schedule.</p>
-  <div style="margin: 14px 0;">
-    <a href="/">Home</a>
-    <a href="#features">Features</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#faq">FAQ</a>
-    <a href="/privacy">Privacy Policy</a>
-    <a href="/terms">Terms of Service</a>
+  <div class="foot-inner">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a href="/" class="nav-logo"><span class="mark">⚡</span> AtoZ <span class="q">Shift Helper</span></a>
+        <p>The smarter way to grab VET, READY shifts and VTO on Amazon AtoZ — automatically, the moment they drop.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h4>Product</h4>
+          <a href="#modes">Modes</a>
+          <a href="#features">Features</a>
+          <a href="#how">How it works</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="foot-col">
+          <h4>Get it</h4>
+          <a href="https://chromewebstore.google.com/detail/atoz-shift-helper/fjajhooelifadiolkgpkafboghbdelad" target="_blank" rel="noopener">Chrome Web Store</a>
+          <a href="mailto:support@qwicktry.com">Support</a>
+          <a href="https://qwicktry.com" target="_blank" rel="noopener">qwicktry.com</a>
+        </div>
+        <div class="foot-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <p class="disc">Qwicktry and AtoZ Shift Helper are independent and are <strong>not affiliated with, endorsed by, sponsored by, or in any way officially connected with</strong> Amazon.com, Inc. or any of its subsidiaries or affiliates. "Amazon," "AtoZ," and related names and marks are the property of their respective owners. AtoZ Shift Helper is an independent tool provided as-is, and use of it is at your own risk. You are solely responsible for ensuring your use complies with your employer's policies. Qwicktry accepts no liability for any consequences arising from the use of this software.</p>
+      <p class="copy">© 2026 Qwicktry · Contact: <span>support</span>&#64;<span>qwicktry.com</span></p>
+    </div>
   </div>
-  <p>Contact us: <span>support</span>&#64;<span>qwicktry.com</span></p>
-  <p style="margin-top: 18px; font-size: 12px; color: rgba(255,255,255,0.28); max-width: 640px; margin-left: auto; margin-right: auto; line-height: 1.6;">
-    Qwicktry is not affiliated with, endorsed by, or in any way officially connected with Amazon.com, Inc. or any of its subsidiaries. AtoZ Shift Helper is an independent tool. Use of this extension is at your own risk. Users are solely responsible for ensuring their use complies with their employer's policies. Qwicktry accepts no liability for any consequences arising from the use of this software.
-  </p>
-  <p style="margin-top: 14px; font-size: 12px; color: rgba(255,255,255,0.25);">&#169; 2026 Qwicktry. All rights reserved.</p>
 </footer>
+
+<script>
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (Math.min(i % 6, 5) * 60) + 'ms';
+    io.observe(el);
+  });
+</script>
 </body>
 </html>

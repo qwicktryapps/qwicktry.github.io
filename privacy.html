@@ -3,94 +3,168 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Privacy Policy — Qwicktry</title>
+  <title>Privacy Policy — AtoZ Shift Helper</title>
+  <meta name="description" content="How AtoZ Shift Helper handles your data: everything stays on your device. We don't run a server, don't track you, and never see your shift data." />
+  <meta name="theme-color" content="#5B4FCF" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --purple: #5B4FCF; --dark: #0F172A; --muted: #64748B;
-      --border: #E2E8F0; --bg: #F8FAFC; --white: #FFFFFF;
-      --accent-bg: #EEF2FF;
+      --purple:   #5B4FCF;  --purple-2: #764ba2;  --indigo: #6366F1;  --violet: #8B5CF6;
+      --dark:     #0B1020;   --ink:     #0F172A;   --muted: #5B6577;   --muted-2: #8893A6;
+      --border:   #E7EAF0;   --bg:      #F7F8FC;   --white: #FFFFFF;
+      --green:    #16A34A;   --amber:   #D97706;   --red:   #DC2626;   --blue: #3B82F6;
+      --shadow-md: 0 12px 32px -8px rgba(20, 18, 66, 0.16);
+      --shadow-sm: 0 2px 10px rgba(15, 23, 42, 0.06);
+      --maxw: 880px;
     }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-size: 16px; line-height: 1.75; color: var(--dark); background: var(--bg); }
-    header { background: linear-gradient(135deg, #5B4FCF 0%, #764ba2 100%); color: white; padding: 48px 24px 40px; text-align: center; }
-    .logo { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
-    .logo span { opacity: 0.75; font-weight: 400; }
-    header h1 { font-size: 36px; font-weight: 700; margin-bottom: 12px; }
-    header p { font-size: 16px; opacity: 0.85; max-width: 560px; margin: 0 auto; }
-    .last-updated { display: inline-block; margin-top: 16px; background: rgba(255,255,255,0.15); border-radius: 20px; padding: 4px 16px; font-size: 14px; opacity: 0.9; }
-    nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 12px 24px; text-align: center; }
-    nav a { color: var(--purple); text-decoration: none; font-size: 14px; margin: 0 12px; font-weight: 500; }
-    .container { max-width: 820px; margin: 0 auto; padding: 48px 24px 80px; }
-    .summary { background: var(--accent-bg); border: 1px solid #C7D2FE; border-left: 5px solid var(--purple); border-radius: 8px; padding: 24px 28px; margin-bottom: 48px; }
-    .summary h2 { font-size: 18px; color: var(--purple); margin-bottom: 14px; }
-    .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
-    .summary-item { display: flex; align-items: flex-start; gap: 8px; font-size: 15px; }
-    .summary-item.good::before { content: "✅"; flex-shrink: 0; }
-    .summary-item.bad::before  { content: "🚫"; flex-shrink: 0; }
-    section { margin-bottom: 48px; background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 32px 36px; }
-    section h2 { font-size: 22px; font-weight: 700; color: var(--dark); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
-    .num { background: var(--purple); color: white; font-size: 13px; font-weight: 700; width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    section h3 { font-size: 17px; font-weight: 600; color: var(--purple); margin: 24px 0 10px; }
-    section p { color: #334155; margin-bottom: 14px; }
-    section ul { padding-left: 24px; margin-bottom: 14px; }
-    section li { color: #334155; margin-bottom: 8px; }
-    table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; }
-    th { background: var(--purple); color: white; padding: 10px 14px; text-align: left; font-weight: 600; }
-    td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; color: #334155; }
+
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      font-size: 16.5px; line-height: 1.75; color: var(--ink); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+
+    /* ── NAV (shared with home) ── */
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: saturate(180%) blur(14px);
+      -webkit-backdrop-filter: saturate(180%) blur(14px);
+      border-bottom: 1px solid rgba(231,234,240,0.9);
+    }
+    .nav-inner { max-width: 1140px; margin: 0 auto; padding: 0 24px; height: 66px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 9px; font-weight: 800; font-size: 19px; color: var(--ink); text-decoration: none; letter-spacing: -0.4px; }
+    .nav-logo .mark { width: 30px; height: 30px; border-radius: 9px; background: linear-gradient(135deg, var(--purple), var(--purple-2)); display: grid; place-items: center; color: #fff; font-size: 16px; box-shadow: 0 6px 16px rgba(91,79,207,0.35); }
+    .nav-logo .q { color: var(--purple); }
+    .nav-links { display: flex; align-items: center; gap: 26px; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 15px; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+    .nav-cta { background: linear-gradient(135deg, var(--purple), var(--purple-2)); color: #fff !important; padding: 10px 18px; border-radius: 10px; font-weight: 600 !important; font-size: 14.5px !important; box-shadow: 0 8px 20px rgba(91,79,207,0.3); transition: transform .15s, box-shadow .15s; }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 12px 26px rgba(91,79,207,0.42); }
+
+    /* ── DOC HERO ── */
+    .doc-hero {
+      position: relative; isolation: isolate; text-align: center; color: #fff;
+      padding: 70px 24px 60px;
+      background: linear-gradient(135deg, #5B4FCF 0%, #6D28D9 52%, #764ba2 100%);
+      overflow: hidden;
+    }
+    .doc-hero::before { content:""; position:absolute; inset:0; z-index:-1;
+      background:
+        radial-gradient(520px 280px at 18% 0%, rgba(255,255,255,0.14), transparent 60%),
+        radial-gradient(520px 280px at 86% 100%, rgba(252,211,21,0.12), transparent 60%); }
+    .doc-hero h1 { font-size: clamp(30px, 5vw, 44px); font-weight: 900; letter-spacing: -1px; margin-bottom: 14px; }
+    .doc-hero p { font-size: 17px; color: rgba(255,255,255,0.88); max-width: 580px; margin: 0 auto; }
+    .updated { display: inline-block; margin-top: 20px; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.28); border-radius: 999px; padding: 6px 16px; font-size: 13.5px; font-weight: 600; }
+
+    /* ── CONTENT ── */
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 56px 24px 80px; }
+
+    .summary { background: linear-gradient(160deg, #ffffff, #F6F4FF); border: 1px solid #E4E1F7; border-left: 5px solid var(--purple); border-radius: 16px; padding: 26px 30px; margin-bottom: 44px; box-shadow: var(--shadow-sm); }
+    .summary h2 { font-size: 18px; color: var(--purple); margin-bottom: 16px; font-weight: 800; }
+    .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 26px; }
+    .summary-item { display: flex; align-items: flex-start; gap: 9px; font-size: 15px; color: var(--ink); font-weight: 500; }
+    .summary-item.good::before { content: "✓"; color: var(--green); font-weight: 900; flex-shrink: 0; }
+    .summary-item.bad::before  { content: "✕"; color: var(--red); font-weight: 900; flex-shrink: 0; }
+    .summary p { font-size: 15.5px; color: var(--muted); line-height: 1.7; }
+
+    section { margin-bottom: 22px; background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 32px 36px; box-shadow: var(--shadow-sm); }
+    section h2 { font-size: 21px; font-weight: 800; color: var(--ink); margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; letter-spacing: -0.3px; }
+    .num { background: linear-gradient(135deg, var(--purple), var(--purple-2)); color: #fff; font-size: 13px; font-weight: 800; width: 28px; height: 28px; border-radius: 9px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    section h3 { font-size: 16.5px; font-weight: 700; color: var(--purple); margin: 24px 0 10px; }
+    section p { color: var(--muted); margin-bottom: 14px; }
+    section p strong, section li strong { color: var(--ink); }
+    section ul { padding-left: 22px; margin-bottom: 14px; }
+    section li { color: var(--muted); margin-bottom: 8px; }
+    code { background: #EEF0FB; color: var(--purple); padding: 2px 7px; border-radius: 6px; font-size: 14px; font-family: 'SFMono-Regular', Consolas, monospace; }
+
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; border-radius: 12px; overflow: hidden; }
+    th { background: linear-gradient(135deg, var(--purple), var(--purple-2)); color: #fff; padding: 12px 14px; text-align: left; font-weight: 700; font-size: 14px; }
+    td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; color: var(--muted); }
     tr:nth-child(even) td { background: var(--bg); }
-    .tag { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 13px; font-weight: 600; }
-    .no  { background: #FEF2F2; color: #DC2626; }
-    .yes { background: #F0FDF4; color: #16A34A; }
-    .min { background: #FFFBEB; color: #D97706; }
-    .box { border-radius: 8px; padding: 16px 20px; margin: 16px 0; font-size: 15px; }
-    .box.green  { background: #F0FDF4; border-left: 4px solid #16A34A; }
-    .box.orange { background: #FFFBEB; border-left: 4px solid #D97706; }
-    .box.blue   { background: #EFF6FF; border-left: 4px solid #3B82F6; }
-    .box strong { display: block; margin-bottom: 6px; color: var(--dark); }
-    .contact-box { background: linear-gradient(135deg, #5B4FCF 0%, #764ba2 100%); border-radius: 10px; padding: 28px 32px; text-align: center; margin-bottom: 20px; }
-    .contact-box h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #ffffff; }
-    .contact-box p  { margin-bottom: 16px; color: #ffffff; opacity: 0.92; font-size: 16px; }
-    .contact-box a  { display: inline-block; background: white; color: var(--purple); padding: 10px 24px; border-radius: 6px; font-weight: 700; text-decoration: none; font-size: 15px; }
-    footer { text-align: center; padding: 32px 24px; font-size: 14px; color: var(--muted); border-top: 1px solid var(--border); }
-    footer a { color: var(--purple); text-decoration: none; margin: 0 8px; }
-    @media (max-width: 600px) {
-      header h1 { font-size: 26px; }
-      section { padding: 24px 18px; }
+    .tag { display: inline-block; padding: 3px 11px; border-radius: 999px; font-size: 12.5px; font-weight: 700; white-space: nowrap; }
+    .tag.no { background: #FEE2E2; color: var(--red); }
+
+    .box { border-radius: 12px; padding: 18px 22px; margin: 18px 0; font-size: 15px; color: var(--muted); }
+    .box.green  { background: #F0FDF4; border-left: 4px solid var(--green); }
+    .box.amber  { background: #FFFBEB; border-left: 4px solid var(--amber); }
+    .box.blue   { background: #EFF6FF; border-left: 4px solid var(--blue); }
+    .box strong { display: block; margin-bottom: 6px; color: var(--ink); }
+
+    .contact-box { background: linear-gradient(135deg, #5B4FCF, #764ba2); border-radius: 16px; padding: 30px 34px; text-align: center; margin-bottom: 20px; box-shadow: var(--shadow-md); }
+    .contact-box h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; color: #fff; }
+    .contact-box p { margin-bottom: 18px; color: rgba(255,255,255,0.92); font-size: 16px; }
+    .contact-box a { display: inline-block; background: #fff; color: var(--purple); padding: 11px 26px; border-radius: 10px; font-weight: 700; text-decoration: none; font-size: 15px; transition: transform .15s; }
+    .contact-box a:hover { transform: translateY(-1px); }
+
+    /* ── FOOTER (shared with home) ── */
+    footer { background: var(--dark); color: #fff; padding: 52px 24px 36px; }
+    .foot-inner { max-width: 1140px; margin: 0 auto; }
+    .foot-top { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 28px; padding-bottom: 28px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .foot-brand { max-width: 320px; }
+    .foot-brand .nav-logo { color: #fff; margin-bottom: 12px; }
+    .foot-brand .nav-logo .q { color: #C4B5FD; }
+    .foot-brand p { color: rgba(255,255,255,0.55); font-size: 14.5px; }
+    .foot-cols { display: flex; gap: 56px; flex-wrap: wrap; }
+    .foot-col h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.45); margin-bottom: 14px; font-weight: 700; }
+    .foot-col a { display: block; color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14.5px; margin-bottom: 10px; transition: color .2s; }
+    .foot-col a:hover { color: #fff; }
+    .foot-legal { padding-top: 26px; }
+    .foot-legal .disc { font-size: 12.5px; color: rgba(255,255,255,0.4); line-height: 1.7; max-width: 880px; }
+    .foot-legal .copy { margin-top: 16px; font-size: 12.5px; color: rgba(255,255,255,0.35); }
+
+    @media (max-width: 680px) {
+      .nav-links a:not(.nav-cta) { display: none; }
+      section { padding: 24px 20px; }
       .summary-grid { grid-template-columns: 1fr; }
-      table { font-size: 13px; }
-      th, td { padding: 8px 10px; }
+      table { font-size: 13px; } th, td { padding: 9px 10px; }
+      .foot-top { flex-direction: column; }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">&#9889; Qwicktry <span>by qwicktry.com</span></div>
-  <h1>Privacy Policy</h1>
-  <p>We believe privacy should be simple and honest. This policy explains exactly what we collect, what we don't, and how we protect you.</p>
-  <span class="last-updated">Last updated: March 11, 2026</span>
-</header>
-
+<!-- ── NAV ── -->
 <nav>
-  <a href="/">Home</a>
-  <a href="/privacy">Privacy Policy</a>
-  <a href="/terms">Terms of Service</a>
-  <a href="mailto:support@qwicktry.com">Contact</a>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><span class="mark">⚡</span> AtoZ <span class="q">Shift Helper</span></a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/privacy" class="active">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="https://chromewebstore.google.com/detail/atoz-shift-helper/fjajhooelifadiolkgpkafboghbdelad" target="_blank" rel="noopener" class="nav-cta">Add to Chrome</a>
+    </div>
+  </div>
 </nav>
+
+<!-- ── HERO ── -->
+<header class="doc-hero">
+  <h1>Privacy Policy</h1>
+  <p>Privacy should be simple and honest. This explains exactly what we collect, what we don't, and how your data stays yours.</p>
+  <span class="updated">Last updated: May 31, 2026</span>
+</header>
 
 <div class="container">
 
   <div class="summary">
-    <h2>&#128269; Privacy at a Glance</h2>
+    <h2>Privacy at a glance</h2>
     <div class="summary-grid">
       <div class="summary-item good">Your shift data stays on your device — we never see it</div>
-      <div class="summary-item good">Your Employee ID is never shared with third parties</div>
+      <div class="summary-item good">Your Employee ID is never sent to our servers</div>
       <div class="summary-item good">We do not sell or share your data</div>
       <div class="summary-item good">We do not use tracking cookies or analytics</div>
-      <div class="summary-item bad">We do not collect browsing history</div>
+      <div class="summary-item bad">We do not collect your browsing history</div>
       <div class="summary-item bad">We do not read your Amazon credentials</div>
-      <div class="summary-item bad">We do not access data outside the AtoZ shifts page</div>
-      <div class="summary-item good">You can request deletion of your data at any time</div>
+      <div class="summary-item bad">We do not access anything outside the AtoZ pages</div>
+      <div class="summary-item good">You can delete all your local data at any time</div>
     </div>
   </div>
 
@@ -102,105 +176,80 @@
       <strong>Website:</strong> https://qwicktry.com<br>
       <strong>Country:</strong> Canada
     </p>
-    <p>This Privacy Policy applies to the AtoZ Shift Helper Chrome extension, the qwicktry.com website, our license verification backend at qwicktry-backend.vercel.app, and any communications between you and us.</p>
+    <p>This Privacy Policy applies to the AtoZ Shift Helper Chrome extension, the qwicktry.com website, and any communications between you and us.</p>
   </section>
 
   <section id="what-we-collect">
     <h2><span class="num">2</span> What Information We Collect</h2>
-    <p>We collect the absolute minimum information required to operate our service. Here is a complete breakdown of everything we touch.</p>
+    <p>AtoZ Shift Helper is designed to collect the absolute minimum. Almost everything stays on your device.</p>
 
     <h3>2.1 Stored Locally on Your Device Only</h3>
     <p>The following data is saved to Chrome's local extension storage on your device. It <strong>never leaves your device</strong> and is never transmitted to us or any third party.</p>
     <table>
       <thead><tr><th>Data</th><th>Purpose</th><th>Sent to us?</th></tr></thead>
       <tbody>
-        <tr><td>Your filter preferences (dates, days, time windows)</td><td>Remember your settings between sessions</td><td><span class="tag no">Never</span></td></tr>
-        <tr><td>Cached license expiry date</td><td>Allow brief offline fallback if server is temporarily unreachable</td><td><span class="tag no">Never</span></td></tr>
-        <tr><td>Your license key</td><td>Saved locally so you don't re-enter it each session</td><td><span class="tag min">Only for verification</span></td></tr>
+        <tr><td>Your filter preferences (dates, days, time windows, priority windows)</td><td>Remember your settings between sessions</td><td><span class="tag no">Never</span></td></tr>
+        <tr><td>Your Amazon Employee ID</td><td>Required to query the AtoZ platform and act on your behalf</td><td><span class="tag no">Never</span></td></tr>
+        <tr><td>Your profile label (optional name/note)</td><td>Displayed on the floating status panel</td><td><span class="tag no">Never</span></td></tr>
+        <tr><td>Activity log</td><td>Local record of shifts claimed (VET) and time off accepted (VTO) for you</td><td><span class="tag no">Never</span></td></tr>
       </tbody>
     </table>
 
-    <h3>2.2 Sent to Our License Verification Server</h3>
-    <p>When you click Start, two pieces of information are sent to our secure license server at qwicktry-backend.vercel.app:</p>
+    <h3>2.2 Sent to Amazon's AtoZ Platform</h3>
+    <p>When the extension is running, it communicates directly with Amazon's AtoZ scheduling platform on your behalf — the same platform you use when you log in normally. This is how it reads available opportunities and, with your settings, claims VET / READY shifts or accepts VTO for you. This includes:</p>
     <table>
-      <thead><tr><th>Data</th><th>Purpose</th><th>Stored on our server?</th></tr></thead>
+      <thead><tr><th>Data</th><th>Purpose</th><th>Sent to us?</th></tr></thead>
       <tbody>
-        <tr><td>Your license key</td><td>Verify your subscription is active and has not expired</td><td><span class="tag yes">Yes — see 2.3</span></td></tr>
-        <tr><td>Your Amazon Employee ID</td><td>Bind your license on first use; verify ownership on subsequent uses</td><td><span class="tag yes">Yes — see 2.3</span></td></tr>
+        <tr><td>Your Amazon Employee ID</td><td>Included in the request when querying available shifts — this is how Amazon's own API works</td><td><span class="tag no">Never</span></td></tr>
+        <tr><td>Available shift data</td><td>Read from Amazon's servers so your filters can be applied locally</td><td><span class="tag no">Never</span></td></tr>
       </tbody>
     </table>
-    <div class="box orange">
-      <strong>Note about your Employee ID</strong>
-      Your Employee ID is a workplace identifier — not personal information like your name, address, or payment details. We store it solely to prevent one license being shared across multiple accounts. We do not use it for any other purpose and do not share it with any third party.
+    <div class="box amber">
+      <strong>Note about Amazon's servers</strong>
+      The extension communicates with atoz.amazon.work and atoz-apps.amazon.work — Amazon's own systems. This is the same connection your browser makes when you use AtoZ normally. Qwicktry has no access to this communication and receives none of this data. Amazon's own Privacy Policy applies to your use of their platform.
     </div>
 
-    <h3>2.3 What We Store in Our Database</h3>
-    <p>Our database is hosted on Supabase in Canada. It stores only the following — nothing else:</p>
-    <table>
-      <thead><tr><th>Data stored</th><th>Purpose</th><th>Retention period</th></tr></thead>
-      <tbody>
-        <tr><td>License key</td><td>Verify subscription status</td><td>Until cancelled or deleted on request</td></tr>
-        <tr><td>Employee ID (bound on first use)</td><td>Verify license ownership</td><td>Until cancelled or deleted on request</td></tr>
-        <tr><td>Subscription status (active / cancelled)</td><td>Determine if a license is currently valid</td><td>Until deleted on request</td></tr>
-        <tr><td>Subscription expiry date</td><td>Enforce subscription end date</td><td>Until deleted on request</td></tr>
-        <tr><td>Record creation date</td><td>Internal record keeping</td><td>Until deleted on request</td></tr>
-      </tbody>
-    </table>
+    <h3>2.3 Our Servers</h3>
+    <p>AtoZ Shift Helper does <strong>not</strong> communicate with any Qwicktry server. We do not operate a backend, database, or verification service for this extension. No data is ever sent to us.</p>
     <div class="box green">
-      <strong>We do NOT store any of the following</strong>
-      Your name, email address, home address, payment details, browsing history, shift history, Amazon account credentials, or any information about activity on the AtoZ page.
+      <strong>We store nothing about you</strong>
+      Qwicktry holds no database records for extension users. We have no server that receives data from the extension. Everything runs locally on your device.
     </div>
 
-    <h3>2.4 Payment Information</h3>
-    <p>Payments are processed securely. When you purchase a subscription, your payment is handled through our payment provider — we never see, receive, or store your payment card number, billing address, or any financial information.</p>
-    <p>All payment transactions are subject to our payment provider's privacy policy. We receive only confirmation that payment was successful and the license record to create — nothing else.</p>
-
-    <h3>2.5 This Website</h3>
+    <h3>2.4 This Website</h3>
     <p>The qwicktry.com website does not use tracking cookies, analytics services (such as Google Analytics), or any third-party tracking scripts. We do not collect information about visitors to our website.</p>
 
-    <h3>2.6 Support Communications</h3>
+    <h3>2.5 Support Communications</h3>
     <p>If you contact us at support&#64;qwicktry.com, we receive and store your email address and message content solely to respond to you. We do not share this with third parties and retain support emails only as long as necessary to resolve your issue.</p>
   </section>
 
   <section id="how-we-use">
     <h2><span class="num">3</span> How We Use Your Information</h2>
-    <p>We use the limited information we collect for these purposes only:</p>
+    <p>Because the extension stores everything locally and sends nothing to Qwicktry, we have no user data to use. The only information we may hold is:</p>
     <ul>
-      <li><strong>License verification:</strong> To confirm your subscription is active each time you click Start in the extension</li>
-      <li><strong>License binding:</strong> To associate your license key with your Employee ID on first use, preventing a single license from being shared across multiple accounts</li>
-      <li><strong>License management:</strong> To update your license status when your license expires or is renewed</li>
-      <li><strong>Customer support:</strong> To respond to support requests you send to support&#64;qwicktry.com</li>
+      <li><strong>Support emails:</strong> Used solely to respond to your inquiry — never shared or used for any other purpose</li>
     </ul>
-    <p>We do not use your information for marketing, advertising, profiling, analytics, or any purpose beyond the above.</p>
+    <p>We do not use your information for marketing, advertising, profiling, analytics, or any purpose beyond responding to direct support requests.</p>
   </section>
 
   <section id="how-we-protect">
     <h2><span class="num">4</span> How We Protect Your Information</h2>
     <ul>
-      <li><strong>HTTPS everywhere:</strong> All communication between the extension and our license server uses HTTPS encryption (TLS)</li>
-      <li><strong>Database security:</strong> Our database is hosted on Supabase with enterprise-grade security, encryption at rest, and strict access controls</li>
-      <li><strong>Minimal transmission:</strong> Only the minimum data required to verify a license is transmitted — no other information is requested or received</li>
-      <li><strong>Local storage:</strong> Your personal preferences never leave your device — stored in Chrome's local extension storage only</li>
-      <li><strong>No passwords stored:</strong> License keys are not passwords. We do not store any account passwords.</li>
+      <li><strong>Local storage only:</strong> Your preferences and Employee ID are stored in Chrome's local extension storage — inaccessible to any website or third party, never transmitted to us</li>
+      <li><strong>HTTPS for Amazon communication:</strong> All communication between the extension and Amazon's AtoZ platform uses HTTPS encryption (TLS)</li>
+      <li><strong>No Qwicktry backend:</strong> We have no server receiving your data, so there is no Qwicktry server to compromise</li>
+      <li><strong>Minimal data:</strong> The extension only stores what is strictly necessary for it to function</li>
     </ul>
-    <p>No method of electronic transmission or storage is 100% secure. While we take reasonable precautions, we cannot guarantee absolute security of data transmitted over the internet.</p>
+    <p>Data stored locally on your device is entirely under your control. You can delete it at any time by clearing the extension's storage or uninstalling the extension.</p>
   </section>
 
   <section id="sharing">
     <h2><span class="num">5</span> Do We Share Your Information?</h2>
     <p><strong>We do not sell your personal information. We do not share your personal information with advertisers, data brokers, or marketing companies.</strong></p>
-    <p>We share limited data with the following service providers solely to operate our service:</p>
-    <table>
-      <thead><tr><th>Service provider</th><th>What they receive</th><th>Purpose</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Supabase</strong> (supabase.com)</td><td>License keys, Employee IDs, subscription status</td><td>Database hosting — stores our license records</td></tr>
-        <tr><td><strong>Vercel</strong> (vercel.com)</td><td>License key and Employee ID in transit only — not stored by Vercel</td><td>Serverless backend hosting — runs our license verification code</td></tr>
-        <tr><td><strong>Payment provider</strong></td><td>Payment information you provide directly to them</td><td>Payment processing — we never receive your payment details</td></tr>
-      </tbody>
-    </table>
+    <p>Because the extension does not send any data to Qwicktry, there is nothing we could share. The only third-party communication is between the extension and Amazon's own AtoZ platform — the same platform you use directly as an employee.</p>
     <div class="box blue">
       <strong>Legal disclosure</strong>
-      We may disclose your information if required by law, court order, or governmental authority, or if we believe in good faith that such disclosure is necessary to protect our rights, investigate fraud, or respond to a government request.
+      We may disclose information if required by law, court order, or governmental authority, or if we believe in good faith that such disclosure is necessary to protect our rights, investigate fraud, or respond to a government request. In practice, since we hold no user data from the extension, this would apply only to any support emails you have sent us.
     </div>
   </section>
 
@@ -216,28 +265,22 @@
     <p>We honour these rights for all users regardless of where you live:</p>
 
     <h3>Right to Access</h3>
-    <p>You can request a copy of all personal information we hold about you. We will provide it within 30 days.</p>
+    <p>You can request a copy of any information we hold about you. Since the extension stores everything locally and sends nothing to us, the only data we may hold is any support email correspondence you have had with us.</p>
 
     <h3>Right to Deletion</h3>
-    <p>You can request that we delete all personal information associated with your license key. We process deletion requests within 30 days. Note: deletion of your license record will disable your subscription.</p>
+    <p>You can delete all data the extension stores by uninstalling the extension or clearing Chrome's extension storage. For any support email correspondence, contact us and we will delete it.</p>
 
     <h3>Right to Correction</h3>
     <p>If any information we hold is inaccurate, you can request that we correct it.</p>
-
-    <h3>Right to Data Portability</h3>
-    <p>You can request a copy of your data in a machine-readable format (JSON or CSV).</p>
-
-    <h3>Right to Object</h3>
-    <p>You can object to our processing of your personal information at any time.</p>
 
     <h3>How to Exercise Your Rights</h3>
     <p>Email <strong>support&#64;qwicktry.com</strong> with the subject line <strong>"Privacy Request"</strong> and describe your request. We will respond within 30 days.</p>
 
     <h3>Canadian Residents (PIPEDA)</h3>
-    <p>You have rights under the Personal Information Protection and Electronic Documents Act (PIPEDA). You may also contact the Office of the Privacy Commissioner of Canada at <a href="https://www.priv.gc.ca" target="_blank">priv.gc.ca</a> if you have concerns.</p>
+    <p>You have rights under the Personal Information Protection and Electronic Documents Act (PIPEDA). You may also contact the Office of the Privacy Commissioner of Canada at <a href="https://www.priv.gc.ca" target="_blank" rel="noopener">priv.gc.ca</a> if you have concerns.</p>
 
     <h3>European Residents (GDPR)</h3>
-    <p>You have rights under the General Data Protection Regulation (GDPR). Our legal basis for processing is contract performance. You may lodge a complaint with your local data protection authority.</p>
+    <p>You have rights under the General Data Protection Regulation (GDPR). You may lodge a complaint with your local data protection authority.</p>
 
     <h3>California Residents (CCPA)</h3>
     <p>You have rights under the California Consumer Privacy Act (CCPA). We do not sell personal information. Contact support&#64;qwicktry.com to exercise your rights.</p>
@@ -246,17 +289,15 @@
   <section id="data-retention">
     <h2><span class="num">8</span> Data Retention</h2>
     <ul>
-      <li><strong>Active licenses:</strong> Your license record is kept for as long as your license is active</li>
-      <li><strong>Expired licenses:</strong> Retained for up to 90 days after expiry, then permanently deleted unless you have renewed</li>
-      <li><strong>On written request:</strong> Deleted immediately upon request to support&#64;qwicktry.com regardless of license status</li>
+      <li><strong>Extension data (local):</strong> Stored on your device only — retained until you clear it or uninstall the extension. Entirely under your control.</li>
       <li><strong>Support emails:</strong> Retained for up to 2 years or until you request deletion</li>
     </ul>
-    <p>Data stored locally on your device is entirely under your control. Clear it at any time by uninstalling the extension or clearing Chrome's extension storage.</p>
+    <p>Qwicktry holds no server-side records for extension users.</p>
   </section>
 
   <section id="children">
     <h2><span class="num">9</span> Children's Privacy</h2>
-    <p>Our extension is intended for use by Amazon warehouse employees who are adults. We do not knowingly collect personal information from anyone under the age of 18. If you are under 18, please do not use our extension or provide any information to us.</p>
+    <p>Our extension is intended for use by Amazon associates who are adults. We do not knowingly collect personal information from anyone under the age of 18. If you are under 18, please do not use our extension or provide any information to us.</p>
     <p>If we become aware that we have inadvertently collected information from a person under 18, we will delete it immediately. To report a concern, contact support&#64;qwicktry.com.</p>
   </section>
 
@@ -271,7 +312,6 @@
     <p>We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. When we make material changes:</p>
     <ul>
       <li>We will update the "Last updated" date at the top of this page</li>
-      <li>For significant changes, we will notify active subscribers by email</li>
       <li>Continued use of the extension after changes are posted constitutes your acceptance of the updated policy</li>
     </ul>
     <p>We encourage you to review this policy periodically. All previous versions are available on request.</p>
@@ -281,7 +321,7 @@
     <h2><span class="num">12</span> Contact Us</h2>
     <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please reach out:</p>
     <div class="contact-box">
-      <h3>&#128274; Privacy Questions?</h3>
+      <h3>Privacy questions?</h3>
       <p>We respond to all privacy requests within 30 days.</p>
       <a href="mailto:support@qwicktry.com">support&#64;qwicktry.com</a>
     </div>
@@ -294,16 +334,41 @@
 
 </div>
 
+<!-- ── FOOTER ── -->
 <footer>
-  <p>&#169; 2026 Qwicktry. All rights reserved.</p>
-  <p style="margin-top: 10px;">
-    <a href="/">Home</a>
-    <a href="/privacy">Privacy Policy</a>
-    <a href="/terms">Terms of Service</a>
-  </p>
-  <p style="margin-top: 12px; font-size: 12px; color: var(--muted); max-width: 580px; margin-left: auto; margin-right: auto; line-height: 1.6;">
-    Qwicktry is not affiliated with, endorsed by, or in any way officially connected with Amazon.com, Inc. or any of its subsidiaries.
-  </p>
+  <div class="foot-inner">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a href="/" class="nav-logo"><span class="mark">⚡</span> AtoZ <span class="q">Shift Helper</span></a>
+        <p>The smarter way to grab VET, READY shifts and VTO on Amazon AtoZ — automatically, the moment they drop.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h4>Product</h4>
+          <a href="/#modes">Modes</a>
+          <a href="/#features">Features</a>
+          <a href="/#how">How it works</a>
+          <a href="/#faq">FAQ</a>
+        </div>
+        <div class="foot-col">
+          <h4>Get it</h4>
+          <a href="https://chromewebstore.google.com/detail/atoz-shift-helper/fjajhooelifadiolkgpkafboghbdelad" target="_blank" rel="noopener">Chrome Web Store</a>
+          <a href="mailto:support@qwicktry.com">Support</a>
+          <a href="https://qwicktry.com" target="_blank" rel="noopener">qwicktry.com</a>
+        </div>
+        <div class="foot-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <p class="disc">Qwicktry and AtoZ Shift Helper are independent and are <strong>not affiliated with, endorsed by, sponsored by, or in any way officially connected with</strong> Amazon.com, Inc. or any of its subsidiaries or affiliates. "Amazon," "AtoZ," and related names and marks are the property of their respective owners. AtoZ Shift Helper is an independent tool provided as-is, and use of it is at your own risk. You are solely responsible for ensuring your use complies with your employer's policies.</p>
+      <p class="copy">© 2026 Qwicktry · Contact: <span>support</span>&#64;<span>qwicktry.com</span></p>
+    </div>
+  </div>
 </footer>
+
 </body>
 </html>
