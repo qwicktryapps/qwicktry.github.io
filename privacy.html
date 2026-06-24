@@ -158,7 +158,7 @@
     <h2>Privacy at a glance</h2>
     <div class="summary-grid">
       <div class="summary-item good">Your shift data stays on your device — we never see it</div>
-      <div class="summary-item good">Your Employee ID is never sent to our servers</div>
+      <div class="summary-item good">Your Employee ID is never stored by us or sent to our servers</div>
       <div class="summary-item good">We do not sell or share your data</div>
       <div class="summary-item good">We do not use tracking cookies or analytics</div>
       <div class="summary-item bad">We do not collect your browsing history</div>
@@ -189,7 +189,6 @@
       <thead><tr><th>Data</th><th>Purpose</th><th>Sent to us?</th></tr></thead>
       <tbody>
         <tr><td>Your filter preferences (dates, days, time windows, priority windows)</td><td>Remember your settings between sessions</td><td><span class="tag no">Never</span></td></tr>
-        <tr><td>Your Amazon Employee ID</td><td>Required to query the AtoZ platform and act on your behalf</td><td><span class="tag no">Never</span></td></tr>
         <tr><td>Your profile label (optional name/note)</td><td>Displayed on the floating status panel</td><td><span class="tag no">Never</span></td></tr>
         <tr><td>Activity log</td><td>Local record of shifts claimed (VET) and time off accepted (VTO) for you</td><td><span class="tag no">Never</span></td></tr>
       </tbody>
@@ -200,7 +199,7 @@
     <table>
       <thead><tr><th>Data</th><th>Purpose</th><th>Sent to us?</th></tr></thead>
       <tbody>
-        <tr><td>Your Amazon Employee ID</td><td>Included in the request when querying available shifts — this is how Amazon's own API works</td><td><span class="tag no">Never</span></td></tr>
+        <tr><td>Your Amazon Employee ID</td><td>Read from AtoZ's own page/session and included in the request to AtoZ's API — this is how Amazon's own API works. It is not stored.</td><td><span class="tag no">Never</span></td></tr>
         <tr><td>Available shift data</td><td>Read from Amazon's servers so your filters can be applied locally</td><td><span class="tag no">Never</span></td></tr>
       </tbody>
     </table>
@@ -235,7 +234,7 @@
   <section id="how-we-protect">
     <h2><span class="num">4</span> How We Protect Your Information</h2>
     <ul>
-      <li><strong>Local storage only:</strong> Your preferences and Employee ID are stored in Chrome's local extension storage — inaccessible to any website or third party, never transmitted to us</li>
+      <li><strong>Local storage only:</strong> Your preferences are stored in Chrome's local extension storage — inaccessible to any website or third party, never transmitted to us</li>
       <li><strong>HTTPS for Amazon communication:</strong> All communication between the extension and Amazon's AtoZ platform uses HTTPS encryption (TLS)</li>
       <li><strong>No Qwicktry backend:</strong> We have no server receiving your data, so there is no Qwicktry server to compromise</li>
       <li><strong>Minimal data:</strong> The extension only stores what is strictly necessary for it to function</li>
