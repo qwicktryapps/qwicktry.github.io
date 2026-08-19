@@ -453,7 +453,7 @@
       <div class="mock-popup">
         <div class="mp-head">
           <div class="title">⚡ AtoZ Shift Helper</div>
-          <div class="desc">Set your rules once. It grabs the right ones for you.</div>
+          <div class="desc">Set your filters once. It grabs the right ones for you.</div>
           <div class="mp-tabs"><span class="mp-tab active">Settings</span><span class="mp-tab">How it works</span><span class="mp-tab">Support</span></div>
         </div>
         <div class="mp-body">
@@ -575,6 +575,7 @@
       <div class="feat reveal"><div class="ic">📅</div><h3>Date ranges</h3><p>Only consider shifts inside the dates you choose. Add as many ranges as you like — overlaps are merged for you.</p></div>
       <div class="feat reveal"><div class="ic">📆</div><h3>Days of the week</h3><p>Weekends only? Just Mondays and Thursdays? Tap the days you want and it ignores the rest.</p></div>
       <div class="feat reveal"><div class="ic">🕐</div><h3>Allowed hours</h3><p>A hard gate — a shift is only grabbed if it fits <em>completely</em> inside your hours. Night windows that cross midnight are handled correctly.</p></div>
+      <div class="feat reveal"><div class="ic">📏</div><h3>VET / VTO length</h3><p>Amazon often posts a full shift <em>and</em> the halves it splits into — both fit inside your allowed hours. Set a minimum length and only the full one is taken. Set a maximum if short ones are all you want.</p></div>
       <div class="feat reveal"><div class="ic">⭐</div><h3>Priority windows</h3><p>Rank your favourite time slots P1, P2, P3… It always tries to grab your P1 shifts before anything else.</p></div>
       <div class="feat reveal"><div class="ic">⚡</div><h3>Instant reaction</h3><p>Choose how often it checks — as fast as twice a second — so matching shifts get claimed the moment they appear.</p></div>
       <div class="feat reveal"><div class="ic">🌍</div><h3>Timezone aware</h3><p>Set your building's timezone and every filter lines up with your site's clock — no off-by-an-hour surprises.</p></div>
@@ -615,7 +616,7 @@
   <div class="container">
     <p class="eyebrow reveal">Up and running in a minute</p>
     <h2 class="h2 reveal">Three steps. That's it.</h2>
-    <p class="sub reveal">Install it, set your rules, and let it grab. That's the whole setup.</p>
+    <p class="sub reveal">Install it, set your filters, and let it grab. That's the whole setup.</p>
 
     <div class="how-steps">
       <div class="hstep reveal">
@@ -628,8 +629,8 @@
       <div class="hstep reveal">
         <div class="num">2</div>
         <div>
-          <h3>Set your rules</h3>
-          <p>Open the popup, pick VET or VTO, then set your dates, days, hours and priority windows — as broad or as specific as you like. Nothing to look up or type in: it knows your AtoZ account automatically.</p>
+          <h3>Enter your Employee ID and set your filters</h3>
+          <p>Open the popup, type your Amazon Employee ID (it's on your AtoZ profile), pick VET or VTO, then set your dates, days, hours, shift length and priority windows — as broad or as specific as you like.</p>
         </div>
       </div>
       <div class="hstep reveal">
@@ -652,7 +653,7 @@
     <div class="faq-list">
       <details class="faq-item reveal" open>
         <summary>What does it actually do? <span class="plus">+</span></summary>
-        <div class="ans">It watches Amazon AtoZ for available opportunities and automatically claims the ones that match your filters. In <strong>VET / READY mode</strong> it picks up extra shifts the moment they post; in <strong>VTO mode</strong> it accepts Voluntary Time Off as soon as it opens. You set the rules once — it does the grabbing for you, far faster than refreshing by hand.</div>
+        <div class="ans">It watches Amazon AtoZ for available opportunities and automatically claims the ones that match your filters. In <strong>VET / READY mode</strong> it picks up extra shifts the moment they post; in <strong>VTO mode</strong> it accepts Voluntary Time Off as soon as it opens. You set the filters once — it does the grabbing for you, far faster than refreshing by hand.</div>
       </details>
       <details class="faq-item reveal">
         <summary>What's the difference between VET and VTO? <span class="plus">+</span></summary>
@@ -664,11 +665,11 @@
       </details>
       <details class="faq-item reveal">
         <summary>What do I need to get started? <span class="plus">+</span></summary>
-        <div class="ans">Just Google Chrome and an active Amazon AtoZ account. Install the extension, set your filters, and you're ready — it detects your AtoZ account automatically, so there's nothing to look up or type in.</div>
+        <div class="ans">Just Google Chrome and an active Amazon AtoZ account. Install the extension, enter your Amazon Employee ID (found on your AtoZ profile page), set your filters, and you're ready.</div>
       </details>
       <details class="faq-item reveal">
         <summary>Is my account information safe? <span class="plus">+</span></summary>
-        <div class="ans">Yes. Everything runs locally in your own browser. Your filters are stored on your device only — they're never sent to us. The extension talks only to AtoZ's own scheduling page to read and claim shifts on your behalf, and it never touches your activity on any other site.</div>
+        <div class="ans">Yes. Everything runs locally in your own browser. Your Employee ID and filters are stored on your device only — they're never sent to us. The extension talks only to AtoZ's own scheduling page to read and claim shifts on your behalf, and it never touches your activity on any other site.</div>
       </details>
       <details class="faq-item reveal">
         <summary>Which browser does it work on? <span class="plus">+</span></summary>
