@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Slot Scout — Privacy</title>
+        <style>
+            :root {
+                --bg: #10141c;
+                --panel: #171d28;
+                --border: #2a3444;
+                --text: #eef2f8;
+                --muted: #8b98ab;
+                --accent: #f5b544;
+                --success: #34d399;
+                --danger: #f87171;
+            }
+            * { box-sizing: border-box; }
+            body {
+                margin: 0;
+                background: var(--bg);
+                color: var(--text);
+                font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+                font-size: 15px;
+                line-height: 1.65;
+                -webkit-font-smoothing: antialiased;
+            }
+            .wrap { max-width: 720px; margin: 0 auto; padding: 56px 24px 80px; }
+            .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+            .brand__mark {
+                width: 11px; height: 11px; border-radius: 2px;
+                background: var(--accent); transform: rotate(45deg);
+            }
+            .brand__name {
+                font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+                text-transform: uppercase; color: var(--muted);
+            }
+            h1 { margin: 0 0 10px; font-size: 30px; line-height: 1.2; letter-spacing: -0.02em; }
+            .lede { margin: 0 0 12px; font-size: 16px; color: var(--muted); }
+            .updated { margin: 0 0 40px; font-size: 13px; color: var(--muted); }
+            h2 {
+                margin: 40px 0 12px; font-size: 12px; font-weight: 700;
+                letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent);
+            }
+            p { margin: 0 0 14px; }
+            ul { margin: 0 0 14px; padding-left: 20px; }
+            li { margin: 0 0 8px; }
+            strong { font-weight: 650; }
+            code {
+                font-family: ui-monospace, "Cascadia Mono", Menlo, monospace;
+                font-size: 0.88em; background: var(--panel);
+                border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px;
+            }
+            .card {
+                background: var(--panel); border: 1px solid var(--border);
+                border-left: 3px solid var(--success); border-radius: 10px;
+                padding: 16px 18px; margin: 0 0 16px;
+            }
+            .card--warn { border-left-color: var(--danger); }
+            .card h3 { margin: 0 0 8px; font-size: 15px; }
+            .card p:last-child { margin-bottom: 0; }
+            table { width: 100%; border-collapse: collapse; margin: 0 0 16px; font-size: 14px; }
+            th, td {
+                text-align: left; padding: 9px 10px;
+                border-bottom: 1px solid var(--border); vertical-align: top;
+            }
+            th {
+                color: var(--muted); font-size: 11px; font-weight: 700;
+                letter-spacing: 0.1em; text-transform: uppercase;
+            }
+            .foot {
+                margin-top: 56px; padding-top: 20px;
+                border-top: 1px solid var(--border); color: var(--muted); font-size: 13px;
+            }
+        
+/* --- injected by dev/publish-site.js --- */
+:root { --display: "Archivo", system-ui, sans-serif; }
+body { font-family: "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+h1 { font-family: var(--display); letter-spacing: -0.02em; }
+/* The sticky nav carries the wordmark on the web, so the page-top eyebrow the
+   in-extension copies use would be a duplicate here. */
+.brand { display: none; }
+.wrap { padding-top: 40px; }
+.sitenav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(16, 20, 28, 0.86);
+    backdrop-filter: saturate(160%) blur(12px);
+    -webkit-backdrop-filter: saturate(160%) blur(12px);
+    border-bottom: 1px solid var(--border);
+}
+.sitenav__in {
+    max-width: 760px; margin: 0 auto; padding: 0 24px; height: 56px;
+    display: flex; align-items: center; gap: 22px;
+}
+.sitenav__home {
+    display: flex; align-items: center; gap: 9px;
+    text-decoration: none; color: var(--text); margin-right: auto;
+}
+.sitenav__home i {
+    width: 10px; height: 10px; background: var(--accent);
+    transform: rotate(45deg); border-radius: 2px; display: block; flex: none;
+}
+.sitenav__home span {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+}
+.sitenav a.sitenav__link {
+    font-size: 13.5px; color: var(--muted); text-decoration: none; white-space: nowrap;
+}
+.sitenav a.sitenav__link:hover { color: var(--text); }
+.sitenav a.sitenav__link[aria-current="page"] { color: var(--accent); font-weight: 600; }
+@media (max-width: 520px) {
+    .sitenav__in { gap: 14px; padding: 0 16px; }
+    .sitenav__home span { display: none; }
+}
+</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Public+Sans:wght@400;500;600&display=swap">
+    </head>
+    <body>
+    <nav class="sitenav">
+        <div class="sitenav__in">
+            <a class="sitenav__home" href="./"><i></i><span>Slot Scout</span></a>
+            <a class="sitenav__link" href="guide.html">How it works</a>
+            <a class="sitenav__link" href="privacy.html" aria-current="page">Privacy</a>
+        </div>
+    </nav>
+        <div class="wrap">
+            <div class="brand">
+                <span class="brand__mark"></span>
+                <span class="brand__name">Slot Scout</span>
+            </div>
+            <h1>Privacy</h1>
+            <p class="lede">
+                Slot Scout has no server, no account and no analytics. Everything
+                it knows about you stays in your browser.
+            </p>
+            <p class="updated">Version 1.0.0</p>
+
+            <div class="card">
+                <h3>The short version</h3>
+                <p>
+                    Nothing you enter is transmitted anywhere except to
+                    <code>ais.usvisa-info.com</code> — the site you are already
+                    signed into. There is no backend to send it to. The developer
+                    of this extension cannot see your data, because none of it
+                    ever leaves your machine.
+                </p>
+            </div>
+
+            <h2>What is stored, and where</h2>
+            <p>
+                All of the following is kept in your browser's local extension
+                storage. It is readable only by this extension, on this browser
+                profile, on this device.
+            </p>
+            <table>
+                <tr>
+                    <th>Data</th>
+                    <th>Why</th>
+                </tr>
+                <tr>
+                    <td>Email address</td>
+                    <td>To fill the AIS sign-in form and show who is signed in.</td>
+                </tr>
+                <tr>
+                    <td>Password <strong>(only if you ask)</strong></td>
+                    <td>
+                        To sign back in when the site drops your session. This is
+                        off by default. It is stored unencrypted, the same as any
+                        browser-saved password, and you can delete it any time
+                        with <em>Forget credentials</em> in the side panel.
+                    </td>
+                </tr>
+                <tr>
+                    <td>Appointment ID and current date</td>
+                    <td>To know which booking to improve on, and what counts as earlier.</td>
+                </tr>
+                <tr>
+                    <td>Locations, date window, interval, auto-book</td>
+                    <td>Your settings.</td>
+                </tr>
+                <tr>
+                    <td>Check counts and timestamps</td>
+                    <td>To show status and to back off correctly after a block.</td>
+                </tr>
+            </table>
+
+            <h2>What is sent over the network</h2>
+            <p>
+                Exactly two kinds of request, both to
+                <code>ais.usvisa-info.com</code>, both using the session you
+                already established by signing in:
+            </p>
+            <ul>
+                <li>
+                    Reading the appointment calendar — the same requests the
+                    site's own page makes when you browse dates by hand.
+                </li>
+                <li>
+                    Submitting the reschedule form, when a slot inside your
+                    window is found.
+                </li>
+            </ul>
+            <p>
+                There are no requests to any other host. The extension declares
+                no other host permissions, so it is not technically capable of
+                contacting one.
+            </p>
+
+            <div class="card card--warn">
+                <h3>What Slot Scout does not do</h3>
+                <p>
+                    No analytics, telemetry or crash reporting. No screenshots.
+                    No advertising or tracking identifiers. Your appointment data
+                    is never shared or aggregated with other users. Nothing is
+                    sold, because there is nothing collected to sell.
+                </p>
+            </div>
+
+            <h2>Permissions, and why each one exists</h2>
+            <table>
+                <tr>
+                    <th>Permission</th>
+                    <th>Used for</th>
+                </tr>
+                <tr>
+                    <td><code>ais.usvisa-info.com</code></td>
+                    <td>The only site the extension runs on or talks to.</td>
+                </tr>
+                <tr>
+                    <td><code>storage</code></td>
+                    <td>Saving your settings locally.</td>
+                </tr>
+                <tr>
+                    <td><code>scripting</code></td>
+                    <td>Adding the interface and automation to AIS pages.</td>
+                </tr>
+                <tr>
+                    <td><code>notifications</code></td>
+                    <td>
+                        Telling you a slot was found when auto-book is off, so
+                        you can decide without watching the tab.
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>sidePanel</code></td>
+                    <td>The settings and status panel.</td>
+                </tr>
+                <tr>
+                    <td><code>cookies</code></td>
+                    <td>
+                        Clearing the stale AIS session cookie when the site gets
+                        stuck on its maintenance page. Only that one cookie, only
+                        on that one domain.
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>tabs</code></td>
+                    <td>
+                        Knowing which tab holds the watch, so a second tab does
+                        not check in parallel and get you blocked twice as fast.
+                    </td>
+                </tr>
+            </table>
+
+            <h2>Deleting your data</h2>
+            <p>
+                <em>Reset everything</em> in the side panel clears all stored
+                data, including saved credentials. Uninstalling the extension
+                removes it as well — Chrome deletes extension storage on
+                uninstall. Neither action needs to contact anyone, because there
+                is nowhere else a copy could be.
+            </p>
+
+            <h2>Children</h2>
+            <p>
+                Slot Scout is a tool for managing a visa appointment and is not
+                directed at children. It collects nothing from anyone.
+            </p>
+
+            <h2>Changes</h2>
+            <p>
+                If a future version ever changes what is stored or sent, this
+                page ships with the extension and will be updated in the same
+                release. The version number at the top tells you which build a
+                given copy of this page describes.
+            </p>
+
+            <p class="foot">
+                Slot Scout is an independent tool. It is not affiliated with,
+                endorsed by, or connected to the U.S. Department of State, AIS,
+                or any government agency.
+            </p>
+        </div>
+    </body>
+</html>
