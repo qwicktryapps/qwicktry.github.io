@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Slot Scout — How it works</title>
+        <style>
+            :root {
+                --bg: #10141c;
+                --panel: #171d28;
+                --border: #2a3444;
+                --text: #eef2f8;
+                --muted: #8b98ab;
+                --accent: #f5b544;
+                --success: #34d399;
+                --danger: #f87171;
+            }
+            * {
+                box-sizing: border-box;
+            }
+            body {
+                margin: 0;
+                background: var(--bg);
+                color: var(--text);
+                font-family: system-ui, -apple-system, "Segoe UI", Roboto,
+                    sans-serif;
+                font-size: 15px;
+                line-height: 1.65;
+                -webkit-font-smoothing: antialiased;
+            }
+            .wrap {
+                max-width: 720px;
+                margin: 0 auto;
+                padding: 56px 24px 80px;
+            }
+            .brand {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 8px;
+            }
+            .brand__mark {
+                width: 11px;
+                height: 11px;
+                border-radius: 2px;
+                background: var(--accent);
+                transform: rotate(45deg);
+            }
+            .brand__name {
+                font-size: 11px;
+                font-weight: 700;
+                letter-spacing: 0.16em;
+                text-transform: uppercase;
+                color: var(--muted);
+            }
+            h1 {
+                margin: 0 0 10px;
+                font-size: 30px;
+                line-height: 1.2;
+                letter-spacing: -0.02em;
+            }
+            .lede {
+                margin: 0 0 40px;
+                font-size: 16px;
+                color: var(--muted);
+            }
+            h2 {
+                margin: 40px 0 12px;
+                font-size: 12px;
+                font-weight: 700;
+                letter-spacing: 0.14em;
+                text-transform: uppercase;
+                color: var(--accent);
+            }
+            p {
+                margin: 0 0 14px;
+            }
+            ol,
+            ul {
+                margin: 0 0 14px;
+                padding-left: 20px;
+            }
+            li {
+                margin: 0 0 8px;
+            }
+            strong {
+                font-weight: 650;
+            }
+            code {
+                font-family: ui-monospace, "Cascadia Mono", Menlo, monospace;
+                font-size: 0.88em;
+                background: var(--panel);
+                border: 1px solid var(--border);
+                border-radius: 4px;
+                padding: 1px 5px;
+            }
+            .card {
+                background: var(--panel);
+                border: 1px solid var(--border);
+                border-left: 3px solid var(--accent);
+                border-radius: 10px;
+                padding: 16px 18px;
+                margin: 0 0 16px;
+            }
+            .card--warn {
+                border-left-color: var(--danger);
+            }
+            .card--good {
+                border-left-color: var(--success);
+            }
+            .card p:last-child {
+                margin-bottom: 0;
+            }
+            .card h3 {
+                margin: 0 0 8px;
+                font-size: 15px;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 0 0 16px;
+                font-size: 14px;
+            }
+            th,
+            td {
+                text-align: left;
+                padding: 9px 10px;
+                border-bottom: 1px solid var(--border);
+                vertical-align: top;
+            }
+            th {
+                color: var(--muted);
+                font-size: 11px;
+                font-weight: 700;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+            }
+            .foot {
+                margin-top: 56px;
+                padding-top: 20px;
+                border-top: 1px solid var(--border);
+                color: var(--muted);
+                font-size: 13px;
+            }
+        
+/* --- injected by dev/publish-site.js --- */
+:root { --display: "Archivo", system-ui, sans-serif; }
+body { font-family: "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+h1 { font-family: var(--display); letter-spacing: -0.02em; }
+/* The sticky nav carries the wordmark on the web, so the page-top eyebrow the
+   in-extension copies use would be a duplicate here. */
+.brand { display: none; }
+.wrap { padding-top: 40px; }
+.sitenav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(16, 20, 28, 0.86);
+    backdrop-filter: saturate(160%) blur(12px);
+    -webkit-backdrop-filter: saturate(160%) blur(12px);
+    border-bottom: 1px solid var(--border);
+}
+.sitenav__in {
+    max-width: 760px; margin: 0 auto; padding: 0 24px; height: 56px;
+    display: flex; align-items: center; gap: 22px;
+}
+.sitenav__home {
+    display: flex; align-items: center; gap: 9px;
+    text-decoration: none; color: var(--text); margin-right: auto;
+}
+.sitenav__home i {
+    width: 10px; height: 10px; background: var(--accent);
+    transform: rotate(45deg); border-radius: 2px; display: block; flex: none;
+}
+.sitenav__home span {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+}
+.sitenav a.sitenav__link {
+    font-size: 13.5px; color: var(--muted); text-decoration: none; white-space: nowrap;
+}
+.sitenav a.sitenav__link:hover { color: var(--text); }
+.sitenav a.sitenav__link[aria-current="page"] { color: var(--accent); font-weight: 600; }
+@media (max-width: 520px) {
+    .sitenav__in { gap: 14px; padding: 0 16px; }
+    .sitenav__home span { display: none; }
+}
+</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Public+Sans:wght@400;500;600&display=swap">
+    </head>
+    <body>
+    <nav class="sitenav">
+        <div class="sitenav__in">
+            <a class="sitenav__home" href="./"><i></i><span>Slot Scout</span></a>
+            <a class="sitenav__link" href="guide.html" aria-current="page">How it works</a>
+            <a class="sitenav__link" href="privacy.html">Privacy</a>
+        </div>
+    </nav>
+        <div class="wrap">
+            <div class="brand">
+                <span class="brand__mark"></span>
+                <span class="brand__name">Slot Scout</span>
+            </div>
+            <h1>How it works</h1>
+            <p class="lede">
+                Slot Scout watches the AIS appointment calendar and takes an
+                earlier slot when one opens inside the window you set.
+            </p>
+
+            <div class="card card--good">
+                <h3>Free, and it stays on your machine</h3>
+                <p>
+                    There is no account, no credit system and no server. Your
+                    login, your appointment details and every check you run stay
+                    in this browser. The only site the extension talks to is
+                    <code>ais.usvisa-info.com</code> — the same site you're
+                    already logged into.
+                </p>
+            </div>
+
+            <h2>What you need first</h2>
+            <ul>
+                <li>
+                    An appointment that is <strong>already booked</strong>. This
+                    reschedules an existing appointment; it can't create a first
+                    one.
+                </li>
+                <li>An AIS country that uses the standard scheduling system.</li>
+                <li>The tab left open. Closing it stops the watch.</li>
+            </ul>
+
+            <h2>The steps</h2>
+            <ol>
+                <li>
+                    <strong>Sign in.</strong> Enter your credentials once. Saving
+                    them is optional — leave it off and you sign in by hand each
+                    time the site drops your session.
+                </li>
+                <li>
+                    <strong>Pick the appointment</strong> if the account holds
+                    more than one, and confirm the date you currently hold.
+                </li>
+                <li>
+                    <strong>Set your window.</strong> Only slots between these
+                    two dates count. Anything outside is ignored, so you don't
+                    get moved to a date that's worse for you.
+                </li>
+                <li>
+                    <strong>Rank your locations</strong> — up to three — then
+                    set how often to check and whether to book automatically.
+                </li>
+                <li>
+                    <strong>When a slot appears</strong>, it fills the form and
+                    either confirms it or asks you first, depending on the
+                    auto-book setting below.
+                </li>
+            </ol>
+
+            <h2>Auto-book, and what happens without it</h2>
+            <p>
+                Auto-book is <strong>on by default</strong>, and that is the
+                setting to keep unless you have a reason not to. Earlier slots
+                are taken within seconds of appearing. If Slot Scout has to wait
+                for a human, the slot is usually gone before the human answers.
+            </p>
+            <p>With auto-book <strong>on</strong>: the form is filled, submitted
+                and confirmed in one go. You get a notification telling you it
+                happened.</p>
+            <p>With auto-book <strong>off</strong>, here is exactly what happens:</p>
+            <ol>
+                <li>The form is filled in and submitted, so the site's own
+                    confirmation dialog is open and ready.</li>
+                <li>You are asked on two surfaces at once — a desktop
+                    notification, which reaches you even when the browser is
+                    behind another window, and a dialog on the page itself.
+                    Answering either one dismisses the other.</li>
+                <li>
+                    <strong>You have three minutes.</strong> A countdown runs on
+                    the dialog.
+                </li>
+                <li>
+                    Choose <em>Book it</em> and it confirms. Choose
+                    <em>Skip this one</em> and it cancels and goes back to
+                    watching. Do nothing, and after three minutes it cancels and
+                    goes back to watching on its own.
+                </li>
+            </ol>
+            <div class="card card--warn">
+                <h3>The site does not hold the slot while you decide</h3>
+                <p>
+                    Nothing is reserved during those three minutes. The wait is
+                    short precisely because a longer one would just mean trying
+                    to confirm a slot somebody else already took. If you cannot
+                    reliably answer within three minutes, leave auto-book on.
+                </p>
+            </div>
+
+            <h2>Watching more than one location</h2>
+            <p>
+                You can rank up to three consulates. Slot Scout checks
+                <strong>one per cycle</strong>, in your order — first cycle the
+                top choice, next cycle the second, and so on.
+            </p>
+            <p>
+                This matters: it means extra locations cost you nothing. The
+                number of requests per hour is identical whether you watch one
+                location or three, so your risk of being blocked does not go up.
+                The trade-off is coverage — with two locations at a five-minute
+                interval, each one is checked every ten minutes.
+            </p>
+            <p>
+                The biometrics support centre stays a single choice, shared
+                across every consulate you watch.
+            </p>
+
+            <h2>Getting blocked</h2>
+            <div class="card card--warn">
+                <h3>Checking faster does not help</h3>
+                <p>
+                    After a certain number of checks the site stops returning any
+                    dates at all for a few hours. That's a <strong>soft
+                    block</strong>. If you keep hammering it during one, it
+                    escalates to a longer lockout that can cover your whole IP
+                    address.
+                </p>
+                <p>
+                    Slot Scout treats an empty calendar as a soft-block signal
+                    and backs off automatically — 30 minutes, then 45, then up
+                    to 2 hours — instead of retrying at your normal interval.
+                    Leave it alone and it recovers on its own.
+                </p>
+            </div>
+            <p>
+                The default 5-minute interval is a reasonable balance. Below 2
+                minutes you're trading a real risk of lockout for very little
+                extra coverage.
+            </p>
+
+            <h2>Settings</h2>
+            <table>
+                <tr>
+                    <th>Setting</th>
+                    <th>What it does</th>
+                </tr>
+                <tr>
+                    <td>Not before / Not after</td>
+                    <td>
+                        The date window. A slot outside it is skipped even if
+                        it's earlier than what you hold.
+                    </td>
+                </tr>
+                <tr>
+                    <td>Check every</td>
+                    <td>
+                        Base interval between checks. Random jitter of about 10%
+                        is added so repeated checks aren't perfectly regular.
+                    </td>
+                </tr>
+                <tr>
+                    <td>Book automatically</td>
+                    <td>
+                        On (default): confirms the booking the moment a slot is
+                        found. Off: asks you, and releases the slot after three
+                        minutes if you don't answer.
+                    </td>
+                </tr>
+                <tr>
+                    <td>Locations, in order</td>
+                    <td>
+                        Up to three consulates, checked one per cycle in this
+                        order. Changing location can mean a much longer trip —
+                        check before adding one.
+                    </td>
+                </tr>
+                <tr>
+                    <td>Biometrics date preference</td>
+                    <td>
+                        Whether to take the earliest or latest available support
+                        centre appointment once a consulate slot is found.
+                    </td>
+                </tr>
+            </table>
+
+            <h2>If something goes wrong</h2>
+            <ul>
+                <li>
+                    <strong>Status stuck on "Backing off"</strong> — you're soft
+                    blocked. Nothing to fix; it clears in a few hours.
+                </li>
+                <li>
+                    <strong>"Needs attention"</strong> — open the side panel; the
+                    last result line says what happened.
+                </li>
+                <li>
+                    <strong>Signed out repeatedly</strong> — the site does this
+                    on its own. If credentials are saved it signs back in; if not
+                    you'll need to.
+                </li>
+                <li>
+                    <strong>Anything else</strong> — <em>Reset everything</em> in
+                    the side panel clears all saved data and starts over.
+                </li>
+            </ul>
+
+            <h2>Rescheduling limits</h2>
+            <p>
+                AIS caps how many times an appointment can be rescheduled. Going
+                over that cap can cancel your appointment outright — that's the
+                site's rule, not something the extension can work around. If you
+                see the site's limit warning, take it seriously.
+            </p>
+
+            <h2>Changelog</h2>
+            <p><strong>1.0.0</strong></p>
+            <ul>
+                <li>First release.</li>
+                <li>
+                    No server, no credits, no account — everything runs locally.
+                </li>
+                <li>Optional credential storage; manual sign-in fully supported.</li>
+                <li>
+                    Adaptive backoff on soft blocks, with jitter on normal
+                    checks.
+                </li>
+                <li>
+                    Up to three ranked locations, checked one per cycle so the
+                    request rate never rises.
+                </li>
+                <li>
+                    Auto-book on by default; with it off, a three-minute
+                    decision window on both the page and a notification.
+                </li>
+                <li>
+                    Live status dock on the page and a full side panel for
+                    settings.
+                </li>
+            </ul>
+
+            <p class="foot">
+                Slot Scout is an independent tool. It is not affiliated with,
+                endorsed by, or connected to the U.S. Department of State, AIS,
+                or any government agency.
+            </p>
+        </div>
+    </body>
+</html>
