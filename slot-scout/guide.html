@@ -202,18 +202,22 @@ h1 { font-family: var(--display); letter-spacing: -0.02em; }
             </div>
             <h1>How it works</h1>
             <p class="lede">
-                Slot Scout watches the AIS appointment calendar and takes an
-                earlier slot when one opens inside the window you set.
+                Slot Scout watches the AIS appointment calendar and books an
+                earlier slot when one opens up between the dates you pick.
             </p>
 
             <div class="card card--good">
-                <h3>Free, and it stays on your machine</h3>
+                <h3>Free, and your details stay with you</h3>
                 <p>
-                    There is no account, no credit system and no server. Your
-                    login, your appointment details and every check you run stay
-                    in this browser. The only site the extension talks to is
-                    <code>ais.usvisa-info.com</code> — the same site you're
-                    already logged into.
+                    Slot Scout is free. There's nothing to sign up for, nothing
+                    to pay, and no credits to run out of. You use your normal
+                    AIS login — the same email and password you already have.
+                </p>
+                <p>
+                    Your login and your appointment details stay in this
+                    browser. The only site the extension talks to is
+                    <code>ais.usvisa-info.com</code>, the one you're already
+                    signed in to.
                 </p>
             </div>
 
@@ -231,9 +235,9 @@ h1 { font-family: var(--display); letter-spacing: -0.02em; }
             <h2>The steps</h2>
             <ol>
                 <li>
-                    <strong>Sign in.</strong> Enter your credentials once. Saving
-                    them is optional — leave it off and you sign in by hand each
-                    time the site drops your session.
+                    <strong>Sign in.</strong> Use your normal AIS email and
+                    password. Saving them is optional — leave it off and you
+                    sign in yourself each time the site logs you out.
                 </li>
                 <li>
                     <strong>Pick the appointment</strong> if the account holds
@@ -391,9 +395,9 @@ h1 { font-family: var(--display); letter-spacing: -0.02em; }
                     last result line says what happened.
                 </li>
                 <li>
-                    <strong>Signed out repeatedly</strong> — the site does this
-                    on its own. If credentials are saved it signs back in; if not
-                    you'll need to.
+                    <strong>Signed out over and over</strong> — the site does
+                    this on its own. If you saved your login it signs back in;
+                    if not, you'll need to.
                 </li>
                 <li>
                     <strong>Anything else</strong> — <em>Reset everything</em> in
@@ -413,10 +417,11 @@ h1 { font-family: var(--display); letter-spacing: -0.02em; }
             <p><strong>1.0.0</strong></p>
             <ul>
                 <li>First release.</li>
+                <li>Free — no sign-up, no credits, nothing to pay.</li>
                 <li>
-                    No server, no credits, no account — everything runs locally.
+                    Saving your login is optional; signing in yourself works
+                    just as well.
                 </li>
-                <li>Optional credential storage; manual sign-in fully supported.</li>
                 <li>
                     Adaptive backoff on soft blocks, with jitter on normal
                     checks.
