@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Slot Scout — Earlier US visa appointments</title>
+        <meta
+            name="description"
+            content="A free Chrome extension that watches the AIS visa calendar and reschedules to an earlier slot inside a window you choose. No server, no account, no credits."
+        />
+        <meta name="theme-color" content="#10141c" />
+        <meta property="og:title" content="Slot Scout — Earlier US visa appointments" />
+        <meta
+            property="og:description"
+            content="Watches the AIS calendar and takes an earlier slot when one opens. Free, offline, nothing leaves your browser."
+        />
+        <meta property="og:type" content="website" />
+        <style>
+            /* Base is kept identical to guide.html and privacy.html so the
+               three pages read as one section. Web fonts and the section nav
+               are injected at publish time by dev/publish-site.js. */
+            :root {
+                --bg: #10141c;
+                --panel: #171d28;
+                --border: #2a3444;
+                --text: #eef2f8;
+                --muted: #8b98ab;
+                --accent: #f5b544;
+                --success: #34d399;
+                --danger: #f87171;
+            }
+            * {
+                box-sizing: border-box;
+            }
+            body {
+                margin: 0;
+                background: var(--bg);
+                color: var(--text);
+                font-family: system-ui, -apple-system, "Segoe UI", Roboto,
+                    sans-serif;
+                font-size: 15px;
+                line-height: 1.65;
+                -webkit-font-smoothing: antialiased;
+            }
+            .wrap {
+                max-width: 760px;
+                margin: 0 auto;
+                padding: 40px 24px 80px;
+            }
+            h2 {
+                margin: 52px 0 16px;
+                font-size: 12px;
+                font-weight: 700;
+                letter-spacing: 0.14em;
+                text-transform: uppercase;
+                color: var(--accent);
+            }
+            p {
+                margin: 0 0 14px;
+            }
+            .foot {
+                margin-top: 56px;
+                padding-top: 20px;
+                border-top: 1px solid var(--border);
+                color: var(--muted);
+                font-size: 13px;
+            }
+
+            .hero {
+                padding: 20px 0 8px;
+            }
+            .hero__mark {
+                width: 44px;
+                height: 44px;
+                border-radius: 10px;
+                background: var(--panel);
+                border: 1px solid var(--border);
+                display: grid;
+                place-items: center;
+                margin-bottom: 24px;
+            }
+            .hero__mark i {
+                width: 16px;
+                height: 16px;
+                background: var(--accent);
+                transform: rotate(45deg);
+                border-radius: 3px;
+                display: block;
+            }
+            .hero h1 {
+                font-family: var(--display);
+                font-size: clamp(34px, 6vw, 52px);
+                line-height: 1.04;
+                letter-spacing: -0.03em;
+                font-weight: 700;
+                margin: 0 0 16px;
+                text-wrap: balance;
+            }
+            .hero h1 em {
+                font-style: normal;
+                color: var(--accent);
+            }
+            .hero__lede {
+                font-size: clamp(16px, 2.2vw, 19px);
+                color: var(--muted);
+                max-width: 54ch;
+                margin: 0 0 28px;
+            }
+
+            .status {
+                display: inline-flex;
+                align-items: center;
+                gap: 9px;
+                padding: 9px 15px;
+                background: var(--panel);
+                border: 1px solid var(--border);
+                border-radius: 999px;
+                font-size: 13.5px;
+                color: var(--muted);
+            }
+            .status i {
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                background: var(--accent);
+                display: block;
+                flex: none;
+            }
+            .status strong {
+                color: var(--text);
+                font-weight: 600;
+            }
+
+            .claims {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+                gap: 14px;
+                margin: 8px 0 0;
+            }
+            .claim {
+                background: var(--panel);
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                padding: 20px;
+            }
+            .claim h3 {
+                font-family: var(--display);
+                font-size: 17px;
+                font-weight: 600;
+                letter-spacing: -0.01em;
+                margin: 0 0 7px;
+            }
+            .claim p {
+                margin: 0;
+                font-size: 14px;
+                color: var(--muted);
+            }
+
+            /* Numbered because these genuinely are sequential — each step
+               depends on the one before it. */
+            .steps {
+                counter-reset: step;
+                display: grid;
+                gap: 2px;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+            .steps li {
+                counter-increment: step;
+                display: grid;
+                grid-template-columns: 40px 1fr;
+                gap: 14px;
+                padding: 16px 0;
+                border-bottom: 1px solid var(--border);
+                align-items: start;
+            }
+            .steps li:last-child {
+                border-bottom: none;
+            }
+            .steps li::before {
+                content: counter(step, decimal-leading-zero);
+                font-family: var(--display);
+                font-size: 13px;
+                font-weight: 700;
+                color: var(--accent);
+                font-variant-numeric: tabular-nums;
+                padding-top: 2px;
+            }
+            .steps h3 {
+                font-size: 16px;
+                font-weight: 600;
+                margin: 0 0 4px;
+            }
+            .steps p {
+                margin: 0;
+                font-size: 14.5px;
+                color: var(--muted);
+            }
+
+            .note {
+                background: var(--panel);
+                border: 1px solid var(--border);
+                border-left: 3px solid var(--danger);
+                border-radius: 12px;
+                padding: 20px 22px;
+            }
+            .note h3 {
+                font-family: var(--display);
+                font-size: 17px;
+                font-weight: 600;
+                margin: 0 0 10px;
+            }
+            .note ul {
+                margin: 0;
+                padding-left: 18px;
+                color: var(--muted);
+                font-size: 14.5px;
+            }
+            .note li {
+                margin: 0 0 8px;
+            }
+            .note li:last-child {
+                margin-bottom: 0;
+            }
+            .note strong {
+                color: var(--text);
+                font-weight: 600;
+            }
+
+            .cards {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 14px;
+            }
+            .linkcard {
+                display: block;
+                background: var(--panel);
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                padding: 20px;
+                text-decoration: none;
+                color: inherit;
+                transition: border-color 140ms;
+            }
+            .linkcard:hover {
+                border-color: var(--accent);
+            }
+            .linkcard h3 {
+                font-family: var(--display);
+                font-size: 17px;
+                font-weight: 600;
+                margin: 0 0 6px;
+            }
+            .linkcard p {
+                margin: 0;
+                font-size: 14px;
+                color: var(--muted);
+            }
+            .linkcard span {
+                display: inline-block;
+                margin-top: 10px;
+                font-size: 13px;
+                color: var(--accent);
+                font-weight: 500;
+            }
+
+            @media (max-width: 560px) {
+                .cards {
+                    grid-template-columns: 1fr;
+                }
+            }
+        
+/* --- injected by dev/publish-site.js --- */
+:root { --display: "Archivo", system-ui, sans-serif; }
+body { font-family: "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+h1 { font-family: var(--display); letter-spacing: -0.02em; }
+/* The sticky nav carries the wordmark on the web, so the page-top eyebrow the
+   in-extension copies use would be a duplicate here. */
+.brand { display: none; }
+.wrap { padding-top: 40px; }
+.sitenav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(16, 20, 28, 0.86);
+    backdrop-filter: saturate(160%) blur(12px);
+    -webkit-backdrop-filter: saturate(160%) blur(12px);
+    border-bottom: 1px solid var(--border);
+}
+.sitenav__in {
+    max-width: 760px; margin: 0 auto; padding: 0 24px; height: 56px;
+    display: flex; align-items: center; gap: 22px;
+}
+.sitenav__home {
+    display: flex; align-items: center; gap: 9px;
+    text-decoration: none; color: var(--text); margin-right: auto;
+}
+.sitenav__home i {
+    width: 10px; height: 10px; background: var(--accent);
+    transform: rotate(45deg); border-radius: 2px; display: block; flex: none;
+}
+.sitenav__home span {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+}
+.sitenav a.sitenav__link {
+    font-size: 13.5px; color: var(--muted); text-decoration: none; white-space: nowrap;
+}
+.sitenav a.sitenav__link:hover { color: var(--text); }
+.sitenav a.sitenav__link[aria-current="page"] { color: var(--accent); font-weight: 600; }
+@media (max-width: 520px) {
+    .sitenav__in { gap: 14px; padding: 0 16px; }
+    .sitenav__home span { display: none; }
+}
+</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Public+Sans:wght@400;500;600&display=swap">
+    </head>
+    <body>
+    <nav class="sitenav">
+        <div class="sitenav__in">
+            <a class="sitenav__home" href="./"><i></i><span>Slot Scout</span></a>
+            <a class="sitenav__link" href="guide.html">How it works</a>
+            <a class="sitenav__link" href="privacy.html">Privacy</a>
+        </div>
+    </nav>
+        <div class="wrap">
+            <div class="hero">
+                <div class="hero__mark"><i></i></div>
+                <h1>Earlier visa appointments, <em>without the refreshing</em></h1>
+                <p class="hero__lede">
+                    Slot Scout watches the AIS appointment calendar and takes an
+                    earlier slot when one opens inside a date range you choose.
+                    It is free, it has no server, and nothing you type ever
+                    leaves your browser.
+                </p>
+                <span class="status">
+                    <i></i>
+                    <span
+                        >Version 1.0.0 &middot;
+                        <strong>not yet on the Chrome Web Store</strong></span
+                    >
+                </span>
+            </div>
+
+            <h2>Why this one</h2>
+            <div class="claims">
+                <div class="claim">
+                    <h3>No server</h3>
+                    <p>
+                        The only site it contacts is the one you are already
+                        signed into. There is no backend, so there is nowhere
+                        your data could go.
+                    </p>
+                </div>
+                <div class="claim">
+                    <h3>No credits</h3>
+                    <p>
+                        No account, no access code, no premium tier. Every
+                        feature works for everyone, permanently.
+                    </p>
+                </div>
+                <div class="claim">
+                    <h3>Backs off properly</h3>
+                    <p>
+                        An empty calendar means the site has throttled you. Slot
+                        Scout retreats instead of hammering, because hammering
+                        turns hours of lockout into days.
+                    </p>
+                </div>
+            </div>
+
+            <h2>How it works</h2>
+            <ol class="steps">
+                <li>
+                    <div>
+                        <h3>Sign in as usual</h3>
+                        <p>
+                            Saving your password is optional and off by default.
+                            Leave it off and you sign in by hand when the site
+                            drops your session.
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <h3>Set your window</h3>
+                        <p>
+                            Only slots between two dates count. Anything outside
+                            is ignored, so you never get moved to a date that is
+                            worse for you.
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <h3>Rank up to three locations</h3>
+                        <p>
+                            One is checked per cycle, in your order. Extra
+                            locations cost nothing — the request rate is the
+                            same whether you watch one consulate or three.
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <h3>Leave the tab open</h3>
+                        <p>
+                            A status panel shows what it is doing, when the next
+                            check is, and what the last one found.
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <h3>It books the slot</h3>
+                        <p>
+                            Automatically by default, because slots vanish in
+                            seconds. Turn that off and you get a notification
+                            plus three minutes to decide.
+                        </p>
+                    </div>
+                </li>
+            </ol>
+
+            <h2>Before you try it</h2>
+            <div class="note">
+                <h3>Honest limitations</h3>
+                <ul>
+                    <li>
+                        You need an appointment that is
+                        <strong>already booked</strong>. This reschedules an
+                        existing appointment and cannot create a first one.
+                    </li>
+                    <li>
+                        Your country must use the AIS system at
+                        <strong>ais.usvisa-info.com</strong>. The newer portals
+                        are not supported.
+                    </li>
+                    <li>
+                        AIS limits how many times an appointment may be
+                        rescheduled, and going over that limit can cancel it.
+                        That is the site's rule and
+                        <strong>no extension can work around it</strong>.
+                    </li>
+                    <li>
+                        Checking too often gets you temporarily blocked. Slot
+                        Scout defaults to a relaxed interval on purpose.
+                    </li>
+                </ul>
+            </div>
+
+            <h2>Read more</h2>
+            <div class="cards">
+                <a class="linkcard" href="guide.html">
+                    <h3>How it works</h3>
+                    <p>
+                        The full guide: setup, auto-book, soft blocks, every
+                        setting, and what to do when something breaks.
+                    </p>
+                    <span>Read the guide &rarr;</span>
+                </a>
+                <a class="linkcard" href="privacy.html">
+                    <h3>Privacy</h3>
+                    <p>
+                        Exactly what is stored, what is sent, and why each
+                        permission exists. It is a short page.
+                    </p>
+                    <span>Read the policy &rarr;</span>
+                </a>
+            </div>
+
+            <p class="foot">
+                Slot Scout is an independent tool. It is not affiliated with,
+                endorsed by, or connected to the U.S. Department of State, AIS,
+                or any government agency.
+            </p>
+        </div>
+    </body>
+</html>
