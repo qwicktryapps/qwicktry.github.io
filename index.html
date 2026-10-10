@@ -476,7 +476,7 @@
           <div class="right"><span class="hud-pill mode">VET</span><span class="hud-pill state">Running</span></div>
         </div>
         <div class="hud-body">
-          <div class="t">Checking shifts…</div>
+          <div class="t">Checking for shifts</div>
           <div class="hud-dots"><span></span><span></span><span></span><span></span><span></span></div>
         </div>
       </div>
@@ -544,7 +544,7 @@
         <ul>
           <li>Auto-claims VET / Voluntary Extra Time opportunities</li>
           <li>Grabs the longest shift first — or your priority window</li>
-          <li>Only on the days, dates and hours you allow</li>
+          <li>Only on the days, dates, hours and departments you allow</li>
         </ul>
         <div class="where">Runs on your <code>Find Shifts</code> page</div>
       </div>
@@ -576,10 +576,12 @@
       <div class="feat reveal"><div class="ic">📆</div><h3>Days of the week</h3><p>Weekends only? Just Mondays and Thursdays? Tap the days you want and it ignores the rest.</p></div>
       <div class="feat reveal"><div class="ic">🕐</div><h3>Allowed hours</h3><p>A hard gate — a shift is only grabbed if it fits <em>completely</em> inside your hours. Night windows that cross midnight are handled correctly.</p></div>
       <div class="feat reveal"><div class="ic">📏</div><h3>VET / VTO length</h3><p>Amazon often posts a full shift <em>and</em> the halves it splits into — both fit inside your allowed hours. Set a minimum length and only the full one is taken. Set a maximum if short ones are all you want.</p></div>
+      <div class="feat reveal"><div class="ic">🏷️</div><h3>Departments</h3><p>Trained in more than one department? Tick the ones you want VET for and it skips the rest. New departments are added to your list as they turn up. VET / READY only.</p></div>
       <div class="feat reveal"><div class="ic">⭐</div><h3>Priority windows</h3><p>Rank your favourite time slots P1, P2, P3… It always tries to grab your P1 shifts before anything else.</p></div>
-      <div class="feat reveal"><div class="ic">⚡</div><h3>Instant reaction</h3><p>Choose how often it checks — as fast as twice a second — so matching shifts get claimed the moment they appear.</p></div>
-      <div class="feat reveal"><div class="ic">🌍</div><h3>Timezone aware</h3><p>Set your building's timezone and every filter lines up with your site's clock — no off-by-an-hour surprises.</p></div>
-      <div class="feat reveal"><div class="ic">📊</div><h3>Live status panel</h3><p>A clean floating panel sits right on AtoZ showing Running, Idle or cooling down — so you always know it's working.</p></div>
+      <div class="feat reveal"><div class="ic">⚡</div><h3>Instant reaction</h3><p>Check as fast as twice a second, or pick <em>Random</em> — a fresh 0–5 second wait before each check, so your checks don't follow a fixed rhythm.</p></div>
+      <div class="feat reveal"><div class="ic">🌍</div><h3>Warehouse time zone</h3><p>It picks up your warehouse's time zone from AtoZ automatically, so every date and time matches your site's clock — even if your computer is set to another zone.</p></div>
+      <div class="feat reveal"><div class="ic">📊</div><h3>Live status panel</h3><p>A clean floating panel sits right on AtoZ showing what it's doing — checking, cooling down or idle — and how many checks it has made. If something needs you, it says exactly what to do.</p></div>
+      <div class="feat reveal"><div class="ic">✅</div><h3>Checks before it starts</h3><p>If your settings can't match anything — say, no days ticked — it tells you what to fix when you press Start, instead of running for nothing.</p></div>
       <div class="feat reveal"><div class="ic">🔒</div><h3>Stays logged in</h3><p>Automatically keeps your AtoZ session alive so you don't get signed out and miss the next drop.</p></div>
       <div class="feat reveal"><div class="ic">💾</div><h3>Remembers everything</h3><p>Your filters save themselves as you go. Close it, come back tomorrow — it's exactly how you left it.</p></div>
     </div>
@@ -629,8 +631,8 @@
       <div class="hstep reveal">
         <div class="num">2</div>
         <div>
-          <h3>Enter your Employee ID and set your filters</h3>
-          <p>Open the popup, type your Amazon Employee ID (it's on your AtoZ profile), pick VET or VTO, then set your dates, days, hours, shift length and priority windows — as broad or as specific as you like.</p>
+          <h3>Set your filters</h3>
+          <p>Open the popup, pick VET or VTO, then set your dates, days, hours, shift length, departments and priority windows — as broad or as specific as you like.</p>
         </div>
       </div>
       <div class="hstep reveal">
@@ -665,11 +667,11 @@
       </details>
       <details class="faq-item reveal">
         <summary>What do I need to get started? <span class="plus">+</span></summary>
-        <div class="ans">Just Google Chrome and an active Amazon AtoZ account. Install the extension, enter your Amazon Employee ID (found on your AtoZ profile page), set your filters, and you're ready.</div>
+        <div class="ans">Just Google Chrome and an active Amazon AtoZ account. Install the extension, set your filters, and you're ready.</div>
       </details>
       <details class="faq-item reveal">
         <summary>Is my account information safe? <span class="plus">+</span></summary>
-        <div class="ans">Yes. Everything runs locally in your own browser. Your Employee ID and filters are stored on your device only — they're never sent to us. The extension talks only to AtoZ's own scheduling page to read and claim shifts on your behalf, and it never touches your activity on any other site.</div>
+        <div class="ans">Yes. Everything runs locally in your own browser. Your filters are stored on your device only — they're never sent to us. The extension talks only to AtoZ's own scheduling pages to read and claim shifts on your behalf, and it never touches your activity on any other site.</div>
       </details>
       <details class="faq-item reveal">
         <summary>Which browser does it work on? <span class="plus">+</span></summary>
