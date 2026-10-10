@@ -149,7 +149,7 @@
 <header class="doc-hero">
   <h1>Privacy Policy</h1>
   <p>Privacy should be simple and honest. This explains exactly what we collect, what we don't, and how your data stays yours.</p>
-  <span class="updated">Last updated: May 31, 2026</span>
+  <span class="updated">Last updated: October 10, 2026</span>
 </header>
 
 <div class="container">
@@ -188,9 +188,11 @@
     <table>
       <thead><tr><th>Data</th><th>Purpose</th><th>Sent to us?</th></tr></thead>
       <tbody>
-        <tr><td>Your filter preferences (dates, days, time windows, priority windows)</td><td>Remember your settings between sessions</td><td><span class="tag no">Never</span></td></tr>
+        <tr><td>Your filter preferences (dates, days, time windows, shift length, departments, priority windows, check frequency, time zone)</td><td>Remember your settings between sessions</td><td><span class="tag no">Never</span></td></tr>
         <tr><td>Your profile label (optional name/note)</td><td>Displayed on the floating status panel</td><td><span class="tag no">Never</span></td></tr>
-        <tr><td>Activity log</td><td>Local record of shifts claimed (VET) and time off accepted (VTO) for you</td><td><span class="tag no">Never</span></td></tr>
+        <tr><td>Activity log</td><td>Local record of the shifts (VET) and time off (VTO) it tried to claim for you</td><td><span class="tag no">Never</span></td></tr>
+        <tr><td>Department names</td><td>Found on your AtoZ pages, to build the Departments list you pick from</td><td><span class="tag no">Never</span></td></tr>
+        <tr><td>Your answer to the review question (version 3.4.5 and later)</td><td>So it only asks once or twice, then stops</td><td><span class="tag no">Never</span></td></tr>
       </tbody>
     </table>
 
@@ -200,7 +202,9 @@
       <thead><tr><th>Data</th><th>Purpose</th><th>Sent to us?</th></tr></thead>
       <tbody>
         <tr><td>Your Amazon Employee ID</td><td>Read from AtoZ's own page/session and included in the request to AtoZ's API — this is how Amazon's own API works. It is not stored.</td><td><span class="tag no">Never</span></td></tr>
+        <tr><td>Your warehouse's time zone</td><td>Read from AtoZ's own page so dates and times match your site's clock. It is not stored.</td><td><span class="tag no">Never</span></td></tr>
         <tr><td>Available shift data</td><td>Read from Amazon's servers so your filters can be applied locally</td><td><span class="tag no">Never</span></td></tr>
+        <tr><td>Department names on your own schedule</td><td>When you open the extension on the Find Shifts page, it asks AtoZ for the department names on your schedule, to complete your Departments list. Nothing else from your schedule is used or stored.</td><td><span class="tag no">Never</span></td></tr>
       </tbody>
     </table>
     <div class="box amber">
@@ -220,6 +224,9 @@
 
     <h3>2.5 Support Communications</h3>
     <p>If you contact us at support&#64;qwicktry.com, we receive and store your email address and message content solely to respond to you. We do not share this with third parties and retain support emails only as long as necessary to resolve your issue.</p>
+
+    <h3>2.6 Feedback Form When You Remove the Extension</h3>
+    <p>From version 3.4.5, when you remove the extension, Chrome opens a short feedback form hosted on Google Forms. Answering is optional. The extension itself sends nothing — the form's link only carries the extension's version number. If you submit the form, we receive your answers and that version number. We don't receive your email address unless you choose to type it in. Google's own privacy policy applies to the form page.</p>
   </section>
 
   <section id="how-we-use">
@@ -227,6 +234,7 @@
     <p>Because the extension stores everything locally and sends nothing to Qwicktry, we have no user data to use. The only information we may hold is:</p>
     <ul>
       <li><strong>Support emails:</strong> Used solely to respond to your inquiry — never shared or used for any other purpose</li>
+      <li><strong>Uninstall feedback (optional):</strong> Used only to understand why people remove the extension and to improve it</li>
     </ul>
     <p>We do not use your information for marketing, advertising, profiling, analytics, or any purpose beyond responding to direct support requests.</p>
   </section>
@@ -248,7 +256,7 @@
     <p>Because the extension does not send any data to Qwicktry, there is nothing we could share. The only third-party communication is between the extension and Amazon's own AtoZ platform — the same platform you use directly as an employee.</p>
     <div class="box blue">
       <strong>Legal disclosure</strong>
-      We may disclose information if required by law, court order, or governmental authority, or if we believe in good faith that such disclosure is necessary to protect our rights, investigate fraud, or respond to a government request. In practice, since we hold no user data from the extension, this would apply only to any support emails you have sent us.
+      We may disclose information if required by law, court order, or governmental authority, or if we believe in good faith that such disclosure is necessary to protect our rights, investigate fraud, or respond to a government request. In practice, since we hold no user data from the extension, this would apply only to support emails or feedback form answers you have sent us.
     </div>
   </section>
 
@@ -264,10 +272,10 @@
     <p>We honour these rights for all users regardless of where you live:</p>
 
     <h3>Right to Access</h3>
-    <p>You can request a copy of any information we hold about you. Since the extension stores everything locally and sends nothing to us, the only data we may hold is any support email correspondence you have had with us.</p>
+    <p>You can request a copy of any information we hold about you. Since the extension stores everything locally and sends nothing to us, the only data we may hold is any support email correspondence you have had with us, or feedback form answers you chose to send.</p>
 
     <h3>Right to Deletion</h3>
-    <p>You can delete all data the extension stores by uninstalling the extension or clearing Chrome's extension storage. For any support email correspondence, contact us and we will delete it.</p>
+    <p>You can delete all data the extension stores by uninstalling the extension or clearing Chrome's extension storage. For support emails, or feedback answers that include your email address, contact us and we will delete them.</p>
 
     <h3>Right to Correction</h3>
     <p>If any information we hold is inaccurate, you can request that we correct it.</p>
@@ -290,8 +298,9 @@
     <ul>
       <li><strong>Extension data (local):</strong> Stored on your device only — retained until you clear it or uninstall the extension. Entirely under your control.</li>
       <li><strong>Support emails:</strong> Retained for up to 2 years or until you request deletion</li>
+      <li><strong>Uninstall feedback answers:</strong> Retained for up to 2 years</li>
     </ul>
-    <p>Qwicktry holds no server-side records for extension users.</p>
+    <p>Apart from optional feedback form answers, Qwicktry holds no records for extension users.</p>
   </section>
 
   <section id="children">
