@@ -11,6 +11,26 @@
   <meta property="og:title" content="AtoZ Shift Helper — Auto-grab VET shifts & VTO" />
   <meta property="og:description" content="Good VET and VTO vanish in seconds. AtoZ Shift Helper claims the ones that match your schedule automatically, the moment they post." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://qwicktry.com/" />
+  <meta property="og:image" content="https://qwicktry.com/media/setup-video.jpg" />
+  <meta property="og:image:width" content="1280" />
+  <meta property="og:image:height" content="720" />
+  <meta property="og:image:alt" content="AtoZ Shift Helper running on the AtoZ Find Shifts page" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- The setup video, for search engines (Google can list it as a video result) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "Stop Refreshing AtoZ: Auto-Grab VET & VTO (Free Chrome Extension)",
+    "description": "VET and VTO on AtoZ are gone in seconds. A full walkthrough of AtoZ Shift Helper, a free Chrome extension that watches AtoZ and grabs only the VET, READY shifts and VTO that fit your schedule: install, set your filters, press Start.",
+    "thumbnailUrl": ["https://qwicktry.com/media/setup-video.jpg"],
+    "uploadDate": "2026-10-29T06:50:45-07:00",
+    "duration": "PT2M52S",
+    "embedUrl": "https://www.youtube.com/embed/7eRU4f4l62Y"
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -175,79 +195,60 @@
     .hero-trust span { display: inline-flex; align-items: center; gap: 7px; font-size: 13.5px; color: var(--muted); font-weight: 600; }
     .hero-trust .ic { color: var(--green); font-weight: 800; }
 
-    /* ── Hero product mock ── */
-    .hero-visual { position: relative; height: 500px; }
-    @keyframes float { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-12px); } }
-    @keyframes floatB { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(10px); } }
-
-    .mock-popup {
-      position: absolute; left: 0; top: 18px; width: 320px;
-      background: var(--white); border-radius: 20px; overflow: hidden;
-      box-shadow: var(--shadow-lg); border: 1px solid rgba(231,234,240,0.8);
-      animation: float 6s ease-in-out infinite; z-index: 2;
+    /* ── Setup video (hero) ──
+       Click to play: until the visitor presses play, the page shows only
+       its own copy of the thumbnail and nothing loads from YouTube — the
+       site sets no cookies and runs no third-party scripts (privacy policy
+       §2.4, §6). Play swaps in YouTube's privacy-enhanced player. */
+    .hero-video { position: relative; }
+    .video-frame {
+      position: relative; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden;
+      background: var(--dark); box-shadow: var(--shadow-lg), 0 0 0 1px rgba(15,23,42,0.06);
     }
-    .mp-head { background: linear-gradient(135deg, var(--purple), var(--purple-2)); padding: 16px 18px; color: #fff; }
-    .mp-head .title { font-weight: 800; font-size: 15px; display:flex; align-items:center; gap:7px; }
-    .mp-head .desc { font-size: 11.5px; opacity: 0.82; margin-top: 3px; }
-    .mp-tabs { display: flex; gap: 6px; margin-top: 12px; }
-    .mp-tab { font-size: 11px; font-weight: 700; padding: 7px 11px; border-radius: 8px 8px 0 0; background: rgba(255,255,255,0.16); color: rgba(255,255,255,0.8); }
-    .mp-tab.active { background: var(--white); color: var(--purple); }
-    .mp-body { padding: 15px 16px 17px; }
-    .mp-card { border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 10px; }
-    .mp-card .lbl { font-size: 10.5px; font-weight: 700; color: var(--muted-2); text-transform: uppercase; letter-spacing: .6px; margin-bottom: 8px; }
-    .mode-pill { border: 2px solid var(--border); background: var(--bg); border-radius: 9px; padding: 9px 11px; }
-    .mode-pill + .mode-pill { margin-top: 7px; }
-    .mode-pill .n { font-size: 12px; font-weight: 800; color: var(--muted); }
-    .mode-pill .d { font-size: 10.5px; color: var(--muted-2); margin-top: 1px; }
-    .mode-pill.active { border-color: var(--purple); background: #F2F0FE; }
-    .mode-pill.active .n { color: var(--purple); }
-    .mode-pill.active .d { color: var(--muted); }
-    .mp-chips { display: flex; flex-wrap: wrap; gap: 6px; }
-    .mp-chip { font-size: 11px; font-weight: 600; padding: 4px 9px; border-radius: 999px; background: #EEF0FB; color: var(--purple); border: 1px solid #D9DCF6; }
-    .mp-chip.p1 { background: linear-gradient(135deg, var(--purple), var(--purple-2)); color: #fff; border: none; }
-    .mp-start {
-      margin-top: 4px; width: 100%; text-align: center;
+    .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .video-poster {
+      position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0;
+      background: none; cursor: pointer; display: block;
+    }
+    .video-poster img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease, filter .3s; }
+    .video-poster:hover img { transform: scale(1.025); filter: brightness(0.92); }
+    /* The play control sits bottom-left, where the thumbnail has nothing
+       important — a centred button would cover its "VET & VTO" */
+    .video-play {
+      position: absolute; left: 16px; bottom: 16px;
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 7px 16px 7px 7px; border-radius: 999px;
       background: linear-gradient(135deg, var(--purple), var(--purple-2)); color: #fff;
-      font-weight: 800; font-size: 13px; padding: 11px; border-radius: 10px;
+      font-size: 15px; font-weight: 800;
+      box-shadow: 0 0 0 6px rgba(255,255,255,0.18), 0 14px 32px rgba(20,18,66,0.5);
+      transition: transform .2s;
     }
+    .video-play .ic { width: 38px; height: 38px; border-radius: 50%; background: #fff; display: grid; place-items: center; }
+    .video-play .ic svg { width: 16px; height: 16px; margin-left: 3px; fill: var(--purple); }
+    .video-play .len { font-variant-numeric: tabular-nums; }
+    .video-poster:hover .video-play { transform: scale(1.05); }
+    .video-poster:focus-visible { outline: 3px solid var(--yellow); outline-offset: -3px; }
+    .video-chapters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .video-chapters button {
+      font: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 12px; border-radius: 999px; border: 1px solid var(--border);
+      background: var(--white); color: var(--ink); box-shadow: var(--shadow-sm);
+      transition: transform .15s, border-color .15s;
+    }
+    .video-chapters button:hover { transform: translateY(-1px); border-color: var(--purple); }
+    .video-chapters button .t { color: var(--purple); font-variant-numeric: tabular-nums; }
+    .video-note { margin-top: 10px; font-size: 12.5px; color: var(--muted-2); }
+    button.btn { font-family: inherit; }
 
-    .mock-hud {
-      position: absolute; right: -6px; top: 0; width: 268px;
-      background: var(--white); border-radius: 16px; overflow: hidden;
-      box-shadow: var(--shadow-lg); border: 1px solid rgba(231,234,240,0.8);
-      animation: floatB 5.2s ease-in-out infinite; z-index: 3;
+    /* "Watch this step" links in How it works */
+    .step-watch {
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 10px;
+      font: inherit; font-size: 14px; font-weight: 700; color: var(--purple);
+      background: rgba(91,79,207,0.08); border: none; border-radius: 999px; padding: 6px 12px; cursor: pointer;
     }
-    .hud-head { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; background: linear-gradient(135deg, var(--purple), var(--purple-2)); }
-    .hud-head .name { color: #fff; font-weight: 800; font-size: 12.5px; }
-    .hud-head .right { display: flex; gap: 6px; }
-    .hud-pill { font-size: 9px; font-weight: 800; padding: 3px 7px; border-radius: 999px; text-transform: uppercase; letter-spacing: .6px; }
-    .hud-pill.mode { background: rgba(255,255,255,0.28); color: #fff; }
-    .hud-pill.state { background: #10B981; color: #fff; }
-    .hud-body { padding: 12px 14px; background: #F8FAFC; display: flex; align-items: center; gap: 10px; }
-    .hud-body .t { font-size: 12px; color: #475569; font-weight: 600; }
-    .hud-dots { display: inline-flex; gap: 4px; margin-left: auto; }
-    .hud-dots span { width: 6px; height: 6px; border-radius: 50%; background: linear-gradient(135deg, var(--purple), var(--purple-2)); opacity: .35; animation: hp 1.6s infinite; }
-    .hud-dots span:nth-child(2){ animation-delay:.16s; } .hud-dots span:nth-child(3){ animation-delay:.32s; }
-    .hud-dots span:nth-child(4){ animation-delay:.48s; } .hud-dots span:nth-child(5){ animation-delay:.64s; }
-    @keyframes hp { 0%,100%{ transform: scale(.75); opacity:.3; } 50%{ transform: scale(1.2); opacity:1; } }
-
-    .toast {
-      position: absolute; right: 8px; width: 248px;
-      background: var(--white); border-radius: 13px; padding: 12px 13px;
-      box-shadow: var(--shadow-md); border: 1px solid var(--border);
-      display: flex; align-items: center; gap: 11px; z-index: 4;
-      opacity: 0; transform: translateY(8px);
-    }
-    .toast .tick { width: 30px; height: 30px; border-radius: 9px; background: rgba(16,185,129,0.12); color: var(--green); display: grid; place-items: center; font-weight: 900; font-size: 15px; flex-shrink: 0; }
-    .toast .tt { font-size: 12.5px; font-weight: 800; color: var(--ink); }
-    .toast .ts { font-size: 11px; color: var(--muted); }
-    .toast.t1 { bottom: 96px; animation: pop 5.4s ease-in-out infinite; }
-    .toast.t2 { bottom: 22px; animation: pop 5.4s ease-in-out 2.7s infinite; }
-    @keyframes pop {
-      0% { opacity: 0; transform: translateY(10px) scale(.98); }
-      8%, 40% { opacity: 1; transform: translateY(0) scale(1); }
-      52%, 100% { opacity: 0; transform: translateY(-6px) scale(.99); }
-    }
+    .step-watch:hover { background: rgba(91,79,207,0.15); }
+    .step-watch .t { font-variant-numeric: tabular-nums; opacity: .8; }
 
     /* ─────────────── STAT STRIP ─────────────── */
     .stat-strip { background: var(--dark); color: #fff; }
@@ -398,7 +399,7 @@
     /* ─────────────── RESPONSIVE ─────────────── */
     @media (max-width: 940px) {
       .hero-grid { grid-template-columns: 1fr; gap: 56px; }
-      .hero-visual { height: 420px; max-width: 420px; margin: 0 auto; width: 100%; }
+      .hero-video { max-width: 640px; margin: 0 auto; width: 100%; }
       .feat-grid { grid-template-columns: 1fr 1fr; }
       .modes-grid, .problem-wrap { grid-template-columns: 1fr; }
       .stat-grid { grid-template-columns: 1fr 1fr; gap: 24px 14px; }
@@ -439,7 +440,7 @@
       <p class="hero-sub">Good VET / READY shifts and VTO get taken in seconds. AtoZ Shift Helper watches AtoZ for you and <strong>automatically claims the ones that match your exact schedule</strong> — so you stop refreshing and start winning the grab.</p>
       <div class="hero-cta">
         <a href="https://chromewebstore.google.com/detail/atoz-shift-helper/fjajhooelifadiolkgpkafboghbdelad" target="_blank" rel="noopener" class="btn btn-primary">Add to Chrome →</a>
-        <a href="#how" class="btn btn-ghost">See how it works</a>
+        <button type="button" class="btn btn-ghost" data-play="0">▶ Watch the setup · 2:52</button>
       </div>
       <div class="hero-trust">
         <span><span class="ic">✓</span> Reacts in under a second</span>
@@ -448,41 +449,26 @@
       </div>
     </div>
 
-    <!-- product mock -->
-    <div class="hero-visual">
-      <div class="mock-popup">
-        <div class="mp-head">
-          <div class="title">⚡ AtoZ Shift Helper</div>
-          <div class="desc">Set your filters once. It grabs the right ones for you.</div>
-          <div class="mp-tabs"><span class="mp-tab active">Settings</span><span class="mp-tab">How it works</span><span class="mp-tab">Support</span></div>
-        </div>
-        <div class="mp-body">
-          <div class="mp-card">
-            <div class="lbl">Mode</div>
-            <div class="mode-pill active"><div class="n">⚡ VET (Extra Time) / READY</div><div class="d">Auto-claim extra shifts on Find Shifts</div></div>
-            <div class="mode-pill"><div class="n">🌴 VTO (Voluntary Time Off)</div><div class="d">Auto-accept time off on VTO page</div></div>
-          </div>
-          <div class="mp-card">
-            <div class="lbl">Priority times</div>
-            <div class="mp-chips"><span class="mp-chip p1">P1 · 22:00–07:00</span><span class="mp-chip">P2 · 09:00–17:00</span></div>
-          </div>
-          <div class="mp-start">▶ Start</div>
-        </div>
+    <!-- The setup video. Click to play — see .hero-video in the CSS. -->
+    <div class="hero-video" id="watch">
+      <div class="video-frame" data-video="7eRU4f4l62Y" data-title="Stop Refreshing AtoZ: Auto-Grab VET &amp; VTO (Free Chrome Extension)">
+        <button type="button" class="video-poster" data-play="0" aria-label="Play the setup video (2 minutes 52 seconds)">
+          <img src="/media/setup-video.jpg" width="1280" height="720"
+               alt="AtoZ Shift Helper running on the AtoZ Find Shifts page: Auto-grab VET and VTO" />
+          <span class="video-play" aria-hidden="true">
+            <span class="ic"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z"/></svg></span>
+            <span class="len">2:52</span>
+          </span>
+        </button>
       </div>
-
-      <div class="mock-hud">
-        <div class="hud-head">
-          <div class="name">Your Name</div>
-          <div class="right"><span class="hud-pill mode">VET</span><span class="hud-pill state">Running</span></div>
-        </div>
-        <div class="hud-body">
-          <div class="t">Checking for shifts</div>
-          <div class="hud-dots"><span></span><span></span><span></span><span></span><span></span></div>
-        </div>
+      <div class="video-chapters" aria-label="Jump to a part of the video">
+        <button type="button" data-play="14"><span class="t">0:14</span> Install</button>
+        <button type="button" data-play="24"><span class="t">0:24</span> Open it on AtoZ</button>
+        <button type="button" data-play="36"><span class="t">0:36</span> Your filters</button>
+        <button type="button" data-play="128"><span class="t">2:08</span> Press Start</button>
+        <button type="button" data-play="145"><span class="t">2:25</span> VTO</button>
       </div>
-
-      <div class="toast t1"><div class="tick">✓</div><div><div class="tt">Shift claimed</div><div class="ts">Sat · 6:00 AM – 4:30 PM · 10.5 hrs</div></div></div>
-      <div class="toast t2"><div class="tick">✓</div><div><div class="tt">VTO accepted</div><div class="ts">Fri · 2:00 PM – 10:00 PM · 8 hrs</div></div></div>
+      <p class="video-note">The video plays from YouTube once you press play.</p>
     </div>
   </div>
 </header>
@@ -616,30 +602,41 @@
 <!-- ─────────────── HOW IT WORKS ─────────────── -->
 <section class="block features" id="how">
   <div class="container">
-    <p class="eyebrow reveal">Up and running in a minute</p>
-    <h2 class="h2 reveal">Three steps. That's it.</h2>
-    <p class="sub reveal">Install it, set your filters, and let it grab. That's the whole setup.</p>
+    <p class="eyebrow reveal">Up and running in minutes</p>
+    <h2 class="h2 reveal">Four steps. That's it.</h2>
+    <p class="sub reveal">The same four steps as the video — tap any step to watch it.</p>
 
     <div class="how-steps">
       <div class="hstep reveal">
         <div class="num">1</div>
         <div>
-          <h3>Install the extension</h3>
-          <p><a href="https://chromewebstore.google.com/detail/atoz-shift-helper/fjajhooelifadiolkgpkafboghbdelad" target="_blank" rel="noopener">Add AtoZ Shift Helper to Chrome</a> from the Chrome Web Store. One click from the Chrome Web Store — about 30 seconds.</p>
+          <h3>Install it</h3>
+          <p><a href="https://chromewebstore.google.com/detail/atoz-shift-helper/fjajhooelifadiolkgpkafboghbdelad" target="_blank" rel="noopener">Add AtoZ Shift Helper to Chrome</a> from the Chrome Web Store, then pin it so it's one click away. About 30 seconds.</p>
+          <button type="button" class="step-watch" data-play="14">▶ Watch this step <span class="t">0:14</span></button>
         </div>
       </div>
       <div class="hstep reveal">
         <div class="num">2</div>
         <div>
-          <h3>Set your filters</h3>
-          <p>Open the popup, pick VET or VTO, then set your dates, days, hours, shift length, departments and priority windows — as broad or as specific as you like.</p>
+          <h3>Open it on AtoZ</h3>
+          <p>Go to your Find Shifts page for VET and READY shifts, or your VTO page for time off. Click the extension's icon and pick the matching mode.</p>
+          <button type="button" class="step-watch" data-play="24">▶ Watch this step <span class="t">0:24</span></button>
         </div>
       </div>
       <div class="hstep reveal">
         <div class="num">3</div>
         <div>
-          <h3>Open AtoZ and hit Start</h3>
-          <p>Go to your Find Shifts page (VET) or VTO page and press Start. It watches the page and claims every matching opportunity automatically — the status panel shows you exactly what's happening.</p>
+          <h3>Set your filters</h3>
+          <p>Dates, days, departments, priority times, allowed hours and shift length — as broad or as specific as you like. They save as you go.</p>
+          <button type="button" class="step-watch" data-play="36">▶ Watch this step <span class="t">0:36</span></button>
+        </div>
+      </div>
+      <div class="hstep reveal">
+        <div class="num">4</div>
+        <div>
+          <h3>Press Start</h3>
+          <p>The panel on the page turns green and says Running. Leave the tab open and your computer awake — it checks for you and claims the matches.</p>
+          <button type="button" class="step-watch" data-play="128">▶ Watch this step <span class="t">2:08</span></button>
         </div>
       </div>
     </div>
@@ -738,6 +735,32 @@
     el.style.transitionDelay = (Math.min(i % 6, 5) * 60) + 'ms';
     io.observe(el);
   });
+
+  // Setup video: click to play. Nothing loads from YouTube until a button
+  // with data-play is pressed; then YouTube's privacy-enhanced player replaces
+  // the thumbnail, starting at that many seconds. Pressing another one
+  // restarts it there.
+  const frame = document.querySelector('.video-frame');
+  function playVideo(start) {
+    const src = 'https://www.youtube-nocookie.com/embed/' + frame.dataset.video +
+                '?autoplay=1&rel=0&playsinline=1&start=' + start;
+    let iframe = frame.querySelector('iframe');
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.title = frame.dataset.title;
+      iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      iframe.allowFullscreen = true;
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      frame.replaceChildren(iframe);
+    }
+    iframe.src = src;
+  }
+  document.querySelectorAll('[data-play]').forEach((b) => b.addEventListener('click', () => {
+    // From further down the page, bring the video into view first
+    const r = frame.getBoundingClientRect();
+    if (r.top < 0 || r.bottom > innerHeight) frame.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    playVideo(+b.dataset.play || 0);
+  }));
 </script>
 </body>
 </html>
